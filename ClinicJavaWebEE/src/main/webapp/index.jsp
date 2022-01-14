@@ -140,7 +140,7 @@
 				</div>
 				<div class="col-lg-6 text-center">
 					<h6>
-						<b>About this project</b>
+						<b>Description of sproject</b>
 					</h6>
 					<p class='text-muted mb-3'>Lorem Ipsum is simply dummy text of
 						the printing and typesetting industry. Lorem Ipsum has been the
