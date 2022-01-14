@@ -35,3 +35,38 @@
 	background-color: #00E4BA;
 }
 
+/* Landing CSS */
+.Hero-Section {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 650px;
+  position: relative;
+  overflow: hidden;
+  padding: 200px 0 80px;
+  background-color: #DEF2F0;
+}
+
+/** Flow cards **/
+
+.flow-card {
+  min-height: 350px;
+}
+.flow-card .card-header {
+  background-color: #DEF2F0;
+  min-height: 230px;
+}
+
+
+.footer {
+  background-color: rgb(12, 12, 12);
+  color: white;
+  text-align: center;
+}
+ 
+.footer-desc {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+
