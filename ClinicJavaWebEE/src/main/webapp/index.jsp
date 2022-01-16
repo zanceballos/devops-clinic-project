@@ -70,7 +70,7 @@
 				<div class='col-lg-3'>
 					<div class="card border-0 bg-white rounded-lg flow-card shadow">
 						<div class="card-header rounded-lg border-0">
-							<img class="img-fluid" src="./assetsimg/select-clinic-2.svg"
+							<img class="card-img-top" src="./assetsimg/select-clinic-2.svg"
 								alt="" />
 						</div>
 						<div class="card-body text-center">
@@ -86,7 +86,7 @@
 				<div class='col-lg-3'>
 					<div class="card border-0 bg-white rounded-lg flow-card shadow">
 						<div class="card-header rounded-lg border-0">
-							<img class="img-fluid" src="./assetsimg/select-date.svg" alt="" />
+							<img class="card-img-top" src="./assetsimg/select-date.svg" alt="" />
 						</div>
 						<div class="card-body text-center">
 							<h5>
@@ -99,7 +99,7 @@
 				<div class='col-lg-3'>
 					<div class="card border-0 bg-white rounded-lg flow-card shadow">
 						<div class="card-header rounded-lg border-0">
-							<img class="img-fluid" src="./assetsimg/attend-clinic.svg" alt="" />
+							<img class="card-img-top" src="./assetsimg/attend-clinic.svg" alt="" />
 						</div>
 						<div class="card-body text-center">
 							<h5>
@@ -112,7 +112,7 @@
 				<div class='col-lg-3'>
 					<div class="card border-0 bg-white rounded-lg flow-card shadow">
 						<div class="card-header rounded-lg border-0">
-							<img class="img-fluid" src="./assetsimg/review-img.svg" alt="" />
+							<img class="card-img-top" src="./assetsimg/review-img.svg" alt="" />
 						</div>
 						<div class="card-body text-center">
 							<h5>

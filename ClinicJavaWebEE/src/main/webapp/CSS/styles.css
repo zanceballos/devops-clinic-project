@@ -47,6 +47,28 @@
   background-color: #DEF2F0;
 }
 
+.Home-section {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+  padding: 200px 0 80px;
+  background-color: #e0efff;
+}
+
+/** Patient & Doctors Home page **/
+.card-home img {
+  width: 100%;
+  max-height: 200px;
+}
+
+.bg-home {
+  background-color: #e0efff !important;
+}
+
+
 /** Flow cards **/
 
 .flow-card {
