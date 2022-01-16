@@ -58,7 +58,7 @@
 	</div>
 
 	<div class="container py-5">
-		<div class="intro-section">
+		<div class="intro-section py-4">
 			<div class='header'>
 				<h4>
 					<b>Features </b>
@@ -126,7 +126,7 @@
 
 		</div>
 
-		<div class="about-section py-3">
+		<div class="about-section py-4">
 			<div class='mt-3'>
 				<h4>
 					<b>About</b>
@@ -160,7 +160,7 @@
 
 	</div>
 
-	<!-- -Include the navbar jsp to the page -->
+	<!-- -Include the Footer jsp to the page -->
 	<jsp:include page="footer.jsp" />
 
 </body>

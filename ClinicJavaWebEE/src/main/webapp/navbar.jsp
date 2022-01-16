@@ -18,8 +18,8 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light shadow bg-white">
-		<a class="navbar-brand" href="#"> <b>ClinicHub</b>
+	<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top bg-white">
+		<a class="navbar-brand" href="#"> <img src='./assetsimg/devops-clinic-logo.png' height='45'/>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
