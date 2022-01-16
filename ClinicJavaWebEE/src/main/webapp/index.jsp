@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Clinic Hub | Home</title>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -58,7 +58,7 @@
 	</div>
 
 	<div class="container py-5">
-		<div class="intro-section">
+		<div class="intro-section py-4">
 			<div class='header'>
 				<h4>
 					<b>Features </b>
@@ -126,7 +126,7 @@
 
 		</div>
 
-		<div class="about-section py-3">
+		<div class="about-section py-4">
 			<div class='mt-3'>
 				<h4>
 					<b>About</b>
@@ -140,7 +140,7 @@
 				</div>
 				<div class="col-lg-6 text-center">
 					<h6>
-						<b>Description of sproject</b>
+						<b>Description of Project</b>
 					</h6>
 					<p class='text-muted mb-3'>Lorem Ipsum is simply dummy text of
 						the printing and typesetting industry. Lorem Ipsum has been the
@@ -160,7 +160,7 @@
 
 	</div>
 
-	<!-- -Include the navbar jsp to the page -->
+	<!-- -Include the Footer jsp to the page -->
 	<jsp:include page="footer.jsp" />
 
 </body>
