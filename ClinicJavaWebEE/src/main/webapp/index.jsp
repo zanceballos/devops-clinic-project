@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Clinic Hub | Home</title>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -140,7 +140,7 @@
 				</div>
 				<div class="col-lg-6 text-center">
 					<h6>
-						<b>Description of sproject</b>
+						<b>Description of Project</b>
 					</h6>
 					<p class='text-muted mb-3'>Lorem Ipsum is simply dummy text of
 						the printing and typesetting industry. Lorem Ipsum has been the
