@@ -6,6 +6,11 @@
 	font-family: 'Montserrat', sans-serif;
 }
 
+/* USE THIS TO MAKE THE BODY GO UNDER THE FIXED NAVBAR*/
+.fixed-top-body {
+  padding-top: 100px !important;
+}
+
 .navbar-light .navbar-nav .nav-link {
   color: rgba(0, 0, 0, 0.55);
   font-size: 1.1rem;
