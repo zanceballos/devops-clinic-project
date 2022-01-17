@@ -38,8 +38,8 @@
 	
 			</ul>
 			<div class="form-inline my-2 my-lg-0">
-				<button class="btn btn-primary my-2 my-sm-0 px-5 mr-2 pr-2 rounded-pill" type="submit"><b>Login</b> </button>
-				<button class="btn btn-outline-primary my-2 my-sm-0 px-5 rounded-pill" type="submit"><b>Register</b></button>
+				<a href="<%=request.getContextPath()%>/login.jsp" class="btn btn-primary my-2 my-sm-0 px-5 mr-2 pr-2 rounded-pill" type="submit"><b>Login</b> </a>
+				<a href="<%=request.getContextPath()%>/register.jsp" class="btn btn-outline-primary my-2 my-sm-0 px-5 rounded-pill" type="submit"><b>Register</b></a>
 			</div>
 		</div>
 	</nav>
