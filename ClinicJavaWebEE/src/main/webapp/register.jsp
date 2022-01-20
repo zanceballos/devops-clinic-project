@@ -34,7 +34,7 @@
 
 									<p class="text-muted mb-4">Enter Your Credentials To
 										Continue</p>
-									<form autoComplete="off" noValidate>
+									<form autoComplete="off" noValidate action='RegisterServlet' method="post">
 										<div class="form-group mb-3">
 											<input id="inputUsername" type="text" placeholder="Username"
 												name="username" required=""
@@ -76,6 +76,13 @@
 
 
 										<div class="form-group mb-3">
+											<input id="inputRole" type="text" placeholder="Role"
+												required="" name="role"
+												class="form-control border-0 shadow-sm px-4 py-4 text-primary" />
+
+										</div>
+
+										<div class="form-group mb-3">
 											<input id="inputPassword" type="password"
 												placeholder="Password" required="" name="password"
 												ref={password}
@@ -84,13 +91,9 @@
 
 										</div>
 
-										<div class="form-group mb-3">
-											<input id="inputPassword" type="password"
-												placeholder="Confirm Password" required=""
-												name="cfmpassword"
-												class="form-control border-0 shadow-sm px-4 py-4 text-primary" />
-										</div>
+										
 										<button
+											type='submit'
 											class="btn btn-primary py-3 btn-block text-uppercase mb-2 shadow-sm w-100">
 											Confirm & Register</button>
 										<div class="row justify-content-center">
