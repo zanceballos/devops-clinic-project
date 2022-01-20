@@ -73,8 +73,8 @@
 				<c:if test="${logged_in == null}">
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>"><b>Home</b> </a></li>
-					<li class="nav-item"><a class="nav-link" href="#features"><b>Features</b></a></li>
-					<li class="nav-item"><a class="nav-link" href="#about"><b>About</b></a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>#features"><b>Features</b></a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>#about"><b>About</b></a></li>
 				</c:if>
 
 			</ul>

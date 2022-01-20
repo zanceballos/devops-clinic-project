@@ -54,9 +54,11 @@
 
 										<c:if test="${username_err == true || password_err == true}">
 											<div class="alert alert-danger py-3" role="alert">
-												Username or Password is incorrect!</div>
+												<i class="fas fa-exclamation-circle pr-2"></i><span>Username
+													or Password is incorrect!</span>
+											</div>
 											<c:set var="username_err" value="" scope="session" />
-												<c:set var="password_err" value="" scope="session" />
+											<c:set var="password_err" value="" scope="session" />
 										</c:if>
 
 										<button type="submit"
@@ -75,9 +77,9 @@
 										</div>
 									</form>
 
-									<button
-										class="btn btn-outline-primary btn-block text-uppercase 										mb-2  shadow-sm w-100">
-										Create an Account</button>
+									<a href="<%=request.getContextPath()%>/register.jsp"
+										class="btn btn-outline-primary btn-block text-uppercase mb-2  shadow-sm w-100">
+										Create an Account</a>
 								</div>
 							</div>
 						</div>
