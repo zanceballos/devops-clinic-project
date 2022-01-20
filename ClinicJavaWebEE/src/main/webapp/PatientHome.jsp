@@ -30,7 +30,7 @@
 						<div class="header">
 							<h3>Hello,</h3>
 							<h1>
-								<b>Username</b>
+								<b>${username}</b>
 							</h1>
 							<p class="text-muted">
 								<b>Manage Appointments & Make Some Review!</b>

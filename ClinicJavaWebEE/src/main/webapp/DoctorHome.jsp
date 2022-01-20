@@ -29,7 +29,7 @@
 						<div class="header">
 							<h3>Hello,</h3>
 							<h1>
-								<b>Doctor!</b>
+								<b>${username}</b>
 							</h1>
 							<p class="text-muted">
 								<b>Manage your patient's appointments and clinics!</b>
