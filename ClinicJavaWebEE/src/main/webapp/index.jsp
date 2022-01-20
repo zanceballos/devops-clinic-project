@@ -57,7 +57,7 @@
 		</div>
 	</div>
 
-	<div class="container py-5">
+	<div class="container py-5" id="features">
 		<div class="intro-section py-4">
 			<div class='header'>
 				<h4>
@@ -126,7 +126,7 @@
 
 		</div>
 
-		<div class="about-section py-4">
+		<div class="about-section py-4" id="about">
 			<div class='mt-3'>
 				<h4>
 					<b>About</b>
