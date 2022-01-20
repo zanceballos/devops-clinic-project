@@ -20,21 +20,25 @@
 	<!-- -Include the navbar jsp to the page -->
 	<jsp:include page="navbar.jsp" />
 	<div class='fixed-top-body'>
-		<div class='container text-center py-5'>
-			<div class="row no-gutter g-0 shadow rounded-lg">
+		<div class='container text-center py-2'>
+			<div class="row no-gutter g-0">
 
-				<div class="col-md-12 bg-light">
+				<div class="col-md-12">
 					<div class="login d-flex align-items-center py-5">
-						<div class="container py-3 px-3">
+						<div class="container py-1 px-3">
 							<div class="row text-dark">
-								<div class="col-lg-10 col-xl-7 mx-auto">
+								<div
+									class="col-lg-10 col-xl-7 mx-auto px-5 py-5 bg-light border shadow border-rounded">
+									<img class='py-5'
+										src="./assetsimg/devops-clinic-logo-trans.png">
 									<h2>
 										<b>Register</b>
 									</h2>
 
 									<p class="text-muted mb-4">Enter Your Credentials To
 										Continue</p>
-									<form autoComplete="off" noValidate action='RegisterServlet' method="post">
+									<form autoComplete="off" noValidate action='RegisterServlet'
+										method="post">
 										<div class="form-group mb-3">
 											<input id="inputUsername" type="text" placeholder="Username"
 												name="username" required=""
@@ -73,14 +77,15 @@
 												</div>
 											</div>
 										</div>
-
-
 										<div class="form-group mb-3">
-											<input id="inputRole" type="text" placeholder="Role"
-												required="" name="role"
-												class="form-control border-0 shadow-sm px-4 py-4 text-primary" />
-
+											<select class="w-100 border-0 shadow-sm py-3 px-3 text-muted"
+												name="role">
+												<option value="none" disabled selected>Select Role</option>
+												<option value="patient">Patient</option>
+												<option value="doctor">Doctor</option>
+											</select>
 										</div>
+
 
 										<div class="form-group mb-3">
 											<input id="inputPassword" type="password"
@@ -91,9 +96,15 @@
 
 										</div>
 
-										
-										<button
-											type='submit'
+										<c:if test="${register_username_err == true}">
+											<i class="fas fa-exclamation-circle pr-2"></i>
+											<span>Username is taken, Please try again!</span>
+											<c:set var="register_username_err" value="" scope="session" />
+
+										</c:if>
+
+
+										<button type='submit'
 											class="btn btn-primary py-3 btn-block text-uppercase mb-2 shadow-sm w-100">
 											Confirm & Register</button>
 										<div class="row justify-content-center">
@@ -106,9 +117,9 @@
 											</div>
 										</div>
 									</form>
-									<button
+									<a href="<%=request.getContextPath()%>/login.jsp"
 										class="btn btn-outline-primary btn-block text-uppercase mb-2 shadow-sm w-100">
-										Login to existing account</button>
+										Login to existing account</a>
 								</div>
 							</div>
 						</div>
