@@ -37,9 +37,27 @@
 <body>
 	<nav
 		class="navbar navbar-expand-lg navbar-light shadow fixed-top bg-white">
-		<a href="<%=request.getContextPath()%>" class="navbar-brand" href="#">
-			<img src='./assetsimg/devops-clinic-logo.png' height='45' />
-		</a>
+		<c:if test="${logged_in == null}">
+			<a href="<%=request.getContextPath()%>" class="navbar-brand"> <img
+				src='./assetsimg/devops-clinic-logo.png' height='45' />
+			</a>
+		</c:if>
+
+		<c:if test="${logged_in == true}">
+			<c:if test="${role == 'patient' }">
+				<a href="<%=request.getContextPath()%>/PatientHome.jsp"
+					class="navbar-brand"> <img
+					src='./assetsimg/devops-clinic-logo.png' height='45' />
+				</a>
+			</c:if>
+			<c:if test="${role == 'doctor' }">
+				<a href="<%=request.getContextPath()%>/DoctorHome.jsp"
+					class="navbar-brand"> <img
+					src='./assetsimg/devops-clinic-logo.png' height='45' />
+				</a>
+			</c:if>
+		</c:if>
+
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -65,16 +83,26 @@
 						</a></li>
 					</c:if>
 
-					<li class="nav-item"><a class="nav-link" href="#"><b>Clinics</b>
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath()%>/ClinicsListing.jsp"><b>Clinics</b>
 					</a></li>
+
 					<li class="nav-item"><a class="nav-link" href="#"><b>Appointments</b></a></li>
 				</c:if>
+
+
+
 
 				<c:if test="${logged_in == null}">
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>"><b>Home</b> </a></li>
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>#features"><b>Features</b></a></li>
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>#about"><b>About</b></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath()%>/ClinicsListing.jsp"><b>Clinics</b>
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath()%>#features"><b>Features</b></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath()%>#about"><b>About</b></a></li>
 				</c:if>
 
 			</ul>
@@ -101,8 +129,7 @@
 							<a class="dropdown-item" href="#">Account</a> <a
 								class="dropdown-item" href="#">Reviews</a>
 							<form action='UserServlet/logout' method='post'>
-								<button type='submit'
-									class="dropdown-item">Logout</button>
+								<button type='submit' class="dropdown-item">Logout</button>
 							</form>
 						</div>
 

@@ -22,7 +22,7 @@
 	<jsp:include page="navbar.jsp" />
 
 	<div >
-		<div class="Hero-Section">
+		<div class="Hero-Section shadow">
 			<div class="container">
 				<div class="row align-item-center">
 					<div class="col-lg-7">

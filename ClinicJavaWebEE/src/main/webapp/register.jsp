@@ -97,8 +97,11 @@
 										</div>
 
 										<c:if test="${register_username_err == true}">
-											<i class="fas fa-exclamation-circle pr-2"></i>
-											<span>Username is taken, Please try again!</span>
+											<div class="alert alert-danger py-3" role="alert">
+												<i class="fas fa-exclamation-circle pr-2"></i> <span>Username
+													is taken, Please try again!</span>
+											</div>
+
 											<c:set var="register_username_err" value="" scope="session" />
 
 										</c:if>
