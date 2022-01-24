@@ -23,7 +23,7 @@
 	<jsp:include page="navbar.jsp" />
 
 	<div>
-		<div class="Home-section shadow-sm">
+		<div class="Home-section shadow">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-5">
@@ -37,8 +37,8 @@
 							</p>
 						</div>
 						<div class="header-buttons py-3">
-							<button class="btn btn-primary px-5 py-3 mr-2">Browse
-								Clinics</button>
+							<a href="<%=request.getContextPath()%>/ClinicsListing.jsp" class="btn btn-primary px-5 py-3 mr-2">Browse
+								Clinics</a>
 							<button class="btn btn-outline-primary px-5 py-3">My
 								Account</button>
 						</div>

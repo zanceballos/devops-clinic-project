@@ -22,7 +22,7 @@
 	<jsp:include page="navbar.jsp" />
 	
 	<div>
-		<div class="Home-section shadow-sm">
+		<div class="Home-section shadow">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-5">
