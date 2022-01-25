@@ -10,7 +10,6 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 
-
 	<servlet>
 		<servlet-name>UserServlet</servlet-name>
 		<servlet-class>UserServlet</servlet-class>
@@ -30,6 +29,8 @@
 	<servlet-mapping>
 		<servlet-name>ClinicServlet</servlet-name>
 		<url-pattern>/ClinicServlet/dashboard</url-pattern>
+		<url-pattern>/ClinicServlet/all-clinics</url-pattern>
+		<url-pattern>/ClinicServlet/clinic-details</url-pattern>
 		<url-pattern>/ClinicServlet/update</url-pattern>
 		<url-pattern>/ClinicServlet/delete</url-pattern>
 	</servlet-mapping>

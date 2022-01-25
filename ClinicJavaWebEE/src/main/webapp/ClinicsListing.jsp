@@ -12,7 +12,9 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
-<link rel="stylesheet" href="./CSS/styles.css" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/CSS/styles.css"
+	type="text/css">
 </head>
 <body>
 
@@ -46,7 +48,8 @@
 
 					</div>
 					<div class='col-lg-6 text-center'>
-						<img src="./assetsimg/clinics-list-img4.svg"
+						<img
+							src="${pageContext.request.contextPath}/assetsimg/clinics-list-img4.svg"
 							class="clinic-img-head" alt="" />
 					</div>
 				</div>
@@ -62,235 +65,56 @@
 			</div>
 
 			<div class="row">
-				<div class='col-lg-4 py-3'>
-					<div class='clinic-cards'>
-						<div class="card bg-white border rounded-lg shadow-sm">
-							<img src='https://www.onecaremedical.com.sg/wp-content/uploads/2019/07/OCTM.png' class="card-img-top-alt" alt=""
-							/>
-							<h5>
-								<span class="badge bg-info text-white location-name-clinics-card shadow"> <i
-									class="fas fa-map-marker-alt text-white mr-2"></i> Location Name
-								</span>
-							</h5>
-							<div class="card-body">
-								<div class="header card-event-name">
-									<h5>
-										<b>Clinic Name</b>
-									</h5>
-								</div>
-								<div class="event-info text-muted">
-									<ul class="list-unstyled text-small text-left info">
-										<li class="mb-2"><i
-											class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i> <b>Operating Days</b>
-										</li>
-										<li class="mb-2"><i
-											class="fas fa-clipboard-list me-2 text-secondary fa-lg"></i> <b>Operating Hours</b>
-										</li>
-									</ul>
-								</div>
-								<span class="text-muted"> <b>Contact</b> 
-								</span>
-								<div class="buttons py-2">
-									<a href='<%=request.getContextPath()%>/ClinicDetails.jsp' class="btn btn-primary float-right">
-										<b>View More</b>
-									</a>
-								</div>
-							</div>
+				<c:forEach var='clinic' items='${listPatientClinics}'>
 
+					<div class='col-lg-4 py-3'>
+						<div class='clinic-cards'>
+							<div class="card clinic-card bg-white border rounded-lg-clinic-card shadow-sm">
+								<img
+									src=<c:out value="${clinic.image}" />
+									class="card-img-top-alt" alt="" />
+								<h5>
+									<span
+										class="badge bg-info text-white location-name-clinics-card shadow">
+										<i class="fas fa-map-marker-alt text-white mr-2"></i> <c:out value="${clinic.location_name}" />
+									</span>
+								</h5>
+								<div class="card-body">
+									<div class="header card-event-name">
+										<h5>
+											<b><c:out value="${clinic.clinic_name}" /></b>
+										</h5>
+									</div>
+									<div class="event-info text-muted">
+										<ul class="list-unstyled text-small text-left info">
+											<li class="mb-2"><i
+												class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i> <b><c:out value="${clinic.opening_days}" /></b></li>
+											<li class="mb-2"><i
+												class="fas fa-clipboard-list me-2 text-secondary fa-lg"></i>
+												<b><c:out value="${clinic.opening_hours}" /></b></li>
+										</ul>
+									</div>
+									<span class="text-muted"> <b><c:out value="${clinic.contact_number}" /></b>
+									</span>
+									<div class="buttons py-2">
+										<a href='<%=request.getContextPath()%>/ClinicServlet/clinic-details?id=<c:out value='${clinic.id}'/>'
+											class="btn btn-primary float-right"> <b>View More</b>
+										</a>
+									</div>
+								</div>
+
+							</div>
 						</div>
 					</div>
-				</div>
-				
-				<div class='col-lg-4 py-3'>
-					<div class='clinic-cards'>
-						<div class="card bg-white border rounded-lg shadow-sm">
-							<img src='https://fdb.clinicstandard.com/api/fdb/download??p=1&ref_file=be6348da-e402-41d1-8f56-44c269590a3c.jpg' class="card-img-top-alt" alt=""
-							" />
-							<h5>
-								<span class="badge bg-info text-white location-name-clinics-card shadow"> <i
-									class="fas fa-map-marker-alt text-white mr-2"></i> Location Name
-								</span>
-							</h5>
-							<div class="card-body">
-								<div class="header card-event-name">
-									<h5>
-										<b>Clinic Name</b>
-									</h5>
-								</div>
-								<div class="event-info text-muted">
-									<ul class="list-unstyled text-small text-left info">
-										<li class="mb-2"><i
-											class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i> <b>Operating Days</b>
-										</li>
-										<li class="mb-2"><i
-											class="fas fa-clipboard-list me-2 text-secondary fa-lg"></i> <b>Operating Hours</b>
-										</li>
-									</ul>
-								</div>
-								<span class="text-muted"> <b>Contact</b> 
-								</span>
-								<div class="buttons py-2">
-									<button class="btn btn-primary float-right">
-										<b>View More</b>
-									</button>
-								</div>
-							</div>
 
-						</div>
-					</div>
-				</div>
-				<div class='col-lg-4 py-3'>
-					<div class='clinic-cards'>
-						<div class="card bg-white border rounded-lg shadow-sm">
-							<img src='https://polyclinic.singhealth.com.sg/patient-care/PublishingImages/shp-punggol/shp-pg.jpg' class="card-img-top-alt" alt=""
-							 />
-							<h5>
-								<span class="badge bg-info text-white location-name-clinics-card shadow"> <i
-									class="fas fa-map-marker-alt text-white mr-2"></i> Location Name
-								</span>
-							</h5>
-							<div class="card-body">
-								<div class="header card-event-name">
-									<h5>
-										<b>Clinic Name</b>
-									</h5>
-								</div>
-								<div class="event-info text-muted">
-									<ul class="list-unstyled text-small text-left info">
-										<li class="mb-2"><i
-											class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i> <b>Operating Days</b>
-										</li>
-										<li class="mb-2"><i
-											class="fas fa-clipboard-list me-2 text-secondary fa-lg"></i> <b>Operating Hours</b>
-										</li>
-									</ul>
-								</div>
-								<span class="text-muted"> <b>Contact</b> 
-								</span>
-								<div class="buttons py-2">
-									<button class="btn btn-primary float-right">
-										<b>View More</b>
-									</button>
-								</div>
-							</div>
+				</c:forEach>
 
-						</div>
-					</div>
-				</div>
-				<div class='col-lg-4 py-3'>
-					<div class='clinic-cards'>
-						<div class="card bg-white border rounded-lg shadow-sm">
-							<img src='https://onecms-res.cloudinary.com/image/upload/s--nx-K60a5--/c_crop%2Ch_810%2Cw_1440%2Cx_0%2Cy_135/f_auto%2Cq_auto/c_fill%2Cg_auto%2Ch_676%2Cw_1200/v1/mediacorp/cna/image/2021-10/242702303_408531773962235_6330686202698429774_n.jpg?itok=GCDaGhXR' class="card-img-top-alt" alt=""
-							" />
-							<h5>
-								<span class="badge bg-info text-white location-name-clinics-card shadow"> <i
-									class="fas fa-map-marker-alt text-white mr-2"></i> Location Name
-								</span>
-							</h5>
-							<div class="card-body">
-								<div class="header card-event-name">
-									<h5>
-										<b>Clinic Name</b>
-									</h5>
-								</div>
-								<div class="event-info text-muted">
-									<ul class="list-unstyled text-small text-left info">
-										<li class="mb-2"><i
-											class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i> <b>Operating Days</b>
-										</li>
-										<li class="mb-2"><i
-											class="fas fa-clipboard-list me-2 text-secondary fa-lg"></i> <b>Operating Hours</b>
-										</li>
-									</ul>
-								</div>
-								<span class="text-muted"> <b>Contact</b> 
-								</span>
-								<div class="buttons py-2">
-									<button class="btn btn-primary float-right">
-										<b>View More</b>
-									</button>
-								</div>
-							</div>
 
-						</div>
-					</div>
-				</div>
-				<div class='col-lg-4 py-3'>
-					<div class='clinic-cards'>
-						<div class="card bg-white border rounded-lg shadow-sm">
-							<img src='https://www.moh.gov.sg/images/librariesprovider5/default-album/khatib-polyclinic_200131.jpeg?sfvrsn=ed7d0d61_2' class="card-img-top-alt" alt=""
-							" />
-							<h5>
-								<span class="badge bg-info text-white location-name-clinics-card shadow"> <i
-									class="fas fa-map-marker-alt text-white mr-2"></i> Location Name
-								</span>
-							</h5>
-							<div class="card-body">
-								<div class="header card-event-name">
-									<h5>
-										<b>Clinic Name</b>
-									</h5>
-								</div>
-								<div class="event-info text-muted">
-									<ul class="list-unstyled text-small text-left info">
-										<li class="mb-2"><i
-											class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i> <b>Operating Days</b>
-										</li>
-										<li class="mb-2"><i
-											class="fas fa-clipboard-list me-2 text-secondary fa-lg"></i> <b>Operating Hours</b>
-										</li>
-									</ul>
-								</div>
-								<span class="text-muted"> <b>Contact</b> 
-								</span>
-								<div class="buttons py-2">
-									<button class="btn btn-primary float-right">
-										<b>View More</b>
-									</button>
-								</div>
-							</div>
 
-						</div>
-					</div>
-				</div>
-				<div class='col-lg-4 py-3'>
-					<div class='clinic-cards'>
-						<div class="card bg-white border rounded-lg shadow-sm">
-							<img src='https://www.onecaremedical.com.sg/wp-content/uploads/2019/07/OCTM.png' class="card-img-top-alt" alt=""
-							" />
-							<h5>
-								<span class="badge bg-info text-white location-name-clinics-card shadow"> <i
-									class="fas fa-map-marker-alt text-white mr-2"></i> Location Name
-								</span>
-							</h5>
-							<div class="card-body">
-								<div class="header card-event-name">
-									<h5>
-										<b>Clinic Name</b>
-									</h5>
-								</div>
-								<div class="event-info text-muted">
-									<ul class="list-unstyled text-small text-left info">
-										<li class="mb-2"><i
-											class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i> <b>Operating Days</b>
-										</li>
-										<li class="mb-2"><i
-											class="fas fa-clipboard-list me-2 text-secondary fa-lg"></i> <b>Operating Hours</b>
-										</li>
-									</ul>
-								</div>
-								<span class="text-muted"> <b>Contact</b> 
-								</span>
-								<div class="buttons py-2">
-									<button class="btn btn-primary float-right">
-										<b>View More</b>
-									</button>
-								</div>
-							</div>
 
-						</div>
-					</div>
-				</div>
+
+
+
 
 			</div>
 		</div>

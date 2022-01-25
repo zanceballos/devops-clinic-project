@@ -66,7 +66,7 @@ public class CreateClinicServlet extends HttpServlet {
 				System.out.println("SQL query executed");
 			 if (i > 0){
 					System.out.println("Successfully inserted");
-				response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+				response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard");
 				 }
 		}
 		catch (Exception exception) {

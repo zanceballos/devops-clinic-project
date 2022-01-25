@@ -31,7 +31,7 @@
 	integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<link rel="stylesheet" href="./CSS/styles.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/styles.css" type="text/css">
 
 </head>
 <body>
@@ -39,7 +39,7 @@
 		class="navbar navbar-expand-lg navbar-light shadow fixed-top bg-white">
 		<c:if test="${logged_in == null}">
 			<a href="<%=request.getContextPath()%>" class="navbar-brand"> <img
-				src='./assetsimg/devops-clinic-logo.png' height='45' />
+				src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png' height='45' />
 			</a>
 		</c:if>
 
@@ -47,13 +47,13 @@
 			<c:if test="${role == 'patient' }">
 				<a href="<%=request.getContextPath()%>/PatientHome.jsp"
 					class="navbar-brand"> <img
-					src='./assetsimg/devops-clinic-logo.png' height='45' />
+					src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png' height='45' />
 				</a>
 			</c:if>
 			<c:if test="${role == 'doctor' }">
 				<a href="<%=request.getContextPath()%>/DoctorHome.jsp"
 					class="navbar-brand"> <img
-					src='./assetsimg/devops-clinic-logo.png' height='45' />
+					src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png' height='45' />
 				</a>
 			</c:if>
 		</c:if>
@@ -84,7 +84,7 @@
 					</c:if>
 
 					<li class="nav-item"><a class="nav-link"
-						href="<%=request.getContextPath()%>/ClinicsListing.jsp"><b>Clinics</b>
+						href="<%=request.getContextPath()%>/ClinicServlet/all-clinics"><b>Clinics</b>
 					</a></li>
 
 					<li class="nav-item"><a class="nav-link" href="#"><b>Appointments</b></a></li>
@@ -97,7 +97,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>"><b>Home</b> </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<%=request.getContextPath()%>/ClinicsListing.jsp"><b>Clinics</b>
+						href="<%=request.getContextPath()%>/ClinicServlet/all-clinics"><b>Clinics</b>
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>#features"><b>Features</b></a></li>

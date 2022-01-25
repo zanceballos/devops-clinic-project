@@ -74,7 +74,7 @@
 
 
 										<div class="form-group mb-3">
-											<input id="inputDescription" type="text" placeholder="Description"
+											<input id="inputDescription" type="text" value='test' placeholder="Description"
 												required="" name="description"
 												class="form-control border-0 shadow-sm px-4 py-4 " />
 
@@ -84,7 +84,7 @@
 											<input id="inputOpening_Hours" type="text"
 												placeholder="Opening Hours" required="" name="opening_hours"
 												class="form-control border-0 shadow-sm px-4 py-4 "
-												onChange={handleInputChange} />
+												value='10am to 9pm' >
 
 										</div>
 										
@@ -92,7 +92,7 @@
 											<input id="inputOpening_Days" type="text"
 												placeholder="Opening Days" required="" name="opening_days"
 												class="form-control border-0 shadow-sm px-4 py-4 "
-												onChange={handleInputChange} />
+												value='Monday to Sunday' />
 
 										</div>
 										
@@ -100,7 +100,7 @@
 											<input id="inputContact_Number" type="text"
 												placeholder="Contact Number" required="" name="contact_number"
 												class="form-control border-0 shadow-sm px-4 py-4 "
-												onChange={handleInputChange} />
+												value='98987512' />
 
 										</div>
 
