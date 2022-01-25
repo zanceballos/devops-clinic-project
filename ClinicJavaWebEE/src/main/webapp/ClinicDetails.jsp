@@ -25,8 +25,8 @@
 					<b>Clinics Details</b>
 				</h6>
 				<ol class="breadcrumb text-dark">
-					<li class="breadcrumb-item"><a href="#">Home</a></li>
-					<li class="breadcrumb-item"><a href="#">Listings</a></li>
+					<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/PatientHome.jsp">Home</a></li>
+					<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/ClinicServlet/all-clinics">Listings</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Clinic
 						Details</li>
 				</ol>
@@ -34,17 +34,17 @@
 			<div class='row py-4'>
 				<div class='col-lg-8'>
 					<img class='shadow-sm rounded img-clinic'
-						src='https://www.onecaremedical.com.sg/wp-content/uploads/2019/07/OCTM.png'>
+						src=<c:out value='${clinicDetails.image}' />>
 
 
 				</div>
 				<div class='col-lg-4'>
 					<div class="header">
 						<h4>
-							<b>Clinic Name</b>
+							<b><c:out value='${clinicDetails.clinic_name}' /></b>
 						</h4>
 						<p class="text-muted">
-							@ <b> Location Name </b>
+							@ <b> <c:out value='${clinicDetails.location_name}' /> </b>
 						</p>
 					</div>
 					<div class="event-info">
@@ -61,20 +61,17 @@
 
 						<div class="datetime">
 							<p class="text-muted">
-								<i class="far fa-clock mr-2 text-primary fa-lg"></i>Operating
-								Hours
+								<i class="far fa-clock mr-2 text-primary fa-lg"></i><c:out value='${clinicDetails.opening_hours}' />
 							</p>
 						</div>
 						<div class="datetime">
 							<p class="text-muted">
-								<i class="fas fa-calendar mr-2 text-primary fa-lg"></i>Operating
-								Days
+								<i class="fas fa-calendar mr-2 text-primary fa-lg"></i><c:out value='${clinicDetails.opening_days}' />
 							</p>
 						</div>
 						<div class="contact">
 							<p class="text-muted">
-								<i class="fas fa-phone mr-2 text-primary fa-lg"></i>Contact
-								Number
+								<i class="fas fa-phone mr-2 text-primary fa-lg"></i><c:out value='${clinicDetails.contact_number}' />
 							</p>
 						</div>
 						<c:if test="${logged_in == true}">
@@ -85,7 +82,8 @@
 						</c:if>
 						<c:if test="${logged_in == null}">
 							<div class="buttons text-white">
-								<a class='btn btn-primary w-100 py-3'><b> Sign In to Book an Appointment</b></a>
+								<button type='button' disabled class='btn btn-primary w-100 py-3'><i class="fas fa-lock pr-2"></i><b> Sign In to
+										Book an Appointment</b></button>
 							</div>
 						</c:if>
 
@@ -107,7 +105,7 @@
 							<div class="description">
 								<div class="header">
 									<h5>
-										<i class="fas fa-info-circle pe-2 text-primary"></i> <b>Description
+										<i class="fas fa-info-circle pr-2 text-primary"></i> <b>Description
 											of Clinic</b>
 									</h5>
 								</div>
@@ -122,49 +120,49 @@
 							<div class="row py-3">
 								<div class="col-lg-4 col-md-6 col-sm-6 col-6 py-3">
 									<h5>
-										<i class="far fa-calendar-alt pe-2 text-primary"></i> <b>Name
+										<i class="far fa-calendar-alt pr-2 text-primary"></i> <b>Name
 											of Clinic</b>
 									</h5>
 									<div class="text-desc">
-										<p class="text-muted">Clinic Name</p>
+										<p class="text-muted"><c:out value='${clinicDetails.clinic_name}' /></p>
 									</div>
 								</div>
 								<div class="col-lg-4 col-md-6 col-sm-6 col-6 py-3">
 									<h5>
-										<i class="fas fa-map-marker-alt pe-2 text-primary"></i> <b>Location
+										<i class="fas fa-map-marker-alt pr-2 text-primary"></i> <b>Location
 											Name</b>
 									</h5>
 									<div class="text-desc">
-										<p class="text-muted">Location Name</p>
+										<p class="text-muted"><c:out value='${clinicDetails.location_name}' /></p>
 									</div>
 								</div>
 								<div class="col-lg-4 col-md-6 col-sm-6 col-6 py-3">
 									<h5>
-										<i class="fas fa-map-marked-alt pe-2 text-primary"></i> <b>Address</b>
+										<i class="fas fa-map-marked-alt pr-2 text-primary"></i><b>Address</b>
 									</h5>
 									<div class="text-desc">
-										<p class="text-muted">Location Address</p>
+										<p class="text-muted"><c:out value='${clinicDetails.address}' /></p>
 									</div>
 								</div>
 								<div class="col-lg-4 col-md-6 col-sm-6 col-6 py-3">
 									<h5>
-										<i class="fas fa-user-clock pe-2 text-primary"></i> <b>Operating
+										<i class="fas fa-user-clock pr-2 text-primary"></i> <b>Operating
 											Hours</b>
 									</h5>
 									<div class="text-desc">
-										<p class="text-muted">Operating Hours</p>
+										<p class="text-muted"><c:out value='${clinicDetails.opening_hours}' /></p>
 									</div>
 								</div>
 								<div class="col-lg-4 col-md-6 col-sm-6 col-6 py-3">
 									<div class="status">
 										<div class="header">
 											<h5>
-												<i class="fas fa-business-time pe-2 text-primary"></i> <b>Operating
+												<i class="fas fa-business-time pr-2 text-primary"></i> <b>Operating
 													Days</b>
 											</h5>
 											<div class="text-desc">
 												<p class="text-muted">
-													<span>Operating Days</span>
+													<span><c:out value='${clinicDetails.opening_days}' /></span>
 												</p>
 											</div>
 										</div>
@@ -174,12 +172,12 @@
 								<div class="col-lg-4 col-md-6 col-sm-6 col-6 py-3">
 									<div class="header">
 										<h5>
-											<i class="fas fa-envelope pe-2 text-primary"></i> <b>Clinic
+											<i class="fas fa-envelope pr-2 text-primary"></i> <b>Clinic
 												Contact</b>
 										</h5>
 										<div class="text-desc">
 											<p class="text-muted">
-												<span>Some Contact</span>
+												<span><c:out value='${clinicDetails.contact_number}' /></span>
 											</p>
 										</div>
 									</div>
@@ -200,7 +198,7 @@
 							<!-- The image half -->
 							<div class="col-md-6 d-none d-md-flex bg-image">
 								<img class="img-fluid px-4 py-4"
-									src="./assetsimg/review-img1.svg" alt="">
+									src="${pageContext.request.contextPath}/assetsimg/review-img1.svg" alt="">
 							</div>
 							<!-- The content half -->
 							<div class="col-md-6">

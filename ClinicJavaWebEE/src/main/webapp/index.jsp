@@ -39,9 +39,9 @@
 						</div>
 						<div class="intro-button">
 
-							<button class="btn btn-primary py-3 px-5 mt-3">
+							<a href='${pageContext.request.contextPath}/ClinicServlet/all-clinics' class="btn btn-primary py-3 px-5 mt-3">
 								<b>Explore Clinics</b>
-							</button>
+							</a>
 
 						</div>
 

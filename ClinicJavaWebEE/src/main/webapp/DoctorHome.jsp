@@ -86,9 +86,9 @@
 										<b>Manage Clinics</b>
 									</h5>
 									<p class="card-text text-muted mb-4">Add, Update or Remove Clinics here!</p>
-									<button
+									<a href='<%=request.getContextPath()%>/ClinicServlet/dashboard'
 										class="btn btn-primary float-right px-5 rounded-pill py-2">
-										View More</button>
+										View More</a>
 
 								</div>
 							</div>

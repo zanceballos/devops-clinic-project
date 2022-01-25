@@ -13,6 +13,12 @@
 	border-radius: 1rem !important;
 }
 
+.rounded-lg-clinic-card {
+	border-radius: 1rem !important;
+	border: 1px solid #dee2e6 !important;
+}
+
+
 /* USE THIS TO MAKE THE BODY GO UNDER THE FIXED NAVBAR*/
 .fixed-top-body {
 	padding-top: 100px !important;
@@ -171,6 +177,22 @@
 
 .clinic-search .input-group {
 	width: 85% !important;
+}
+
+.table-desc {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1; /* number of lines to show */
+	-webkit-box-orient: vertical;
+}
+
+.card-event-name h5 b{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1; /* number of lines to show */
+	-webkit-box-orient: vertical;
 }
 
 /** Flow cards **/
