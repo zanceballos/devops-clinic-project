@@ -34,5 +34,22 @@
 		<url-pattern>/ClinicServlet/update</url-pattern>
 		<url-pattern>/ClinicServlet/delete</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>AppointmentServlet</servlet-name>
+		<servlet-class>AppointmentServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>AppointmentServlet</servlet-name>
+		<url-pattern>/AppointmentServlet/AppointmentClinic</url-pattern>
+		<url-pattern>/AppointmentServlet/BookAppointment</url-pattern>
+		<url-pattern>/AppointmentServlet/PatientAppointments</url-pattern>
+		<url-pattern>/AppointmentServlet/ShowAppointmentDetails</url-pattern>
+		<url-pattern>/AppointmentServlet/UpdateAppointmentDetails</url-pattern>
+		<url-pattern>/AppointmentServlet/DeleteAppointment</url-pattern>
+	</servlet-mapping>
+	
 
 </web-app>
