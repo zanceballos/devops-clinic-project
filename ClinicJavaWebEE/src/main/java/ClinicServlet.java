@@ -34,7 +34,7 @@ public class ClinicServlet extends HttpServlet {
 	private static final String SELECT_CLINIC_BY_CLINIC_NAME = "select id,clinic_name,address,location_name,image,description,opening_hours,opening_days,contact_number from clinic where clinic_name = ?";
 	private static final String SELECT_ALL_CLINIC = "select * from clinic ";
 	private static final String DELETE_CLINIC_SQL = "delete from clinic where id = ?;";
-	private static final String UPDATE_CLINIC_SQL = "update clinic set clinic_name = ?, address = ? , location_name = ? , image = ?, description= ?, opening_hours= ?, opening_days, contact_number= ? where id = ?;";
+	private static final String UPDATE_CLINIC_SQL = "update clinic set  id=?, clinic_name = ?, address = ? , location_name = ? , image = ?, description= ?, opening_hours= ?, opening_days=?, contact_number= ? where id = ?;";
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -68,13 +68,13 @@ public class ClinicServlet extends HttpServlet {
 		try {
 			switch (action) {
 			case "/ClinicServlet/delete":
-				// deleteUser(request, response);
+					deleteClinic(request, response);
 				break;
 			case "/ClinicServlet/edit":
-				// showEditForm(request, response);
+				 	showEditForm(request, response);
 				break;
 			case "/ClinicServlet/update":
-				// updateUser(request, response);
+				 	updateClinic(request, response);
 				break;
 			case "/ClinicServlet/dashboard":
 				listClinic(request, response);
@@ -188,6 +188,74 @@ public class ClinicServlet extends HttpServlet {
 		// Step 5: Set existingUser to request and serve up the userEdit form
 		request.setAttribute("clinicDetails", clinicDetails);
 		request.getRequestDispatcher("/ClinicDetails.jsp").forward(request, response);
+	}
+
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		Clinic existingClinic = new Clinic(0,"","","","","","","","");
+		
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CLINIC_BY_ID);) {
+			preparedStatement.setInt(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				id = rs.getInt("id");
+				String clinic_name = rs.getString("clinic_name");
+				String address = rs.getString("address");
+				String location_name = rs.getString("location_name");
+				String image = rs.getString("image");
+				String description = rs.getString("description");
+				String opening_hours = rs.getString("opening_hours");
+				String opening_days = rs.getString("opening_days");
+				String contact_number = rs.getString("contact_number");
+				existingClinic = new Clinic (id,clinic_name, address, location_name, image, description, opening_hours,
+						opening_days, contact_number);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		request.setAttribute("clinic", existingClinic);
+		request.getRequestDispatcher("/clinicEdit.jsp").forward(request, response);
+	}
+	
+	private void updateClinic(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		String clinic_name = request.getParameter("clinic_name");
+		String address = request.getParameter("address");
+		String location_name = request.getParameter("location_name");
+		String image = request.getParameter("image");
+		String description = request.getParameter("description");
+		String opening_hours = request.getParameter("opening_hours");
+		String opening_days = request.getParameter("opening_days");
+		String contact_number = request.getParameter("contact_number");
+		
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_CLINIC_SQL);){
+			statement.setInt(1, id);
+			statement.setString(2, clinic_name);
+			statement.setString(3, address);
+			statement.setString(4, location_name);
+			statement.setString(5, image);
+			statement.setString(6, description);
+			statement.setString(7, opening_hours);
+			statement.setString(8, opening_days);
+			statement.setString(9, contact_number);
+			statement.setInt(10 ,id);
+			int i = statement.executeUpdate();
+		}
+		
+		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard");
+	}
+	
+	private void deleteClinic(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_CLINIC_SQL);){
+			statement.setInt(1, id);
+			int i = statement.executeUpdate();
+		}
+		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard");
 	}
 
 	/**
