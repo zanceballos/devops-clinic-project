@@ -37,7 +37,7 @@
 							</p>
 						</div>
 						<div class="header-buttons py-3">
-							<a href="<%=request.getContextPath()%>/ClinicsListing.jsp" class="btn btn-primary px-5 py-3 mr-2">Browse
+							<a href="<%=request.getContextPath()%>/ClinicServlet/all-clinics" class="btn btn-primary px-5 py-3 mr-2">Browse
 								Clinics</a>
 							<button class="btn btn-outline-primary px-5 py-3">My
 								Account</button>

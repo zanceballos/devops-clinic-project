@@ -87,7 +87,7 @@
 						href="<%=request.getContextPath()%>/ClinicServlet/all-clinics"><b>Clinics</b>
 					</a></li>
 
-					<li class="nav-item"><a class="nav-link" href="#"><b>Appointments</b></a></li>
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/AppointmentServlet/PatientAppointments?userid=${id}"><b>Appointments</b></a></li>
 				</c:if>
 
 
@@ -128,7 +128,7 @@
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							<a class="dropdown-item" href="#">Account</a> <a
 								class="dropdown-item" href="#">Reviews</a>
-							<form action='UserServlet/logout' method='post'>
+							<form action='/ClinicJavaWebEE/UserServlet/logout' method='post'>
 								<button type='submit' class="dropdown-item">Logout</button>
 							</form>
 						</div>

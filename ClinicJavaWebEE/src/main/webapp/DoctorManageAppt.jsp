@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>All Clinics | Clinic Hub</title>
+<title>Manage Appointments | Clinic Hub</title>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -20,54 +21,24 @@
 
 	<!-- -Include the navbar jsp to the page -->
 	<jsp:include page="navbar.jsp" />
+	
+	
+	<div class='fixed-top-body'>
 
-	<div class='clinic'>
-		<div class="Clinic-Section shadow">
+		<div class='background'>
 			<div class='container'>
-				<div class='row'>
-					<div class='col-lg-6'>
-						<div class="header text-white mt-4">
-							<h1>
-								<b>Browse Clinics</b>
-							</h1>
-							<p class="text-white">
-								<b>Search for a clinic and Book an Appointment!</b>
-							</p>
-						</div>
-						<div class='clinic-search'>
-							<a href='<%=request.getContextPath()%>/AppointmentServlet/PatientAppointments?userid=${id}' class='btn btn-light px-5 py-3 rounded-pill'><i class="fas fa-calendar-check pr-2"></i><b>View Your Appointments</b></a>
-						</div>
-
-
-					</div>
-					<div class='col-lg-6 text-center'>
-						<img
-							src="${pageContext.request.contextPath}/assetsimg/clinics-list-img4.svg"
-							class="clinic-img-head" alt="" />
-					</div>
+				<div class='header py-3'>
+					<h3>
+						<i class="fas fa-hospital-user pr-2 text-primary"></i> <b>Select a Clinic</b>
+					</h3>
+					<p class='text-muted'>
+						<b>Select a clinic where you want to manage appointments </b>
+					</p>
 				</div>
-			</div>
-
-		</div>
-
-		<div class='container py-4'>
-			<div class='header py-4'>
-				<h3>
-					<b>All Clinics</b>
-				</h3>
-			</div>
-			
-			<c:if test="${empty listPatientClinics}">
-					<div class='empty-icon text-center'>
-						<img src="${pageContext.request.contextPath}/assetsimg/empty.svg" width="250" class='' alt=""
-							 />
-						<p class='pt-5'>
-							<b>Nothing To See Here!</b>
-						</p>
-					</div>
-				</c:if>
-
-			<div class="row">
+				
+				
+				<div class='clinics'>
+					<div class="row">
 				<c:forEach var='clinic' items='${listPatientClinics}'>
 
 					<div class='col-lg-4 py-3'>
@@ -120,13 +91,12 @@
 
 
 			</div>
+				</div>
+			
+			</div>
 		</div>
-
+		
 	</div>
-
-
-	<!-- -Include the footer jsp to the page -->
-	<jsp:include page="footer.jsp" />
 
 </body>
 </html>

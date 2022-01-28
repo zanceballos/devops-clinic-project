@@ -76,7 +76,7 @@
 						</div>
 						<c:if test="${logged_in == true}">
 							<div class="buttons text-white">
-								<a class='btn btn-primary w-100 py-3'><b> Book an
+								<a href='<%=request.getContextPath()%>/AppointmentServlet/AppointmentClinic?id=<c:out value='${clinicDetails.id}'/>' class='btn btn-primary w-100 py-3'><b> Book an
 										Appointment</b></a>
 							</div>
 						</c:if>

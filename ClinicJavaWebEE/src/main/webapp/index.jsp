@@ -73,7 +73,7 @@
 							<img class="card-img-top" src="./assetsimg/select-clinic-2.svg"
 								alt="" />
 						</div>
-						<div class="card-body text-center">
+						<div class="card-body index-card text-center">
 							<h5>
 								<b>Browse clinic</b>
 							</h5>
@@ -88,7 +88,7 @@
 						<div class="card-header rounded-lg border-0">
 							<img class="card-img-top" src="./assetsimg/select-date.svg" alt="" />
 						</div>
-						<div class="card-body text-center">
+						<div class="card-body index-card text-center">
 							<h5>
 								<b>Select Date & Time</b>
 							</h5>
@@ -101,7 +101,7 @@
 						<div class="card-header rounded-lg border-0">
 							<img class="card-img-top" src="./assetsimg/attend-clinic.svg" alt="" />
 						</div>
-						<div class="card-body text-center">
+						<div class="card-body index-card text-center">
 							<h5>
 								<b>Visit the clinic</b>
 							</h5>
@@ -114,8 +114,8 @@
 						<div class="card-header rounded-lg border-0">
 							<img class="card-img-top" src="./assetsimg/review-img.svg" alt="" />
 						</div>
-						<div class="card-body text-center">
-							<h5>
+						<div class="card-body index-card text-center">
+							<h5> 
 								<b>Review Experience</b>
 							</h5>
 							<p>Give a review to share your experience!</p>
