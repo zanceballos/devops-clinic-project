@@ -31,6 +31,7 @@
 		<url-pattern>/ClinicServlet/dashboard</url-pattern>
 		<url-pattern>/ClinicServlet/all-clinics</url-pattern>
 		<url-pattern>/ClinicServlet/clinic-details</url-pattern>
+		<url-pattern>/ClinicServlet/edit</url-pattern>
 		<url-pattern>/ClinicServlet/update</url-pattern>
 		<url-pattern>/ClinicServlet/delete</url-pattern>
 	</servlet-mapping>
