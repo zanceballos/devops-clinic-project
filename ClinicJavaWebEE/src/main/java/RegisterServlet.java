@@ -57,6 +57,12 @@ public class RegisterServlet extends HttpServlet {
 		String role = request.getParameter("role");
 		String password = request.getParameter("password");
 		
+		if(username.isEmpty() || full_name.isEmpty() || email.isEmpty() || contact_number.isEmpty() || role.isEmpty() || password.isEmpty()) {
+			session.setAttribute("empty_register", true);
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/register.jsp");
+			return;
+		}
+		
 		System.out.println("Selected Role: " + role);
 		
 		// Username check exists or not

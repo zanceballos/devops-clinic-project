@@ -36,7 +36,7 @@
 							</p>
 						</div>
 						<div class="header-buttons py-3">
-							<button class="btn btn-primary px-5 py-3 mr-2">Manage Appointments</button>
+							<a href="<%=request.getContextPath()%>/ClinicServlet/doctor-all-clinics" class="btn btn-primary px-5 py-3 mr-2">Manage Appointments</a>
 					
 						</div>
 					</div>
@@ -67,9 +67,9 @@
 										<b>Manage Appointments</b>
 									</h5>
 									<p class="card-text text-muted mb-4">Manage All Patient Appointments</p>
-									<button
+									<a href="<%=request.getContextPath()%>/ClinicServlet/doctor-all-clinics"
 										class="btn btn-primary float-right px-5 rounded-pill py-2">
-										View More</button>
+										View More</a>
 
 								</div>
 							</div>

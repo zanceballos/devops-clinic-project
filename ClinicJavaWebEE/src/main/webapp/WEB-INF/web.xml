@@ -30,6 +30,7 @@
 		<servlet-name>ClinicServlet</servlet-name>
 		<url-pattern>/ClinicServlet/dashboard</url-pattern>
 		<url-pattern>/ClinicServlet/all-clinics</url-pattern>
+		<url-pattern>/ClinicServlet/doctor-all-clinics</url-pattern>
 		<url-pattern>/ClinicServlet/clinic-details</url-pattern>
 		<url-pattern>/ClinicServlet/edit</url-pattern>
 		<url-pattern>/ClinicServlet/update</url-pattern>
@@ -47,8 +48,11 @@
 		<url-pattern>/AppointmentServlet/AppointmentClinic</url-pattern>
 		<url-pattern>/AppointmentServlet/BookAppointment</url-pattern>
 		<url-pattern>/AppointmentServlet/PatientAppointments</url-pattern>
+		<url-pattern>/AppointmentServlet/ClinicAppointments</url-pattern>
 		<url-pattern>/AppointmentServlet/ShowAppointmentDetails</url-pattern>
+		<url-pattern>/AppointmentServlet/ShowAppointmentDetails-Doctors</url-pattern>
 		<url-pattern>/AppointmentServlet/UpdateAppointmentDetails</url-pattern>
+		<url-pattern>/AppointmentServlet/UpdateAppointmentDetails-Doctors</url-pattern>
 		<url-pattern>/AppointmentServlet/DeleteAppointment</url-pattern>
 	</servlet-mapping>
 	

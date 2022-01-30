@@ -36,7 +36,7 @@
 				</div>
 
 				<c:if test="${empty listAppointments}">
-					<div class='empty-icon text-center'>
+					<div class='empty-icon text-center py-5'>
 						<img src="${pageContext.request.contextPath}/assetsimg/empty.svg"
 							width="250" class='' alt="" />
 						<p class='pt-5'>
@@ -51,8 +51,11 @@
 						<div class="card rounded-lg bg-white shadow mb-3 w-100 border-0">
 							<div class="row no-gutters">
 								<div class="col-md-4">
+
 									<img src=<c:out value="${appointment.image}" />
 										class="card-img-h" alt="..." />
+
+
 								</div>
 								<div class="col-md-8">
 									<div class="card-body">

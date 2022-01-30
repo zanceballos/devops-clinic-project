@@ -9,13 +9,18 @@
 	font-family: 'Montserrat', sans-serif;
 }
 
-body{
-background-color: #fdfdfd !important;
+body {
+	background-color: #fdfdfd !important;
 }
 
 /*Empty Results */
 .empty-icon {
 	padding-top: 15%;
+}
+
+/*Empty Results */
+.empty-icon-appt {
+	padding-top: 5%;
 }
 
 .rounded-lg {
@@ -79,6 +84,19 @@ background-color: #fdfdfd !important;
 	border-bottom-left-radius: 35px;
 }
 
+.account-section {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 200px;
+	border-bottom-left-radius: 35px;
+	position: relative;
+	border-bottom-right-radius: 35px;
+	overflow: hidden;
+	padding: 120px 0 50px;
+	background-color: #007bff;
+}
+
 .Home-section {
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -132,7 +150,6 @@ background-color: #fdfdfd !important;
 	background-color: #00B6BD;
 }
 
-
 .patient-update-section {
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -144,6 +161,19 @@ background-color: #fdfdfd !important;
 	overflow: hidden;
 	padding: 150px 0 50px;
 	background-color: #00B6BD;
+}
+
+.doctor-manage-section {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 200px;
+	border-bottom-left-radius: 35px;
+	position: relative;
+	border-bottom-right-radius: 35px;
+	overflow: hidden;
+	padding: 120px 0 50px;
+	background-color: #28e2ff;
 }
 
 .success-Section {
@@ -163,6 +193,15 @@ background-color: #fdfdfd !important;
 	height: 100% !important;
 	width: 100% !important;
 	object-fit: cover;
+}
+
+.card-img-top-manage-clinic {
+	width: 100%;
+	height: 270px;
+	object-fit: cover;
+	border-top-right-radius: 1rem !important;
+	border-top-left-radius: 1rem !important;
+	filter: brightness(90%);
 }
 
 .selected-clinic-md-4 {
@@ -263,6 +302,10 @@ background-color: #fdfdfd !important;
 	-webkit-box-orient: vertical;
 }
 
+.appt-tb .table thead>tr>th {
+	border-top: none;
+}
+
 /** Flow cards **/
 .flow-card {
 	min-height: 350px;
@@ -290,11 +333,11 @@ background-color: #fdfdfd !important;
 		background-color: #DEF2F0;
 		min-height: 190px;
 	}
-	.index-card{
+	.index-card {
 		font-size: 0.95rem;
 	}
 	.index-card h5 {
-		font-size:0.95rem !important;
+		font-size: 0.95rem !important;
 	}
 	.index-card p {
 		overflow: hidden;

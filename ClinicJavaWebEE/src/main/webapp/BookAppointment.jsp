@@ -20,6 +20,8 @@
 	<!-- -Include the navbar jsp to the page -->
 	<jsp:include page="navbar.jsp" />
 
+	
+
 	<div class='fixed-top-body'>
 		<div class='container'>
 			<div class='header py-3'>

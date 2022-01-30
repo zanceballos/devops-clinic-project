@@ -41,16 +41,14 @@
 										method="post">
 										<div class="form-group mb-3">
 											<input id="inputUsername" type="text" placeholder="Username"
-												name="username" required=""
-												class="form-control border-0 shadow-sm px-4 py-4"
-												onChange={handleInputChange} />
+												name="username"
+												class="form-control border-0 shadow-sm px-4 py-4" required />
 
 										</div>
 										<div class="form-group mb-3">
 											<input id="inputFullName" type="text" placeholder="Full Name"
-												required="" name="full_name"
-												class="form-control border-0 shadow-sm px-4 py-4"
-												onChange={handleInputChange} />
+												name="full_name"
+												class="form-control border-0 shadow-sm px-4 py-4" required />
 
 										</div>
 
@@ -58,9 +56,8 @@
 											<div class='col-lg-6'>
 												<div class="form-group mb-3">
 													<input id="inputEmail" type="text" placeholder="Email"
-														required="" name="email"
-														class="form-control border-0 shadow-sm px-4 py-4"
-														onChange={handleInputChange} />
+														name="email"
+														class="form-control border-0 shadow-sm px-4 py-4" required />
 
 
 												</div>
@@ -69,18 +66,16 @@
 											<div class='col-lg-6'>
 												<div class="form-group mb-3">
 													<input id="inputContact" type="text"
-														placeholder="Contact Number" required=""
-														name="contact_number"
-														class="form-control border-0 shadow-sm px-4 py-4"
-														onChange={handleInputChange} />
+														placeholder="Contact Number" name="contact_number"
+														class="form-control border-0 shadow-sm px-4 py-4" required />
 
 												</div>
 											</div>
 										</div>
 										<div class="form-group mb-3">
 											<select class="w-100 border-0 shadow-sm py-3 px-3 text-muted"
-												name="role">
-												<option value="none" disabled selected>Select Role</option>
+												name="role" required>
+												<option value="" disabled selected>Select Role</option>
 												<option value="patient">Patient</option>
 												<option value="doctor">Doctor</option>
 											</select>
@@ -89,8 +84,7 @@
 
 										<div class="form-group mb-3">
 											<input id="inputPassword" type="password"
-												placeholder="Password" required="" name="password"
-												ref={password}
+												placeholder="Password" name="password" required
 												class="form-control border-0 shadow-sm px-4 py-4 text-primary"
 												onChange={handleInputChange} />
 
@@ -103,6 +97,14 @@
 											</div>
 
 											<c:set var="register_username_err" value="" scope="session" />
+
+										</c:if>
+										<c:if test="${empty_register == true}">
+											<div class="alert alert-danger py-3" role="alert">
+												<i class="fas fa-exclamation-circle pr-2"></i> <span>Please Fill Up All Fields!</span>
+											</div>
+
+											<c:set var="empty_register" value="" scope="session" />
 
 										</c:if>
 
