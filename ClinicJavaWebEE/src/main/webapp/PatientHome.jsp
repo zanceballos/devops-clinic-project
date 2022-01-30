@@ -39,8 +39,8 @@
 						<div class="header-buttons py-3">
 							<a href="<%=request.getContextPath()%>/ClinicServlet/all-clinics" class="btn btn-primary px-5 py-3 mr-2">Browse
 								Clinics</a>
-							<button class="btn btn-outline-primary px-5 py-3">My
-								Account</button>
+							<a  href="<%=request.getContextPath()%>/AccountPage.jsp" class="btn btn-outline-primary px-5 py-3">My
+								Account</a>
 						</div>
 					</div>
 					<div class="col-lg-7">
@@ -59,7 +59,7 @@
 			<div>
 				<div>
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 							<div class="card shadow border-0 mb-3">
 								<div class="card-header card-home bg-home border-0 py-4">
 									<img class="card-img-top" src="./assetsimg/select-clinic.svg"
@@ -78,7 +78,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 
 							<div class="card shadow border-0 mb-3">
 								<div class="card-header card-home bg-home border-0 py-4">
@@ -98,26 +98,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-4">
-
-							<div class="card shadow border-0 mb-3">
-								<div class="card-header card-home bg-home border-0 py-4">
-									<img class="card-img-top" src="./assetsimg/review-img.svg"
-										alt="" />
-								</div>
-								<div class="card-body">
-									<h5 class="card-title">
-										<b>Manage Reviews</b>
-									</h5>
-									<p class="card-text text-muted mb-4">Manage your Reviews</p>
-									<button
-										class="btn btn-primary float-right px-5 rounded-pill py-2">
-										View More</button>
-
-								</div>
-							</div>
-
-						</div>
+						
 					</div>
 				</div>
 

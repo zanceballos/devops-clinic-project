@@ -68,19 +68,22 @@ public class ClinicServlet extends HttpServlet {
 		try {
 			switch (action) {
 			case "/ClinicServlet/delete":
-					deleteClinic(request, response);
+				deleteClinic(request, response);
 				break;
 			case "/ClinicServlet/edit":
-				 	showEditForm(request, response);
+				showEditForm(request, response);
 				break;
 			case "/ClinicServlet/update":
-				 	updateClinic(request, response);
+				updateClinic(request, response);
 				break;
 			case "/ClinicServlet/dashboard":
 				listClinic(request, response);
 				break;
 			case "/ClinicServlet/all-clinics":
 				PatientListClinics(request, response);
+				break;
+			case "/ClinicServlet/doctor-all-clinics":
+				listClinic(request, response);
 				break;
 			case "/ClinicServlet/clinic-details":
 				showClinicDetails(request, response);
@@ -117,8 +120,16 @@ public class ClinicServlet extends HttpServlet {
 			System.out.println(e.getMessage());
 		}
 		// Step 5.4: Set the users list into the listUsers attribute to be pass to the
-		request.setAttribute("listClinic", clinic);
-		request.getRequestDispatcher("/clinic.jsp").forward(request, response);
+		
+		if(request.getServletPath().equals("/ClinicServlet/dashboard")) {
+			request.setAttribute("listClinic", clinic);
+			request.getRequestDispatcher("/clinic.jsp").forward(request, response);
+		}
+		if(request.getServletPath().equals("/ClinicServlet/doctor-all-clinics")) {
+			request.setAttribute("listClinic", clinic);
+			request.getRequestDispatcher("/DoctorManageAppt.jsp").forward(request, response);
+		}
+		
 	}
 
 	private void PatientListClinics(HttpServletRequest request, HttpServletResponse response)
@@ -150,8 +161,7 @@ public class ClinicServlet extends HttpServlet {
 		request.setAttribute("listPatientClinics", clinic);
 		request.getRequestDispatcher("/ClinicsListing.jsp").forward(request, response);
 	}
-	
-	
+
 	private void showClinicDetails(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		// get parameter passed in the URL
@@ -178,9 +188,9 @@ public class ClinicServlet extends HttpServlet {
 				String opening_hours = rs.getString("opening_hours");
 				String opening_days = rs.getString("opening_days");
 				String contact_number = rs.getString("contact_number");
-				clinicDetails = new Clinic(clinic_id, clinic_name, address, location_name, image, description, opening_hours,
-						opening_days, contact_number);
-				System.out.println("Details: " +clinicDetails);
+				clinicDetails = new Clinic(clinic_id, clinic_name, address, location_name, image, description,
+						opening_hours, opening_days, contact_number);
+				System.out.println("Details: " + clinicDetails);
 			}
 		} catch (SQLException e) {
 			System.out.println("Error: " + e.getMessage());
@@ -190,12 +200,13 @@ public class ClinicServlet extends HttpServlet {
 		request.getRequestDispatcher("/ClinicDetails.jsp").forward(request, response);
 	}
 
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
 		int id = Integer.parseInt(request.getParameter("id"));
 
-		Clinic existingClinic = new Clinic(0,"","","","","","","","");
-		
+		Clinic existingClinic = new Clinic(0, "", "", "", "", "", "", "", "");
+
 		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CLINIC_BY_ID);) {
 			preparedStatement.setInt(1, id);
@@ -210,7 +221,7 @@ public class ClinicServlet extends HttpServlet {
 				String opening_hours = rs.getString("opening_hours");
 				String opening_days = rs.getString("opening_days");
 				String contact_number = rs.getString("contact_number");
-				existingClinic = new Clinic (id,clinic_name, address, location_name, image, description, opening_hours,
+				existingClinic = new Clinic(id, clinic_name, address, location_name, image, description, opening_hours,
 						opening_days, contact_number);
 			}
 		} catch (SQLException e) {
@@ -219,8 +230,9 @@ public class ClinicServlet extends HttpServlet {
 		request.setAttribute("clinic", existingClinic);
 		request.getRequestDispatcher("/clinicEdit.jsp").forward(request, response);
 	}
-	
-	private void updateClinic(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+
+	private void updateClinic(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String clinic_name = request.getParameter("clinic_name");
 		String address = request.getParameter("address");
@@ -230,8 +242,9 @@ public class ClinicServlet extends HttpServlet {
 		String opening_hours = request.getParameter("opening_hours");
 		String opening_days = request.getParameter("opening_days");
 		String contact_number = request.getParameter("contact_number");
-		
-		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_CLINIC_SQL);){
+
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(UPDATE_CLINIC_SQL);) {
 			statement.setInt(1, id);
 			statement.setString(2, clinic_name);
 			statement.setString(3, address);
@@ -241,17 +254,19 @@ public class ClinicServlet extends HttpServlet {
 			statement.setString(7, opening_hours);
 			statement.setString(8, opening_days);
 			statement.setString(9, contact_number);
-			statement.setInt(10 ,id);
+			statement.setInt(10, id);
 			int i = statement.executeUpdate();
 		}
-		
+
 		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard");
 	}
-	
-	private void deleteClinic(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException{
+
+	private void deleteClinic(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		
-		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_CLINIC_SQL);){
+
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(DELETE_CLINIC_SQL);) {
 			statement.setInt(1, id);
 			int i = statement.executeUpdate();
 		}

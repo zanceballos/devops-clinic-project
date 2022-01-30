@@ -24,58 +24,99 @@
 
 	<div class='fixed-top-body'>
 
-		<div class="container text-center">
-			<h3 class="text-center py-3">Manage Clinics</h3>
-				<hr>
-				<div class="text-left">
+		<div class="container">
+
+			<div class='d-flex justify-content-between'>
+				<div class=header>
+					<h3>
+						<b>Manage Clinics</b>
+					</h3>
+					<p class='text-muted'>Manage all your clinics here!</p>
+				</div>
+
+
+				<div class="sub-buttons">
 					<!-- Add new user button redirects to the register.jsp page -->
 					<a href="<%=request.getContextPath()%>/CreateClinic.jsp"
-						class="btn btn-success py-3">Add New Clinic</a>
+						class="btn btn-primary shadow rounded-pill px-5 py-3"><i
+						class="fas fa-plus-circle mr-2"></i><b>Add Clinic</b></a>
 				</div>
-				<br>
-				<!-- Create a table to list out all current users information -->
-				<table class="table py-5">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Clinic Name</th>
-							<th>Address</th>
-							<th>Location Name</th>
-							<th>Image</th>
-							<th>Description</th>
-							<th>Opening Hours</th>
-							<th>Opening Days</th>
-							<th>Contact Number</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<!-- Pass in the list of users receive via the Servlet’s response to a loop
--->
-					<tbody>
-						<c:forEach var="clinic" items="${listClinic}">
-							<!-- For each user in the database, display their
-information accordingly -->
-							<tr>
-								<td><c:out value="${clinic.id}" /></td>
-								<td ><c:out value="${clinic.clinic_name}" /></td>
-								<td><c:out value="${clinic.address}" /></td>
-								<td ><c:out value="${clinic.location_name}" /></td>
-								<td ><c:out value="${clinic.image}" /></td>
-								<td ><c:out value="${clinic.description}" /></td>
-								<td><c:out value="${clinic.opening_hours}" /></td>
-								<td ><c:out value="${clinic.opening_days}" /></td>
-								<td ><c:out value="${clinic.contact_number}" /></td>
-								<!-- For each user in the database, Edit/Delete
-buttons which invokes the edit/delete functions -->
-								<td><a href="edit?id=<c:out value='${clinic.id}'
-/>">Edit</a>
-									&nbsp;&nbsp;&nbsp;&nbsp; <a
-									href="delete?id=<c:out
-value='${clinic.id}' />">Delete</a></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+			</div>
+
+
+			<div class='clinics'>
+				<div class="row">
+					<c:forEach var='clinic' items='${listClinic}'>
+
+						<div class='col-lg-4 py-3'>
+							<div class='clinic-cards'>
+								<div
+									class="card clinic-card bg-white border rounded-lg-clinic-card shadow-sm">
+									<img src=<c:out value="${clinic.image}" />
+										class="card-img-top-alt" alt="" />
+									<h5>
+										<span
+											class="badge bg-info text-white location-name-clinics-card shadow">
+											<i class="fas fa-map-marker-alt text-white mr-2"></i> <c:out
+												value="${clinic.location_name}" />
+										</span>
+									</h5>
+									<div class="card-body">
+										<div class="header card-event-name">
+											<h5>
+												<b><c:out value="${clinic.clinic_name}" /></b>
+											</h5>
+										</div>
+										<div class="event-info text-muted">
+											<ul class="list-unstyled text-small text-left info">
+												<li class="mb-2"><i
+													class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i>
+													<b><c:out value="${clinic.opening_days}" /></b></li>
+												<li class="mb-2"><i
+													class="fas fa-clipboard-list me-2 text-secondary fa-lg"></i>
+													<b><c:out value="${clinic.opening_hours}" /></b></li>
+											</ul>
+										</div>
+										<span class="text-muted"> <b><c:out
+													value="${clinic.contact_number}" /></b>
+										</span>
+										<div class="buttons float-right py-2">
+											<div class="dropdown">
+												<button class="btn btn-primary dropdown-toggle"
+													type="button" id="dropdownMenuButton"
+													data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<b>Options</b>
+												</button>
+												<div class="dropdown-menu"
+													aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item"
+														href='<%=request.getContextPath()%>/ClinicServlet/edit?id=${clinic.id}'>Update</a>
+													<a class="dropdown-item"
+														href="<%=request.getContextPath()%>/ClinicServlet/delete?id=${clinic.id}">Delete</a>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</c:forEach>
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+
+
+
 		</div>
 
 	</div>

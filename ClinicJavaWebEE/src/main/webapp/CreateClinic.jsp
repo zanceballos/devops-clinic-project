@@ -19,42 +19,41 @@
 	<!-- -Include the navbar jsp to the page -->
 	<jsp:include page="navbar.jsp" />
 	<div class='fixed-top-body'>
-		<div class='container text-center py-5'>
-			<div class="row no-gutter g-0 shadow rounded-lg">
-
-				<div class="col-md-12 bg-light">
-					<div class="login d-flex align-items-center py-5">
+		<div class='container mt-2'>
+			<div class="row no-gutter g-0">
+				<div class="col-md-12">
+					<div class="d-flex align-items-center">
 						<div class="container py-3 px-3">
 							<div class="row text-dark">
-								<div class="col-lg-10 col-xl-7 mx-auto">
+								<div class="col-lg-6 col-xl-7 mx-auto bg-light py-5 px-5 border shadow border-rounded">
 									<h2>
-										<b>Create Clinic</b>
+										<i class="fas fa-plus-square pr-2 text-primary"></i> <b>Create
+											Clinic</b>
 									</h2>
 
-									
-									<form autoComplete="off" noValidate action='CreateClinicServlet' method="post">
+
+									<form autoComplete="off" noValidate
+										action='CreateClinicServlet' method="post">
 										<div class="form-group mb-3">
-											<input id="inputClinic_Name" type="text" placeholder="Clinic Name"
-												name="clinic_name" required=""
+											<input id="inputClinic_Name" type="text"
+												placeholder="Clinic Name" name="clinic_name" required
 												class="form-control border-0 shadow-sm px-4 py-4"
 												onChange={handleInputChange} />
 
 										</div>
 										<div class="form-group mb-3">
 											<input id="inputAddress" type="text" placeholder="Address"
-												required="" name="address"
-												class="form-control border-0 shadow-sm px-4 py-4"
-												onChange={handleInputChange} />
+												required name="address"
+												class="form-control border-0 shadow-sm px-4 py-4" />
 
 										</div>
 
 										<div class='row'>
 											<div class='col-lg-6'>
 												<div class="form-group mb-3">
-													<input id="inputLocation_Name" type="text" placeholder="Location Name"
-														required="" name="location_name"
-														class="form-control border-0 shadow-sm px-4 py-4"
-														onChange={handleInputChange} />
+													<input id="inputLocation_Name" type="text"
+														placeholder="Location Name" required name="location_name"
+														class="form-control border-0 shadow-sm px-4 py-4" />
 
 
 												</div>
@@ -62,11 +61,9 @@
 											</div>
 											<div class='col-lg-6'>
 												<div class="form-group mb-3">
-													<input id="inputImage" type="text"
-														placeholder="Image" required=""
-														name="image"
-														class="form-control border-0 shadow-sm px-4 py-4"
-														onChange={handleInputChange} />
+													<input id="inputImage" type="text" placeholder="Image"
+														required name="image"
+														class="form-control border-0 shadow-sm px-4 py-4" />
 
 												</div>
 											</div>
@@ -74,52 +71,47 @@
 
 
 										<div class="form-group mb-3">
-											<input id="inputDescription" type="text" value='test' placeholder="Description"
-												required="" name="description"
+											<input id="inputDescription" type="text"
+												placeholder="Description" required name="description"
+												class="form-control border-0 shadow-sm px-4 py-4 " />
+										</div>
+
+										<div class="form-group mb-3">
+											<input id="inputOpening_Hours" type="text"
+												placeholder="Opening Hours" required name="opening_hours"
+												class="form-control border-0 shadow-sm px-4 py-4 ">
+
+										</div>
+
+										<div class="form-group mb-3">
+											<input id="inputOpening_Days" type="text"
+												placeholder="Opening Days" required name="opening_days"
 												class="form-control border-0 shadow-sm px-4 py-4 " />
 
 										</div>
 
 										<div class="form-group mb-3">
-											<input id="inputOpening_Hours" type="text"
-												placeholder="Opening Hours" required="" name="opening_hours"
-												class="form-control border-0 shadow-sm px-4 py-4 "
-												value='10am to 9pm' >
-
-										</div>
-										
-										<div class="form-group mb-3">
-											<input id="inputOpening_Days" type="text"
-												placeholder="Opening Days" required="" name="opening_days"
-												class="form-control border-0 shadow-sm px-4 py-4 "
-												value='Monday to Sunday' />
-
-										</div>
-										
-										<div class="form-group mb-3">
 											<input id="inputContact_Number" type="text"
-												placeholder="Contact Number" required="" name="contact_number"
-												class="form-control border-0 shadow-sm px-4 py-4 "
-												value='98987512' />
+												placeholder="Contact Number" required name="contact_number"
+												class="form-control border-0 shadow-sm px-4 py-4 " />
 
 										</div>
 
-										
-										<button
-											type='submit'
+										<c:if test="${empty_clinic_add == true}">
+											<div class="alert alert-danger py-3" role="alert">
+												<i class="fas fa-exclamation-circle pr-2"></i> <span>Please
+													Fill Up All Fields!</span>
+											</div>
+
+											<c:set var="empty_clinic_add" value="" scope="session" />
+
+										</c:if>
+										<button type='submit'
 											class="btn btn-primary py-3 btn-block text-uppercase mb-2 shadow-sm w-100">
 											Create Clinic</button>
-										<div class="row justify-content-center">
-											<div class="col-sm-4">
-												<hr />
-											</div>
-											
-											<div class="col-sm-4">
-												<hr />
-											</div>
-										</div>
+
 									</form>
-								
+
 								</div>
 							</div>
 						</div>

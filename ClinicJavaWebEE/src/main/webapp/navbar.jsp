@@ -31,7 +31,9 @@
 	integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/styles.css" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/CSS/styles.css"
+	type="text/css">
 
 </head>
 <body>
@@ -39,7 +41,8 @@
 		class="navbar navbar-expand-lg navbar-light shadow fixed-top bg-white">
 		<c:if test="${logged_in == null}">
 			<a href="<%=request.getContextPath()%>" class="navbar-brand"> <img
-				src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png' height='45' />
+				src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png'
+				height='45' />
 			</a>
 		</c:if>
 
@@ -47,13 +50,15 @@
 			<c:if test="${role == 'patient' }">
 				<a href="<%=request.getContextPath()%>/PatientHome.jsp"
 					class="navbar-brand"> <img
-					src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png' height='45' />
+					src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png'
+					height='45' />
 				</a>
 			</c:if>
 			<c:if test="${role == 'doctor' }">
 				<a href="<%=request.getContextPath()%>/DoctorHome.jsp"
 					class="navbar-brand"> <img
-					src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png' height='45' />
+					src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png'
+					height='45' />
 				</a>
 			</c:if>
 		</c:if>
@@ -75,19 +80,27 @@
 						<li class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath()%>/PatientHome.jsp"><b>Home</b>
 						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="<%=request.getContextPath()%>/ClinicServlet/all-clinics"><b>Clinics</b>
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="<%=request.getContextPath()%>/AppointmentServlet/PatientAppointments?userid=${id}"><b>Appointments</b></a></li>
 					</c:if>
 
 					<c:if test="${role == 'doctor' }">
 						<li class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath()%>/DoctorHome.jsp"><b>Home</b>
 						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="<%=request.getContextPath()%>/ClinicServlet/dashboard"><b>Clinics</b>
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="<%=request.getContextPath()%>/ClinicServlet/doctor-all-clinics"><b>Appointments</b></a></li>
 					</c:if>
 
-					<li class="nav-item"><a class="nav-link"
-						href="<%=request.getContextPath()%>/ClinicServlet/all-clinics"><b>Clinics</b>
-					</a></li>
 
-					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/AppointmentServlet/PatientAppointments?userid=${id}"><b>Appointments</b></a></li>
 				</c:if>
 
 
@@ -117,24 +130,27 @@
 						type="submit"><b>Register</b></a>
 				</c:if>
 				<c:if test="${logged_in != null}">
+			
+						<div class="dropdown">
+							<button class="btn btn-primary rounded-pill px-5 dropdown-toggle"
+								type="button" id="dropdownMenuButton" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-user-circle mr-2"></i> <span>${username}</span>
+							</button>
 
-					<div class="dropdown">
-						<button class="btn btn-primary rounded-pill px-5 dropdown-toggle"
-							type="button" id="dropdownMenuButton" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-user-circle mr-2"></i> <span>${username}</span>
-						</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/AccountPage.jsp">Account</a>
+								<form action='/ClinicJavaWebEE/UserServlet/logout' method='post'>
+									<button type='submit' class="dropdown-item">Logout</button>
+								</form>
+							</div>
 
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="#">Account</a> <a
-								class="dropdown-item" href="#">Reviews</a>
-							<form action='/ClinicJavaWebEE/UserServlet/logout' method='post'>
-								<button type='submit' class="dropdown-item">Logout</button>
-							</form>
+
 						</div>
 
+				
+				
 
-					</div>
 				</c:if>
 			</div>
 		</div>
