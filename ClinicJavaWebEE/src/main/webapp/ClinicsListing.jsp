@@ -35,7 +35,20 @@
 							</p>
 						</div>
 						<div class='clinic-search'>
-							<a href='<%=request.getContextPath()%>/AppointmentServlet/PatientAppointments?userid=${id}' class='btn btn-light px-5 py-3 rounded-pill'><i class="fas fa-calendar-check pr-2"></i><b>View Your Appointments</b></a>
+							<c:if test="${logged_in == true}">
+								<a
+									href='<%=request.getContextPath()%>/AppointmentServlet/PatientAppointments?userid=${id}'
+									class='btn btn-light px-5 py-3 rounded-pill'><i
+									class="fas fa-calendar-check pr-2"></i><b>View Your
+										Appointments</b></a>
+							</c:if>
+							<c:if test="${logged_in == null}">
+								<a
+									href='<%=request.getContextPath()%>/login.jsp'
+									class='btn btn-light px-5 py-3 rounded-pill'><i
+									class="fas fa-calendar-check pr-2"></i><b>Sign In to View Appointments!</b></a>
+							</c:if>
+
 						</div>
 
 
@@ -56,30 +69,31 @@
 					<b>All Clinics</b>
 				</h3>
 			</div>
-			
+
 			<c:if test="${empty listPatientClinics}">
-					<div class='empty-icon text-center'>
-						<img src="${pageContext.request.contextPath}/assetsimg/empty.svg" width="250" class='' alt=""
-							 />
-						<p class='pt-5'>
-							<b>Nothing To See Here!</b>
-						</p>
-					</div>
-				</c:if>
+				<div class='empty-icon text-center'>
+					<img src="${pageContext.request.contextPath}/assetsimg/empty.svg"
+						width="250" class='' alt="" />
+					<p class='pt-5'>
+						<b>Nothing To See Here!</b>
+					</p>
+				</div>
+			</c:if>
 
 			<div class="row">
 				<c:forEach var='clinic' items='${listPatientClinics}'>
 
 					<div class='col-lg-4 py-3'>
 						<div class='clinic-cards'>
-							<div class="card clinic-card bg-white border rounded-lg-clinic-card shadow-sm">
-								<img
-									src=<c:out value="${clinic.image}" />
+							<div
+								class="card clinic-card bg-white border rounded-lg-clinic-card shadow-sm">
+								<img src=<c:out value="${clinic.image}" />
 									class="card-img-top-alt" alt="" />
 								<h5>
 									<span
 										class="badge bg-info text-white location-name-clinics-card shadow">
-										<i class="fas fa-map-marker-alt text-white mr-2"></i> <c:out value="${clinic.location_name}" />
+										<i class="fas fa-map-marker-alt text-white mr-2"></i> <c:out
+											value="${clinic.location_name}" />
 									</span>
 								</h5>
 								<div class="card-body">
@@ -91,16 +105,19 @@
 									<div class="event-info text-muted">
 										<ul class="list-unstyled text-small text-left info">
 											<li class="mb-2"><i
-												class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i> <b><c:out value="${clinic.opening_days}" /></b></li>
+												class="fas fa-shopping-bag me-2 text-secondary fa-lg"></i> <b><c:out
+														value="${clinic.opening_days}" /></b></li>
 											<li class="mb-2"><i
 												class="fas fa-clipboard-list me-2 text-secondary fa-lg"></i>
 												<b><c:out value="${clinic.opening_hours}" /></b></li>
 										</ul>
 									</div>
-									<span class="text-muted"> <b><c:out value="${clinic.contact_number}" /></b>
+									<span class="text-muted"> <b><c:out
+												value="${clinic.contact_number}" /></b>
 									</span>
 									<div class="buttons py-2">
-										<a href='<%=request.getContextPath()%>/ClinicServlet/clinic-details?id=<c:out value='${clinic.id}'/>'
+										<a
+											href='<%=request.getContextPath()%>/ClinicServlet/clinic-details?id=<c:out value='${clinic.id}'/>'
 											class="btn btn-primary float-right"> <b>View More</b>
 										</a>
 									</div>
