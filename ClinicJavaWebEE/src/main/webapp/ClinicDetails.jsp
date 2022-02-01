@@ -25,7 +25,7 @@
 					<b>Clinics Details</b>
 				</h6>
 				<ol class="breadcrumb text-dark">
-					<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/PatientHome.jsp">Home</a></li>
+					<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/UserServlet/home">Home</a></li>
 					<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/ClinicServlet/all-clinics">Listings</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Clinic
 						Details</li>
