@@ -97,6 +97,20 @@ public class ClinicServlet extends HttpServlet {
 	private void listClinic(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<Clinic> clinic = new ArrayList<>();
+
+		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		// check user role
+		if (session.getAttribute("role").equals("patient")) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			return;
+		}
+
 		try (Connection connection = getConnection();
 
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CLINIC);) {
@@ -120,21 +134,22 @@ public class ClinicServlet extends HttpServlet {
 			System.out.println(e.getMessage());
 		}
 		// Step 5.4: Set the users list into the listUsers attribute to be pass to the
-		
-		if(request.getServletPath().equals("/ClinicServlet/dashboard")) {
+
+		if (request.getServletPath().equals("/ClinicServlet/dashboard")) {
 			request.setAttribute("listClinic", clinic);
 			request.getRequestDispatcher("/clinic.jsp").forward(request, response);
 		}
-		if(request.getServletPath().equals("/ClinicServlet/doctor-all-clinics")) {
+		if (request.getServletPath().equals("/ClinicServlet/doctor-all-clinics")) {
 			request.setAttribute("listClinic", clinic);
 			request.getRequestDispatcher("/DoctorManageAppt.jsp").forward(request, response);
 		}
-		
+
 	}
 
 	private void PatientListClinics(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<Clinic> clinic = new ArrayList<>();
+
 		try (Connection connection = getConnection();
 
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_CLINIC);) {
@@ -207,6 +222,19 @@ public class ClinicServlet extends HttpServlet {
 
 		Clinic existingClinic = new Clinic(0, "", "", "", "", "", "", "", "");
 
+		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		// check user role
+		if (session.getAttribute("role").equals("patient")) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			return;
+		}
+
 		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CLINIC_BY_ID);) {
 			preparedStatement.setInt(1, id);
@@ -243,6 +271,19 @@ public class ClinicServlet extends HttpServlet {
 		String opening_days = request.getParameter("opening_days");
 		String contact_number = request.getParameter("contact_number");
 
+		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		// check user role
+		if (session.getAttribute("role").equals("patient")) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			return;
+		}
+
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(UPDATE_CLINIC_SQL);) {
 			statement.setInt(1, id);
@@ -264,6 +305,19 @@ public class ClinicServlet extends HttpServlet {
 	private void deleteClinic(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
+
+		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		// check user role
+		if (session.getAttribute("role").equals("patient")) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			return;
+		}
 
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(DELETE_CLINIC_SQL);) {

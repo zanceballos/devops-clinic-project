@@ -97,7 +97,7 @@
 									<p class='text-muted'>Browse & Explore other clinics
 										available!</p>
 									<a
-										href="'<%=request.getContextPath()%>/ClinicServlet/all-clinics"
+										href="<%=request.getContextPath()%>/ClinicServlet/all-clinics"
 										class='btn btn-primary px-5 py-2 rounded-pill text-white mt-3 float-right'><b>More</b>
 									</a>
 								</div>
