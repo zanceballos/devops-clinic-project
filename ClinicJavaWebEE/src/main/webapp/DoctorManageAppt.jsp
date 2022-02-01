@@ -39,7 +39,7 @@
 								</p>
 							</div>
 							<div class='clinic-search'>
-								<a href='<%=request.getContextPath()%>/DoctorHome.jsp'
+								<a href='<%=request.getContextPath()%>/UserServlet/home'
 									class='btn btn-light px-5 py-3 rounded-pill'><i
 									class="fas fa-arrow-left pr-2"></i><b>Back To Home</b></a>
 							</div>

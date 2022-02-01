@@ -48,7 +48,7 @@
 
 		<c:if test="${logged_in == true}">
 			<c:if test="${role == 'patient' }">
-				<a href="<%=request.getContextPath()%>/PatientHome.jsp"
+				<a href='<%=request.getContextPath()%>/UserServlet/home'
 					class="navbar-brand"> <img
 					src='${pageContext.request.contextPath}/assetsimg/devops-clinic-logo.png'
 					height='45' />
@@ -78,7 +78,7 @@
 				<c:if test="${logged_in == true}">
 					<c:if test="${role == 'patient' }">
 						<li class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath()%>/PatientHome.jsp"><b>Home</b>
+							href='<%=request.getContextPath()%>/UserServlet/home'><b>Home</b>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath()%>/ClinicServlet/all-clinics"><b>Clinics</b>
@@ -90,7 +90,7 @@
 
 					<c:if test="${role == 'doctor' }">
 						<li class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath()%>/DoctorHome.jsp"><b>Home</b>
+							href='<%=request.getContextPath()%>/UserServlet/home'><b>Home</b>
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath()%>/ClinicServlet/dashboard"><b>Clinics</b>
