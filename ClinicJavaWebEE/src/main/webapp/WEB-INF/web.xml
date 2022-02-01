@@ -19,6 +19,7 @@
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/UserServlet/login</url-pattern>
 		<url-pattern>/UserServlet/logout</url-pattern>
+		<url-pattern>/UserServlet/home</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

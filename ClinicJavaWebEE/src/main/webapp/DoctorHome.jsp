@@ -14,7 +14,9 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
-<link rel="stylesheet" href="./CSS/styles.css" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/CSS/styles.css"
+	type="text/css">
 
 </head>
 <body>
@@ -41,7 +43,7 @@
 						</div>
 					</div>
 					<div class="col-lg-7">
-						<img src="./assetsimg/doctor-home.svg" class="img-fluid" alt="" />
+						<img src="${pageContext.request.contextPath}/assetsimg/doctor-home.svg" class="img-fluid" alt="" />
 					</div>
 				</div>
 			</div>
@@ -59,7 +61,7 @@
 						<div class="col-lg-6">
 							<div class="card shadow border-0 mb-3">
 								<div class="card-header card-home bg-home border-0 py-4">
-									<img class="card-img-top" src="./assetsimg/manage-appt.svg"
+									<img class="card-img-top" src="${pageContext.request.contextPath}/assetsimg/manage-appt.svg"
 										alt="" />
 								</div>
 								<div class="card-body">
@@ -78,7 +80,7 @@
 
 							<div class="card shadow border-0 mb-3">
 								<div class="card-header card-home bg-home border-0 py-4">
-									<img class="card-img-top" src="./assetsimg/manage-clinic.svg"
+									<img class="card-img-top" src="${pageContext.request.contextPath}/assetsimg/manage-clinic.svg"
 										alt="" />
 								</div>
 								<div class="card-body">
