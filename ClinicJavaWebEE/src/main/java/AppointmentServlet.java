@@ -109,6 +109,13 @@ public class AppointmentServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		System.out.print(id);
 		Clinic clinicDetails = new Clinic(0, "", "", "", "", "", "", "", "");
+
+		// check if user is logged in
+		HttpSession session = request.getSession();
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+		}
+
 		// Step 1: Establishing a Connection
 		try (Connection connection = getConnection();
 				// Step 2:Create a statement using connection object
@@ -146,6 +153,12 @@ public class AppointmentServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		// Set User session storage here!
 		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
 
 		response.setContentType("text/html");
 		String appointment_type = request.getParameter("appointment_type");
@@ -187,9 +200,19 @@ public class AppointmentServlet extends HttpServlet {
 		List<AppointmentJoin> appointments = new ArrayList<>();
 		HttpSession session = request.getSession();
 		String userid = request.getParameter("userid");
-		// System.out.println(session.getAttribute("id").toString().equals(userid.toString()));
 		// Redirect them back to home page if they are trying to access different user's
 		// appointments
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		if (session.getAttribute("role").equals("doctor")) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			return;
+		}
+
 		if (!session.getAttribute("id").toString().equals(userid.toString())) {
 
 			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/PatientHome.jsp");
@@ -223,7 +246,8 @@ public class AppointmentServlet extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		// Step 5.4: Set the appointments list into the listUsers attribute to be pass to the
+		// Step 5.4: Set the appointments list into the listUsers attribute to be pass
+		// to the
 		request.setAttribute("listAppointments", appointments);
 		request.getRequestDispatcher("/PatientAppointments.jsp").forward(request, response);
 
@@ -234,9 +258,19 @@ public class AppointmentServlet extends HttpServlet {
 		List<AppointmentJoin> appointments = new ArrayList<>();
 		Clinic clinicDetails = new Clinic(0, "", "", "", "", "", "", "", "");
 		String clinicid = request.getParameter("clinicid");
-		// System.out.println(session.getAttribute("id").toString().equals(userid.toString()));
-		// Redirect them back to home page if they are trying to access different user's
-		// appointments
+
+		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		// check user role
+		if (session.getAttribute("role").equals("patient")) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			return;
+		}
 
 		// Step 1: Establishing a Connection
 		try (Connection connection = getConnection();
@@ -293,7 +327,8 @@ public class AppointmentServlet extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		// Step 5.4: Set the appointments list into the listUsers attribute to be pass to the
+		// Step 5.4: Set the appointments list into the listUsers attribute to be pass
+		// to the
 		request.setAttribute("listAppointments", appointments);
 		request.setAttribute("clinicDetails", clinicDetails);
 		request.getRequestDispatcher("/DoctorClinicAppt.jsp").forward(request, response);
@@ -308,6 +343,12 @@ public class AppointmentServlet extends HttpServlet {
 		String id = request.getParameter("id");
 
 		Appointment appointment = new Appointment(0, 0, 0, "", "", "");
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
 
 		// Step 1: Establishing a Connection
 		try (Connection connection = getConnection();
@@ -333,12 +374,12 @@ public class AppointmentServlet extends HttpServlet {
 			System.out.println("Error: " + e.getMessage());
 		}
 
-		//If Patient request
+		// If Patient request
 		if (session.getAttribute("role").equals("patient")) {
 			request.setAttribute("appointment", appointment);
 			request.getRequestDispatcher("/PatientUpdateAppt.jsp").forward(request, response);
 		}
-		//If Doctor Request
+		// If Doctor Request
 		if (session.getAttribute("role").equals("doctor")) {
 			request.setAttribute("appointment", appointment);
 			request.getRequestDispatcher("/DoctorUpdateAppointment.jsp").forward(request, response);
@@ -351,6 +392,12 @@ public class AppointmentServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		
 		// Step 1: Retrieve value from the request
 		String apptid = request.getParameter("id");
 		String userid = request.getParameter("user_id");
@@ -376,22 +423,23 @@ public class AppointmentServlet extends HttpServlet {
 			if (date.isEmpty() || time.isEmpty()) {
 				System.out.print("DATE TIME EMPTY ERROR");
 				session.setAttribute("update_datetime_error", true);
-				
-				//if patient update
+
+				// if patient update
 				if (session.getAttribute("role").equals("patient")) {
 					response.sendRedirect(
-							"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id=" + apptid);
-					
-				}
-				
-				//if Doctor Update
-				if (session.getAttribute("role").equals("doctor")) {
-					response.sendRedirect(
-							"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails-Doctors?id=" + apptid);
-			
+							"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="
+									+ apptid);
+
 				}
 
-				
+				// if Doctor Update
+				if (session.getAttribute("role").equals("doctor")) {
+					response.sendRedirect(
+							"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails-Doctors?id="
+									+ apptid);
+
+				}
+
 				return;
 			}
 
@@ -435,6 +483,13 @@ public class AppointmentServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		HttpSession session = request.getSession();
+		
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		
 		// Step 1: Retrieve value from the request
 		String apptid = request.getParameter("id");
 		String clinicid = request.getParameter("clinicid");
@@ -445,18 +500,20 @@ public class AppointmentServlet extends HttpServlet {
 			int i = statement.executeUpdate();
 			// Step 3: redirect back to UserServlet (note: remember to change the url to
 			// your project name)
-			
-			//if Patient Request
-			if(session.getAttribute("role").equals("patient")) {
-				response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="
-						+ session.getAttribute("id"));
+
+			// if Patient Request
+			if (session.getAttribute("role").equals("patient")) {
+				response.sendRedirect(
+						"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="
+								+ session.getAttribute("id"));
 			}
-			//if Doctor Request
-			if(session.getAttribute("role").equals("doctor")) {
-				response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="
-						+ clinicid);
+			// if Doctor Request
+			if (session.getAttribute("role").equals("doctor")) {
+				response.sendRedirect(
+						"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="
+								+ clinicid);
 			}
-			
+
 		} catch (Exception exception) {
 			System.out.println(exception);
 			// out.close();
