@@ -29,7 +29,7 @@
 				</h6>
 				<ol class="breadcrumb text-dark">
 					<li class="breadcrumb-item"><a
-						href="<%=request.getContextPath()%>/DoctorHome.jsp">Home</a></li>
+						href='<%=request.getContextPath()%>/UserServlet/home'>Home</a></li>
 					<li class="breadcrumb-item"><a
 						href="<%=request.getContextPath()%>/ClinicServlet/doctor-all-clinics">All
 							Clinics</a></li>

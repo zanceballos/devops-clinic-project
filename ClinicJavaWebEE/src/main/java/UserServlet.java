@@ -85,6 +85,9 @@ public class UserServlet extends HttpServlet {
 			case "/UserServlet/dashboard":
 				// listUsers(request, response);
 				break;
+			case "/UserServlet/home":
+				displayHomePage(request, response);
+				break;
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
@@ -96,7 +99,7 @@ public class UserServlet extends HttpServlet {
 
 		// Set User session storage here!
 		HttpSession session = request.getSession();
-		
+
 		// get parameter passed in the URL
 		String iusername = request.getParameter("username");
 		String ipassword = request.getParameter("password");
@@ -116,12 +119,12 @@ public class UserServlet extends HttpServlet {
 					if (rs.getString("password").equals(ipassword)) {
 						int id = rs.getInt("id");
 						String username = rs.getString("username");
-						//String contact_number = rs.getString("contact_number");
-						//String email = rs.getString("email");
+						// String contact_number = rs.getString("contact_number");
+						// String email = rs.getString("email");
 						String role = rs.getString("role");
-						//String password = rs.getString("password");
-						//String full_name = rs.getString("full_name");
-						
+						// String password = rs.getString("password");
+						// String full_name = rs.getString("full_name");
+
 						session.setAttribute("id", id);
 						session.setAttribute("username", username);
 						session.setAttribute("logged_in", true);
@@ -131,10 +134,10 @@ public class UserServlet extends HttpServlet {
 
 						// If else statement to redirect user based on their user role
 						if (role.equals("patient")) {
-							response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/PatientHome.jsp");
+							response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
 						}
 						if (role.equals("doctor")) {
-							response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/DoctorHome.jsp");
+							response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
 						}
 
 						// stop the while loop as we have reached our condition
@@ -161,12 +164,10 @@ public class UserServlet extends HttpServlet {
 		}
 
 	}
-	
-	
 
 	private void logoutUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		
+
 		// Set User session storage here!
 		HttpSession session = request.getSession();
 		session.removeAttribute("id");
@@ -174,8 +175,28 @@ public class UserServlet extends HttpServlet {
 		session.removeAttribute("logged_in");
 		session.removeAttribute("role");
 		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE");
-		
-		
+
+	}
+
+	private void displayHomePage(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+
+		// Set User session storage here!
+		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		if (session.getAttribute("role").equals("patient")) {
+			request.getRequestDispatcher("/PatientHome.jsp").forward(request, response);
+		}
+		if (session.getAttribute("role").equals("doctor")) {
+			request.getRequestDispatcher("/DoctorHome.jsp").forward(request, response);
+		}
+		// response.sendRedirect("http://localhost:8090/ClinicJavaWebEE");
+
 	}
 
 	/**
