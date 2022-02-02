@@ -212,7 +212,7 @@
 												</h3>
 												<h5 class="text-muted mb-4">View All Reviews For this
 													Clinic</h5>
-												<a class="btn btn-primary text-white rounded-pill py-2 px-5">Reviews
+												<a href='<%=request.getContextPath()%>/ReviewServlet/ListClinicReviews?id=<c:out value='${clinicDetails.id}' />' class="btn btn-primary text-white rounded-pill py-2 px-5">Reviews
 												</a>
 											</div>
 
