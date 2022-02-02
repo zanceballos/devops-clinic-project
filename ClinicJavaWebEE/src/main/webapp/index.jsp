@@ -150,7 +150,7 @@
 						also the leap into electronic typesetting, remaining essentially
 						unchanged.</p>
 					<a href="<%=request.getContextPath()%>/login.jsp" class="btn btn-primary py-3 w-100 mt-3">
-						<b>Sign In & Start Booking!</b>
+						<b>Login & Start Booking!</b>
 					</a>
 
 				</div>
