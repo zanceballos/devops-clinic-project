@@ -31,10 +31,20 @@
 						<b>Clinic Reviews</b>
 					</h3>
 				</div>
-				<a
-					href='<%=request.getContextPath()%>/ReviewServlet/ClinicReviewForm?id=${clinicid}'
-					class='btn btn-primary text-white px-5 py-2 shadow'><b>Review
-						Clinic</b></a>
+				<c:if test="${logged_in != null }">
+					<a
+						href='<%=request.getContextPath()%>/ReviewServlet/ClinicReviewForm?id=${clinicid}'
+						class='btn btn-primary text-white px-5 py-2 shadow'><b>Review
+							Clinic</b></a>
+
+				</c:if>
+				<c:if test="${logged_in == null }">
+					<a
+						href='<%=request.getContextPath()%>/login.jsp'
+						class='btn btn-primary text-white px-5 py-2 shadow'><b>Sign In to review!</b></a>
+
+				</c:if>
+
 			</div>
 
 			<div class='reviews py-3'>
@@ -43,20 +53,22 @@
 					<div class='card shadow-sm mb-2'>
 						<div class='card-body py-4'>
 							<div class='stars float-right'>
-											<c:forEach begin="0" end="${review.rating_score }"
-												varStatus="loop">
-												<i class="fas fa-star text-warning"></i>
-											</c:forEach>
-										</div>
+								<c:forEach begin="0" end="${review.rating_score }"
+									varStatus="loop">
+									<i class="fas fa-star text-warning"></i>
+								</c:forEach>
+							</div>
 							<div class="d-flex flex-start">
-								<h1 class='pr-3'><i class="fas fa-user-circle fa-2x text-primary"></i></h1>
+								<h1 class='pr-3'>
+									<i class="fas fa-user-circle fa-2x text-primary"></i>
+								</h1>
 								<div>
 									<div class='d-flex justify-content-between'>
 										<h6 class="mb-1">
 											<b><c:out value="${review.username }"></c:out></b> <span
-												class="badge bg-primary text-white py-1 pl-2 pr-2">Verified</span>
+												class="badge bg-primary text-white py-1 pl-2 pr-2">Patient</span>
 										</h6>
-									
+
 									</div>
 
 									<div class="d-flex align-items-center mb-1">

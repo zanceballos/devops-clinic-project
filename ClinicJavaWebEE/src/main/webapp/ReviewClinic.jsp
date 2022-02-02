@@ -86,7 +86,13 @@
 
 										</div>
 
-									
+										<c:if test="${score_error == true}">
+											<div class="alert alert-danger py-3" role="alert">
+												<i class="fas fa-exclamation-circle pr-2"></i><span>Enter Up to Rating Score of 5 only!</span>
+											</div>
+											<c:set var="score_error" value="" scope="session" />
+											
+										</c:if>
 
 
 										<button type='submit'
