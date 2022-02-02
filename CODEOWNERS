@@ -1,0 +1,26 @@
+
+## OWNER - IZZAN
+
+# Owners will by default review all pull requests
+*         @zanceballos
+
+# Styling and Assets images
+*.jsp *.css *.img *.png *svg     @zanceballos
+
+# Specific files for other collaborator users
+
+## Java Classes
+
+## Faizal
+ClinicJavaWebEE/src/main/java/CreateClinicServlet.java  @zal07
+ClinicJavaWebEE/src/main/java/ClinicServlet.java @zal07
+ClinicJavaWebEE/src/main/java/Clinic.java @zal07
+
+## Carlo
+ClinicJavaWebEE/src/main/java/Review.java @carlodl
+ClinicJavaWebEE/src/main/java/ReviewServlet.java @carlodl
+
+## Akash 
+ClinicJavaWebEE/src/main/java/User.java @dhevakash
+ClinicJavaWebEE/src/main/java/UserServlet.java  @dhevakash
+ClinicJavaWebEE/src/main/java/RegisterServlet.java  @dhevakash
