@@ -37,51 +37,94 @@
 						Clinic</b></a>
 			</div>
 
-			<!-- Create a table to list out all current users information -->
-			<table class="table py-5">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Clinic id</th>
-						<th>User id</th>
-						<th>Review Title</th>
-						<th>Review</th>
-						<th>Score</th>
+			<div class='reviews py-3'>
+				<c:forEach var="review" items="${reviews}">
 
-					</tr>
-				</thead>
-				<!-- Pass in the list of users receive via the Servlet’s response to a loop
--->
-				<tbody>
-					<c:forEach var="review" items="${reviews}">
-						<!-- For each user in the database, display their
-information accordingly -->
-						<tr>
-							<td><c:out value="${review.id}" /></td>
-							<td><c:out value="${review.clinic_id}" /></td>
-							<td><c:out value="${review.user_id}" /></td>
-							<td><c:out value="${review.review_title}" /></td>
-							<td><c:out value="${review.review}" /></td>
-							<td><c:out value="${review.rating_score}" /></td>
-							<!-- For each user in the database, Edit/Delete
-buttons which invokes the edit/delete functions -->
+					<div class='card shadow-sm mb-2'>
+						<div class='card-body py-4'>
+							<div class='stars float-right'>
+											<c:forEach begin="0" end="${review.rating_score }"
+												varStatus="loop">
+												<i class="fas fa-star text-warning"></i>
+											</c:forEach>
+										</div>
+							<div class="d-flex flex-start">
+								<h1 class='pr-3'><i class="fas fa-user-circle fa-2x text-primary"></i></h1>
+								<div>
+									<div class='d-flex justify-content-between'>
+										<h6 class="mb-1">
+											<b><c:out value="${review.username }"></c:out></b> <span
+												class="badge bg-primary text-white py-1 pl-2 pr-2">Verified</span>
+										</h6>
+									
+									</div>
 
-							<td><c:if test="${logged_in != null}">
-									<c:if test="${ review.user_id == id}">
-										<a href="ShowUpdateForm?id=<c:out value='${review.id}'/>">Edit</a>
-									</c:if> &nbsp;&nbsp;&nbsp;&nbsp; <c:if
-										test="${review.user_id == id}">
-										<a
-											href="delete?id=<c:out
-value='${review.id}' />&clinicid=<c:out value="${review.clinic_id}" />">Delete</a>
-									</c:if>
-								</c:if></td>
+									<div class="d-flex align-items-center mb-1">
+										<p class="mb-0 text-muted">
+											<c:out value="${review.email }"></c:out>
+
+										</p>
+
+									</div>
+									<h4 class="mb-0">
+										<b><c:out value="${review.review_title }"></c:out></b>
+									</h4>
+									<p class="mb-0">
+										<c:out value="${review.review }"></c:out>
+									</p>
 
 
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+
+								</div>
+							</div>
+							<c:if test="${logged_in != null}">
+								<c:if test="${ review.user_id == id}">
+
+									<div class="dropdown pb-3">
+										<button
+											class="btn btn-secondary px-3 dropdown-toggle float-right"
+											type="button" id="dropdownMenuButton" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false">
+											<b> More Options</b>
+										</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item"
+												href="ShowUpdateForm?id=<c:out value='${review.id}'/>">Update</a>
+											<a class="dropdown-item"
+												href="delete?id=<c:out value='${review.id}'/>">Delete</a>
+										</div>
+									</div>
+
+
+
+								</c:if>
+							</c:if>
+						</div>
+
+
+					</div>
+
+
+
+				</c:forEach>
+
+
+
+
+			</div>
+
+
+			<c:if test="${empty reviews}">
+				<div class='empty-icon text-center py-5'>
+					<img src="${pageContext.request.contextPath}/assetsimg/empty.svg"
+						width="250" class='' alt="" />
+					<p class='pt-5'>
+						<b>Nothing To See Here!</b>
+					</p>
+				</div>
+			</c:if>
+
+
 
 
 		</div>

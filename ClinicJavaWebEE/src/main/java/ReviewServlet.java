@@ -103,7 +103,7 @@ public class ReviewServlet extends HttpServlet {
 		List<ReviewJoin> reviews = new ArrayList<>();
 		try (Connection connection = getConnection();
 
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_REVIEW_BY_CLINICID);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_JOIN_REVIEWS_CLINICID);) {
 			preparedStatement.setString(1, id);
 			ResultSet rs = preparedStatement.executeQuery();
 
