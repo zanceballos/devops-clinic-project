@@ -139,7 +139,7 @@
 							</button>
 
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="<%=request.getContextPath()%>/AccountPage.jsp">Account</a>
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/UserServlet/account-details?id=${id}" >Account</a>
 								<form action='/ClinicJavaWebEE/UserServlet/logout' method='post'>
 									<button type='submit' class="dropdown-item">Logout</button>
 								</form>

@@ -20,6 +20,11 @@
 		<url-pattern>/UserServlet/login</url-pattern>
 		<url-pattern>/UserServlet/logout</url-pattern>
 		<url-pattern>/UserServlet/home</url-pattern>
+		<url-pattern>/UserServlet/account-details</url-pattern>
+		<url-pattern>/UserServlet/delete</url-pattern>
+		<url-pattern>/UserServlet/showPasswordForm</url-pattern>
+		<url-pattern>/UserServlet/updatePassword</url-pattern>
+		<url-pattern>/UserServlet/updateAccount</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

@@ -28,11 +28,11 @@ public class UserServlet extends HttpServlet {
 	// SQL prepared statements to perform UserCRUD
 	private static final String INSERT_USERS_SQL = "INSERT INTO users"
 			+ " (username,role,contact_number, email, password, full_name) VALUES " + " (?, ?, ?,?, ?, ?);";
-	private static final String SELECT_USER_BY_ID = "select name,password,email,language from users where id = ?";
+	private static final String SELECT_USER_BY_ID = "select id,username,full_name,password,email,contact_number,role from users where id = ?";
 	private static final String SELECT_USER_BY_USERNAME = "select id,username,role,contact_number,email,password,full_name from users where username = ?";
 	private static final String SELECT_ALL_USERS = "select * from users ";
 	private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
-	private static final String UPDATE_USERS_SQL = "update users set username = ?, role = ? , contact_number = ? , email = ?, password= ? where id = ?;";
+	private static final String UPDATE_USERS_SQL = "update users set id=?, username = ?, role = ? , contact_number = ? , email = ?, password= ? , full_name=? where id = ?;";
 
 	// Implement the getConnection method which facilitates connection to
 	// the database via JDBC
@@ -74,7 +74,7 @@ public class UserServlet extends HttpServlet {
 				logoutUser(request, response);
 				break;
 			case "/UserServlet/delete":
-				// deleteUser(request, response);
+				deleteUser(request, response);
 				break;
 			case "/UserServlet/edit":
 				// showEditForm(request, response);
@@ -87,6 +87,15 @@ public class UserServlet extends HttpServlet {
 				break;
 			case "/UserServlet/home":
 				displayHomePage(request, response);
+				break;
+			case "/UserServlet/account-details":
+				showUserDetails(request, response);
+				break;
+			case "/UserServlet/showPasswordForm":
+				showUserDetails(request, response);
+				break;
+			case "/UserServlet/updatePassword":
+				updateDetails(request, response);
 				break;
 			}
 		} catch (SQLException ex) {
@@ -196,6 +205,130 @@ public class UserServlet extends HttpServlet {
 			request.getRequestDispatcher("/DoctorHome.jsp").forward(request, response);
 		}
 		// response.sendRedirect("http://localhost:8090/ClinicJavaWebEE");
+
+	}
+
+	private void showUserDetails(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		// get parameter passed in the URL
+		String id = request.getParameter("id");
+		System.out.print(id);
+		User userDetails = new User(0, "", "", "", "", "", "");
+
+		if (!session.getAttribute("id").toString().equals(id)) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/PatientHome.jsp");
+			return;
+		}
+
+		// Step 1: Establishing a Connection
+		try (Connection connection = getConnection();
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+			preparedStatement.setString(1, id);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			System.out.println("EXECUTED QUERY");
+			// Step 4: Process the ResultSet object
+			while (rs.next()) {
+				System.out.println("FOUND USER");
+				int user_id = rs.getInt("id");
+				String username = rs.getString("username");
+				String role = rs.getString("role");
+				String contact_number = rs.getString("contact_number");
+				String email = rs.getString("email");
+				String password = rs.getString("password");
+				String full_name = rs.getString("full_name");
+				userDetails = new User(user_id, username, role, contact_number, email, password, full_name);
+				System.out.println("Details: " + userDetails);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		if (request.getServletPath().equals("/UserServlet/account-details")) {
+			request.setAttribute("userDetails", userDetails);
+			request.getRequestDispatcher("/AccountPage.jsp").forward(request, response);
+		}
+		if (request.getServletPath().equals("/UserServlet/showPasswordForm")) {
+			request.setAttribute("userDetails", userDetails);
+			request.getRequestDispatcher("/ChangePassword.jsp").forward(request, response);
+		}
+
+	}
+
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
+			statement.setInt(1, id);
+			int i = statement.executeUpdate();
+		}
+		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+	}
+
+	private void updateDetails(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		HttpSession session = request.getSession();
+
+		System.out.print("Update function called");
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+
+		String id = request.getParameter("id");
+		String username = request.getParameter("username");
+		String full_name = request.getParameter("full_name");
+		String email = request.getParameter("email");
+		String contact_number = request.getParameter("contact_number");
+		String role = request.getParameter("role");
+		String password = request.getParameter("password");
+		
+		boolean checkForm = false;
+		if(request.getServletPath().equals("/UserServlet/updatePassword"))
+		{	
+			String cfmpassword = request.getParameter("cfm_password");
+			if(password.equals(cfmpassword)) {
+				checkForm = true;
+			}else {
+				session.setAttribute("password_error", true);
+				response.sendRedirect(
+						"http://localhost:8090/ClinicJavaWebEE/UserServlet/showPasswordForm?id="
+								+ session.getAttribute("id"));
+			}
+		}
+		if(request.getServletPath().equals("/UserServlet/updateccount")) {
+			checkForm= true;
+		}
+		
+		if(checkForm == true) {
+			// Step 2: Attempt connection with database and execute update user SQL query
+			try (Connection connection = getConnection();
+					PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+				statement.setString(1, id);
+				statement.setString(2, username);
+				statement.setString(3, role);
+				statement.setString(4, contact_number);
+				statement.setString(5, email);
+				statement.setString(6, password);
+				statement.setString(7, full_name);
+				statement.setString(8, id);
+				int i = statement.executeUpdate();
+
+			} catch (Exception exception) {
+				System.out.println(exception);
+				// out.close();
+			}
+
+			response.sendRedirect(
+					"http://localhost:8090/ClinicJavaWebEE/UserServlet/account-details?id="
+							+ session.getAttribute("id"));
+		}
+		
+		
 
 	}
 
