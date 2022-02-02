@@ -40,6 +40,7 @@
 
 			<div class='clinic-appointment pb-5'>
 				<div class='header'>
+				
 					<h5 class='text-dark'>
 						<b>Selected Clinic</b>
 					</h5>
@@ -118,7 +119,7 @@
 							<b>Appointments for this clinic</b>
 						</h5>
 					</div>
-					<a class='btn btn-primary px-5 py-2 rounded-pill shadow text-white'><i class="fas fa-comments mr-2"></i><b>Reviews</b></a>
+					<a href="<%=request.getContextPath()%>/ReviewServlet/ListClinicReviewsDoctors?id=${clinicDetails.id}" class='btn btn-primary px-5 py-2 rounded-pill shadow text-white'><i class="fas fa-comments mr-2"></i><b>Reviews</b></a>
 				</div>
 
 				<div class='appt-table'>
