@@ -34,7 +34,7 @@ public class ReviewServlet extends HttpServlet {
 	private static final String SELECT_REVIEW_BY_CLINICID = "SELECT id, user_id, clinic_id, review, rating_score, review_title from review where clinic_id = ?";;
 	private static final String DELETE_REVIEW = "DELETE from review where id = ?";
 	private static final String UPDATE_REVIEW = "UPDATE review SET id = ?, user_id = ?, clinic_id = ?, review = ?, rating_score = ?, review_title = ? where id = ? ";
-
+	private static final String SELECT_JOIN_REVIEWS_CLINICID = "SELECT review.id , review.user_id , review.clinic_id, review.review , review.rating_score , review.rating_score, review.review_title, users.username , users.email FROM users JOIN review on users.id = review.user_id WHERE review.clinic_id = ?";
 	// allow connection to database using jdbc
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -95,18 +95,12 @@ public class ReviewServlet extends HttpServlet {
 
 	private void ListClinicReviews(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("id") != null)
-		{
-			int currentUID = Integer.parseInt(session.getAttribute("id").toString());
-			request.setAttribute("uid", currentUID);
-		}
-
+		
 		// get parameter passed in the URL
 		String id = request.getParameter("id");
 
 		// Call database to get all reviews based on clinic id
-		List<Review> reviews = new ArrayList<>();
+		List<ReviewJoin> reviews = new ArrayList<>();
 		try (Connection connection = getConnection();
 
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_REVIEW_BY_CLINICID);) {
@@ -120,7 +114,9 @@ public class ReviewServlet extends HttpServlet {
 				String review = rs.getString("review");
 				int rating_score = rs.getInt("rating_score");
 				String review_title = rs.getString("review_title");
-				reviews.add(new Review(reviewid, user_id, clinic_id, review, rating_score, review_title));
+				String username = rs.getString("username");
+				String email = rs.getString("email");
+				reviews.add(new ReviewJoin(reviewid, user_id, clinic_id, review, rating_score, review_title, username ,email));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
