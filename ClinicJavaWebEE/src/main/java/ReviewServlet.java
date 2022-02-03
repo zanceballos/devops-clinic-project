@@ -72,9 +72,6 @@ public class ReviewServlet extends HttpServlet {
 			case "/ReviewServlet/ListClinicReviews":
 				ListClinicReviews(request, response); // list reviews for the particular clinic
 				break;
-			case "/ReviewServlet/ListClinicReviewsDoctors":
-				ListClinicReviews(request, response); // list reviews for the particular clinic
-				break;
 			case "/ReviewServlet/ClinicReviewForm":
 				ShowReviewClinicForm(request, response); // show review form
 				break;
@@ -127,18 +124,9 @@ public class ReviewServlet extends HttpServlet {
 			System.out.println(e.getMessage());
 		}
 
-		if (request.getServletPath().equals("/ReviewServlet/ListClinicReviews")) {
-			request.setAttribute("clinicid", id);
-			request.setAttribute("reviews", reviews);
-			request.getRequestDispatcher("/ClinicReviews.jsp").forward(request, response);
-		}
-		if (request.getServletPath().equals("/ReviewServlet/ListClinicReviewsDoctors")) {
-			System.out.println("Showing REVIEWS DOCTORS");
-			request.setAttribute("clinicid", id);
-			request.setAttribute("reviews", reviews);
-			request.getRequestDispatcher("/DoctorViewReviews.jsp").forward(request, response);
-		}
-
+		request.setAttribute("clinicid", id);
+		request.setAttribute("reviews", reviews);
+		request.getRequestDispatcher("/ClinicReviews.jsp").forward(request, response);
 	}
 
 	private void ShowReviewClinicForm(HttpServletRequest request, HttpServletResponse response)
@@ -159,20 +147,23 @@ public class ReviewServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String user_id = session.getAttribute("id").toString();
+		
+	
+		
 
 		// retrieve parameter from request in web form
 		String clinic_id = request.getParameter("clinicid");
 		String review = request.getParameter("review");
 		String rating_score = request.getParameter("rating_score");
 		String review_title = request.getParameter("review_title");
-
-		// function to check whether review is up to 5 starts only
-		if (Integer.parseInt(rating_score) > 5) {
+		
+		//function to check whether review is up to 5 starts only
+		if(Integer.parseInt(rating_score) > 5) {
 			session.setAttribute("score_error", true);
-			response.sendRedirect(
-					"http://localhost:8090/ClinicJavaWebEE/ReviewServlet/ClinicReviewForm?id=" + clinic_id);
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ReviewServlet/ClinicReviewForm?id=" + clinic_id);
 			return;
 		}
+		
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

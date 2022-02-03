@@ -53,7 +53,7 @@
 					<div class='card shadow-sm mb-2'>
 						<div class='card-body py-4'>
 							<div class='stars float-right'>
-								<c:forEach begin="1" end="${review.rating_score }"
+								<c:forEach begin="0" end="${review.rating_score }"
 									varStatus="loop">
 									<i class="fas fa-star text-warning"></i>
 								</c:forEach>
