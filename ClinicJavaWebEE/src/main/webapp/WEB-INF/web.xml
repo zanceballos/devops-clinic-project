@@ -21,6 +21,7 @@
 		<url-pattern>/UserServlet/logout</url-pattern>
 		<url-pattern>/UserServlet/home</url-pattern>
 		<url-pattern>/UserServlet/account-details</url-pattern>
+		<url-pattern>/UserServlet/showUpdateForm</url-pattern>
 		<url-pattern>/UserServlet/delete</url-pattern>
 		<url-pattern>/UserServlet/showPasswordForm</url-pattern>
 		<url-pattern>/UserServlet/updatePassword</url-pattern>

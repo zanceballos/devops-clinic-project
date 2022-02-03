@@ -41,7 +41,7 @@
 						<div class="header-buttons py-3">
 							<a href="<%=request.getContextPath()%>/ClinicServlet/all-clinics" class="btn btn-primary px-5 py-3 mr-2">Browse
 								Clinics</a>
-							<a  href="<%=request.getContextPath()%>/AccountPage.jsp" class="btn btn-outline-primary px-5 py-3">My
+							<a  href="<%=request.getContextPath()%>/UserServlet/account-details?id=${id}"" class="btn btn-outline-primary px-5 py-3">My
 								Account</a>
 						</div>
 					</div>

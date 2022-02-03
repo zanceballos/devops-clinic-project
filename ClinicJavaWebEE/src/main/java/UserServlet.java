@@ -79,8 +79,8 @@ public class UserServlet extends HttpServlet {
 			case "/UserServlet/edit":
 				// showEditForm(request, response);
 				break;
-			case "/UserServlet/update":
-				// updateUser(request, response);
+			case "/UserServlet/showUpdateForm":
+				showUserDetails(request, response);
 				break;
 			case "/UserServlet/dashboard":
 				// listUsers(request, response);
@@ -95,6 +95,9 @@ public class UserServlet extends HttpServlet {
 				showUserDetails(request, response);
 				break;
 			case "/UserServlet/updatePassword":
+				updateDetails(request, response);
+				break;
+			case "/UserServlet/updateAccount":
 				updateDetails(request, response);
 				break;
 			}
@@ -254,6 +257,10 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("userDetails", userDetails);
 			request.getRequestDispatcher("/ChangePassword.jsp").forward(request, response);
 		}
+		if (request.getServletPath().equals("/UserServlet/showUpdateForm")) {
+			request.setAttribute("userDetails", userDetails);
+			request.getRequestDispatcher("/AccountEdit.jsp").forward(request, response);
+		}
 
 	}
 
@@ -300,10 +307,11 @@ public class UserServlet extends HttpServlet {
 								+ session.getAttribute("id"));
 			}
 		}
-		if(request.getServletPath().equals("/UserServlet/updateccount")) {
+		if(request.getServletPath().equals("/UserServlet/updateAccount")) {
 			checkForm= true;
+			
 		}
-		
+		System.out.println("Excecuting user update function");
 		if(checkForm == true) {
 			// Step 2: Attempt connection with database and execute update user SQL query
 			try (Connection connection = getConnection();
@@ -317,6 +325,7 @@ public class UserServlet extends HttpServlet {
 				statement.setString(7, full_name);
 				statement.setString(8, id);
 				int i = statement.executeUpdate();
+				System.out.println(password);
 
 			} catch (Exception exception) {
 				System.out.println(exception);
