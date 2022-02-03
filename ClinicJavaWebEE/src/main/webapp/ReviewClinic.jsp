@@ -25,19 +25,26 @@
 
 	<div class='fixed-top-body'>
 		<div class='container'>
-			
+			<div class='header py-2'>
+				<h3>
+					<b>Create Review</b>
+				</h3>
+			</div>
 
 			<form action="ReviewClinic" method="post">
-				<div class="row no-gutter g-0 rounded-lg">
+				<div class="row no-gutter g-0 shadow rounded-lg">
 
-					<div class="col-md-12">
+					<div class="col-md-12 bg-light">
 						<div class="login d-flex align-items-center py-5">
 							<div class="container py-3 px-3">
 								<div class="row text-dark">
-									<div class="col-lg-6 col-xl-7 mx-auto shadow py-5 px-5 bg-light">
+									<div class="col-lg-10 col-xl-7 mx-auto">
 										<h2>
-											<i class="fas fa-comments text-primary pr-2"></i><b>Create Review</b>
+											<b>Create Review</b>
 										</h2>
+
+
+
 
 										<div class='row'>
 											<div class='col-lg-12'>
@@ -73,7 +80,7 @@
 
 										<div class="form-group mb-3">
 											<input id="inputReviewScore" type="number"
-												placeholder="Rating out of 5" required name="rating_score"
+												placeholder="Rating out of 10" required name="rating_score"
 												class="form-control border-0 shadow-sm px-4 py-4 "
 												 />
 

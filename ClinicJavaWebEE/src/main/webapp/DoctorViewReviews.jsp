@@ -22,59 +22,44 @@
 	<!-- -Include the navbar jsp to the page -->
 	<jsp:include page="navbar.jsp" />
 
-	<<div class='fixed-top-body'>
-		<div class='container'>
-			<div class='d-flex justify-content-between py-2'>
+	<div class='fixed-top-body'>
+		<div class='background'>
+			<div class='container'>
 				<div class='header'>
-					<a 	href="<%=request.getContextPath()%>/AppointmentServlet/ClinicAppointments?clinicid=${clinicid}" class='btn btn-primary shadow px-4 py-2 text-white rounded-pill'><i
-									class="fas fa-arrow-left pr-2"></i><b>Back To Appointments</b> </a>
-					<h3 class='mt-4'>
+					<h3>
 						<b>Clinic Reviews</b>
 					</h3>
+					<p class='text-muted'>
+						<b>All Review for: Clinic Name </b>
+					</p>
 				</div>
-				
-			</div>
 
-			<div class='reviews py-3'>
-				<c:forEach var="review" items="${reviews}">
+				<div class='review py-3'>
 
-					<div class='card shadow-sm mb-2'>
-						<div class='card-body py-4'>
-							<div class='stars float-right'>
-								<c:forEach begin="1" end="${review.rating_score }"
-									varStatus="loop">
-									<i class="fas fa-star text-warning"></i>
-								</c:forEach>
-							</div>
+					<div class='card shadow-sm'>
+						<div class='card-body'>
 							<div class="d-flex flex-start">
-								<h1 class='pr-3'>
-									<i class="fas fa-user-circle fa-2x text-primary"></i>
-								</h1>
+								<img class="rounded-circle shadow-sm mr-3"
+									src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
+									alt="avatar" width="60" height="60" />
 								<div>
-									<div class='d-flex justify-content-between'>
-										<h6 class="mb-1">
-											<b><c:out value="${review.username }"></c:out></b> <span
-												class="badge bg-primary text-white py-1 pl-2 pr-2">Patient</span>
-										</h6>
-
-									</div>
-
-									<div class="d-flex align-items-center mb-1">
-										<p class="mb-0 text-muted">
-											<c:out value="${review.email }"></c:out>
-
+									<h6 class="mb-1">
+										<b>Maggie Marsh</b>
+									</h6>
+									<div class="d-flex align-items-center mb-3">
+										<p class="mb-0">
+											March 07, 2021 <span class="badge bg-primary text-white py-1">Verified</span>
 										</p>
-
+	
 									</div>
-									<h4 class="mb-0">
-										<b><c:out value="${review.review_title }"></c:out></b>
-									</h4>
-									<p class="mb-0">
-										<c:out value="${review.review }"></c:out>
-									</p>
-
-
-
+									<p class="mb-0">Lorem Ipsum is simply dummy text of the
+										printing and typesetting industry. Lorem Ipsum has been the
+										industry's standard dummy text ever since the 1500s, when an
+										unknown printer took a galley of type and scrambled it.</p>
+										
+									<div class='buttons'>
+										<a class='btn btn-primary px-5 py-2 text-white float-right'><b>Options</b></a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -83,33 +68,11 @@
 					</div>
 
 
-
-				</c:forEach>
-
-
-
-
-			</div>
-
-
-			<c:if test="${empty reviews}">
-				<div class='empty-icon text-center py-5'>
-					<img src="${pageContext.request.contextPath}/assetsimg/empty.svg"
-						width="250" class='' alt="" />
-					<p class='pt-5'>
-						<b>Nothing To See Here!</b>
-					</p>
 				</div>
-			</c:if>
-
-
-
-
+			</div>
 		</div>
 
-	</div>
-	
 
-	<jsp:include page="footer.jsp" />
+		<jsp:include page="footer.jsp" />
 </body>
 </html>
