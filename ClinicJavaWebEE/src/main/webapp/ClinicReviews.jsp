@@ -103,7 +103,7 @@
 											<a class="dropdown-item"
 												href="ShowUpdateForm?id=<c:out value='${review.id}'/>">Update</a>
 											<a class="dropdown-item"
-												href="delete?id=<c:out value='${review.id}'/>">Delete</a>
+												href="delete?id=<c:out value='${review.id}'/>&clinicid=<c:out value='${review.clinic_id}'/>">Delete</a>
 										</div>
 									</div>
 
