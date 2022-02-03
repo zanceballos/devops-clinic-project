@@ -64,10 +64,10 @@
 				<div class="overview">
 					<div class="header pb-4 d-flex justify-content-between">
 						<h1>
-							<i class="fas fa-user-circle me-2 text-primary"></i> <b>Username</b>
+							<i class="fas fa-user-circle me-2 text-primary"></i> <b>${userDetails.username }</b>
 						</h1>
 						<p class="text-muted edit-account">
-							<a class='text-decoration-none' href="<%=request.getContextPath()%>/AccountEdit.jsp"><i class="fas fa-pen pr-2"></i> <b> Edit Account</b></a>
+							<a class='text-decoration-none' href="<%=request.getContextPath()%>/UserServlet/showUpdateForm?id=${id}"><i class="fas fa-pen pr-2"></i> <b> Edit Account</b></a>
 						</p>
 					</div>
 					<div class="details py-4">
@@ -77,7 +77,7 @@
 									<i class="fas fa-envelope text-primary pr-2"></i> <b>Email</b>
 								</h5>
 								<p class="text-muted">
-									<b>someEmail@mail.com</b>
+									<b>${userDetails.email }</b>
 								</p>
 							</div>
 							<div class="col-lg-3  py-2">
@@ -85,7 +85,7 @@
 									<i class="fas fa-user text-primary pr-2"></i> <b>Full Name</b>
 								</h5>
 								<p class="text-muted">
-									<b>Full Name</b>
+									<b>${userDetails.full_name }</b>
 								</p>
 							</div>
 							<div class="col-lg-3 py-2">
@@ -94,7 +94,7 @@
 								</h5>
 								<p class="text-muted">
 
-									<b>Contact</b>
+									<b>${userDetails.contact_number }</b>
 								</p>
 							</div>
 
@@ -105,16 +105,16 @@
 									<i class="fas fa-dice-d6 text-primary pr-2"></i> <b>Role</b>
 								</h5>
 								<p class="text-muted">
-									<b>User Role</b>
+									<b>U${userDetails.role }</b>
 								</p>
 							</div>
 						</div>
 					</div>
 					<div class="config-sec pt-4">
-						<button
+						<a href="<%=request.getContextPath()%>/UserServlet/delete?id=${id}"
 							class="btn btn-danger rounded-pill py-2 px-5 ml-2 float-right">
-							Delete Account</button>
-						<a href="<%=request.getContextPath()%>/ChangePassword.jsp" class="btn btn-primary rounded-pill py-2 px-5 float-right">
+							Delete Account</a>
+						<a href="<%=request.getContextPath()%>/UserServlet/showPasswordForm?id=${id}" class="btn btn-primary rounded-pill py-2 px-5 float-right">
 							Change Password</a>
 					</div>
 
