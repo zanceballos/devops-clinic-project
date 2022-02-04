@@ -215,13 +215,20 @@ public class UserServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		
 		// get parameter passed in the URL
 		String id = request.getParameter("id");
 		System.out.print(id);
 		User userDetails = new User(0, "", "", "", "", "", "");
 
 		if (!session.getAttribute("id").toString().equals(id)) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/PatientHome.jsp");
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
 			return;
 		}
 
@@ -285,7 +292,7 @@ public class UserServlet extends HttpServlet {
 			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
 			return;
 		}
-
+		
 		String id = request.getParameter("id");
 		String username = request.getParameter("username");
 		String full_name = request.getParameter("full_name");
@@ -293,6 +300,7 @@ public class UserServlet extends HttpServlet {
 		String contact_number = request.getParameter("contact_number");
 		String role = request.getParameter("role");
 		String password = request.getParameter("password");
+		
 		
 		boolean checkForm = false;
 		if(request.getServletPath().equals("/UserServlet/updatePassword"))
@@ -305,6 +313,7 @@ public class UserServlet extends HttpServlet {
 				response.sendRedirect(
 						"http://localhost:8090/ClinicJavaWebEE/UserServlet/showPasswordForm?id="
 								+ session.getAttribute("id"));
+				return;
 			}
 		}
 		if(request.getServletPath().equals("/UserServlet/updateAccount")) {

@@ -18,7 +18,7 @@
 
 	<!-- -Include the navbar jsp to the page -->
 	<jsp:include page="navbar.jsp" />
-	
+
 	<div class='fixed-top-body pb-5'>
 		<div class='container mt-2'>
 			<div class="row no-gutter g-0">
@@ -26,36 +26,99 @@
 					<div class="d-flex align-items-center">
 						<div class="container py-3 px-3">
 							<div class="row text-dark">
-								<div class="col-lg-6 col-xl-7 mx-auto bg-light py-5 px-5 border shadow border-rounded">
+								<div
+									class="col-lg-6 col-xl-7 mx-auto bg-light py-5 px-5 border shadow border-rounded">
 									<h2>
-										<i class="fas fa-plus-square pr-2 text-primary"></i> <b>Change Password</b>
+										<i class="fas fa-plus-square pr-2 text-primary"></i> <b>Change
+											Password</b>
 									</h2>
 
 
-								<p class="text-muted mb-4">Enter new password to continue</p>
-									<form autoComplete="off" noValidate action=''
+									<p class="text-muted mb-4">Enter new password to continue</p>
+									<form autoComplete="off" noValidate action='updatePassword'
 										method="post">
-										<div class="form-group mb-3">
-											<input id="inputUsername" type="text" placeholder="Password"
-												name="password"
-												class="form-control border-0 shadow-sm px-4 py-4" required/>
+										
+										<div class="form-group mb-3 d-none">
+											<input id="inputUsername" type="text" placeholder="User Role"
+												name="id"
+												value="${userDetails.id }"
+												class="form-control border-0 shadow-sm px-4 py-4" required readonly/>
 
 										</div>
-										<div class="form-group mb-3">
-											<input id="inputFullName" type="text" placeholder="Confirm Password"
-												name="cfm_password"
+										<div class="form-group mb-3 d-none">
+											<input id="inputUsername" type="text" placeholder="Username"
+												name="username"
+												value="${userDetails.username }"
+												class="form-control border-0 shadow-sm px-4 py-4" required readonly/>
+
+										</div>
+										<div class="form-group mb-3 d-none">
+											<input id="inputFullName" type="text" placeholder="Full Name"
+												name="full_name"
+												value="${userDetails.full_name }"
 												class="form-control border-0 shadow-sm px-4 py-4" required />
 
 										</div>
 
+										<div class='row'>
+											<div class='col-lg-6'>
+												<div class="form-group mb-3 d-none">
+													<input id="inputEmail" type="text" placeholder="Email"
+														name="email"
+														value="${userDetails.email }"
+														class="form-control border-0 shadow-sm px-4 py-4" required />
+
+
+												</div>
+
+											</div>
+											<div class='col-lg-6'>
+												<div class="form-group mb-3 d-none">
+													<input id="inputContact" type="text"
+														placeholder="Contact Number" name="contact_number"
+														value="${userDetails.contact_number }"
+														class="form-control border-0 shadow-sm px-4 py-4" required />
+
+												</div>
+											</div>
+										</div>
+										<div class="form-group mb-3 d-none">
+											<input id="inputFullName" type="text" placeholder="User Role"
+												name="role"
+												value="${userDetails.role }"
+												class="form-control border-0 shadow-sm px-4 py-4" required readonly/>
+
+										</div>
+										
+										<div class="form-group mb-3">
+											<input id="inputUsername" type="text" placeholder="Password"
+												name="password"
+												class="form-control border-0 shadow-sm px-4 py-4" required />
+
+										</div>
+										<div class="form-group mb-3">
+											<input id="inputFullName" type="text"
+												placeholder="Confirm Password" name="cfm_password"
+												class="form-control border-0 shadow-sm px-4 py-4" required />
+
+										</div>
 										
 										
-									
+										<c:if test="${password_error == true}">
+											<div class="alert alert-danger py-3" role="alert">
+												<i class="fas fa-exclamation-circle pr-2"></i><span>Password doesn't match!</span>
+											</div>
+											<c:set var="password_error" value="" scope="session" />
+										
+										</c:if>
+
+
+
 
 										<button type='submit'
 											class="btn btn-primary py-3 btn-block text-uppercase mb-2 shadow-sm w-100">
 											Change Password</button>
-								
+
 									</form>
 
 								</div>

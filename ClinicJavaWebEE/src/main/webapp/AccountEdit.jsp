@@ -34,17 +34,26 @@
 
 								<p class="text-muted mb-4">Update Your Credentials To
 										Continue</p>
-									<form autoComplete="off" noValidate action=''
+									<form autoComplete="off" noValidate action='updateAccount'
 										method="post">
+										<div class="form-group mb-3 d-none">
+											<input id="inputUsername" type="text" placeholder="User Role"
+												name="id"
+												value="${userDetails.id }"
+												class="form-control border-0 shadow-sm px-4 py-4" required readonly/>
+
+										</div>
 										<div class="form-group mb-3">
 											<input id="inputUsername" type="text" placeholder="Username"
 												name="username"
+												value="${userDetails.username }"
 												class="form-control border-0 shadow-sm px-4 py-4" required readonly/>
 
 										</div>
 										<div class="form-group mb-3">
 											<input id="inputFullName" type="text" placeholder="Full Name"
 												name="full_name"
+												value="${userDetails.full_name }"
 												class="form-control border-0 shadow-sm px-4 py-4" required />
 
 										</div>
@@ -54,6 +63,7 @@
 												<div class="form-group mb-3">
 													<input id="inputEmail" type="text" placeholder="Email"
 														name="email"
+														value="${userDetails.email }"
 														class="form-control border-0 shadow-sm px-4 py-4" required />
 
 
@@ -64,6 +74,7 @@
 												<div class="form-group mb-3">
 													<input id="inputContact" type="text"
 														placeholder="Contact Number" name="contact_number"
+														value="${userDetails.contact_number }"
 														class="form-control border-0 shadow-sm px-4 py-4" required />
 
 												</div>
@@ -72,6 +83,7 @@
 										<div class="form-group mb-3 d-none">
 											<input id="inputFullName" type="text" placeholder="User Role"
 												name="role"
+												value="${userDetails.role }"
 												class="form-control border-0 shadow-sm px-4 py-4" required readonly/>
 
 										</div>
@@ -79,6 +91,7 @@
 										<div class="form-group mb-3 d-none" >
 											<input id="inputUsername" type="password" placeholder="Password"
 												name="password"
+												value="${userDetails.password }"
 												class="form-control border-0 shadow-sm px-4 py-4" required readonly/>
 
 										</div>

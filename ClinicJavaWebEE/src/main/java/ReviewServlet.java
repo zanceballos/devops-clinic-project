@@ -134,6 +134,14 @@ public class ReviewServlet extends HttpServlet {
 
 		// get parameter passed in the URL
 		String id = request.getParameter("id");
+		
+		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
 
 		request.setAttribute("clinicid", id);
 		request.getRequestDispatcher("/ReviewClinic.jsp").forward(request, response);
@@ -200,6 +208,14 @@ public class ReviewServlet extends HttpServlet {
 		System.out.print(id);
 
 		Review current_review = new Review(0, 0, 0, id, 0, id);
+		
+		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
 
 		try (Connection connection = getConnection();
 
@@ -234,6 +250,20 @@ public class ReviewServlet extends HttpServlet {
 		String review = request.getParameter("review");
 		int rating_score = Integer.parseInt(request.getParameter("rating_score"));
 		String review_title = request.getParameter("review_title");
+		
+		HttpSession session = request.getSession();
+
+		// check if user is logged in
+		if (session.getAttribute("logged_in") == null) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			return;
+		}
+		
+		// check if user is trying to update a review for another user based on id
+		if (!session.getAttribute("id").equals(user_id)) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
+			return;
+		}
 
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(UPDATE_REVIEW);) {
