@@ -103,7 +103,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	private void GetAppointmentClinic(HttpServletRequest request, HttpServletResponse response)
+	protected void GetAppointmentClinic(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		// get parameter passed in the URL
 		String id = request.getParameter("id");
@@ -149,7 +149,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	private void BookAppointment(HttpServletRequest request, HttpServletResponse response)
+	protected void BookAppointment(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		// Set User session storage here!
 		HttpSession session = request.getSession();
@@ -195,7 +195,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	private void GetPatientAppointments(HttpServletRequest request, HttpServletResponse response)
+	protected void GetPatientAppointments(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<AppointmentJoin> appointments = new ArrayList<>();
 		HttpSession session = request.getSession();
@@ -253,7 +253,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	private void GetClinicAppointments(HttpServletRequest request, HttpServletResponse response)
+	protected void GetClinicAppointments(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<AppointmentJoin> appointments = new ArrayList<>();
 		Clinic clinicDetails = new Clinic(0, "", "", "", "", "", "", "", "");
@@ -335,7 +335,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	private void ShowAppointmentDetails(HttpServletRequest request, HttpServletResponse response)
+	protected void ShowAppointmentDetails(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		HttpSession session = request.getSession();
 
@@ -387,7 +387,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	private void UpdateAppointmentDetails(HttpServletRequest request, HttpServletResponse response)
+	protected void UpdateAppointmentDetails(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
 		HttpSession session = request.getSession();
@@ -479,7 +479,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	private void DeleteAppointment(HttpServletRequest request, HttpServletResponse response)
+	protected void DeleteAppointment(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
 		HttpSession session = request.getSession();
