@@ -103,7 +103,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	protected void GetAppointmentClinic(HttpServletRequest request, HttpServletResponse response)
+	private void GetAppointmentClinic(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		// get parameter passed in the URL
 		String id = request.getParameter("id");
@@ -149,7 +149,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	protected void BookAppointment(HttpServletRequest request, HttpServletResponse response)
+	private void BookAppointment(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		// Set User session storage here!
 		HttpSession session = request.getSession();
@@ -160,7 +160,7 @@ public class AppointmentServlet extends HttpServlet {
 			return;
 		}
 
-		response.setContentType("text/html");
+		//response.setContentType("text/html");
 		String appointment_type = request.getParameter("appointment_type");
 		String date = request.getParameter("date");
 		String time = request.getParameter("time");
@@ -195,7 +195,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	protected void GetPatientAppointments(HttpServletRequest request, HttpServletResponse response)
+	private void GetPatientAppointments(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<AppointmentJoin> appointments = new ArrayList<>();
 		HttpSession session = request.getSession();
@@ -253,7 +253,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	protected void GetClinicAppointments(HttpServletRequest request, HttpServletResponse response)
+	private void GetClinicAppointments(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<AppointmentJoin> appointments = new ArrayList<>();
 		Clinic clinicDetails = new Clinic(0, "", "", "", "", "", "", "", "");
@@ -335,7 +335,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	protected void ShowAppointmentDetails(HttpServletRequest request, HttpServletResponse response)
+	private void ShowAppointmentDetails(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		HttpSession session = request.getSession();
 
@@ -387,7 +387,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	protected void UpdateAppointmentDetails(HttpServletRequest request, HttpServletResponse response)
+	private void UpdateAppointmentDetails(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
 		HttpSession session = request.getSession();
@@ -479,7 +479,7 @@ public class AppointmentServlet extends HttpServlet {
 
 	}
 
-	protected void DeleteAppointment(HttpServletRequest request, HttpServletResponse response)
+	private void DeleteAppointment(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 
 		HttpSession session = request.getSession();
