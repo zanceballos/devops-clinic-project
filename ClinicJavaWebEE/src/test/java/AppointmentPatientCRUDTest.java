@@ -26,7 +26,7 @@ public class AppointmentPatientCRUDTest {
 		WebElement username = driver.findElement(By.name("username"));
 		WebElement password = driver.findElement(By.name("password"));
 
-		username.sendKeys("izzan");
+		username.sendKeys("test");
 		password.sendKeys("test123");
 
 		// driver.findElement(By.id("sign-in-button"));

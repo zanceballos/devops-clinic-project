@@ -256,6 +256,8 @@ public class AppointmentDoctorsCRUDTest {
 			// assert true since there are no appointments to be updated
 			Assert.assertTrue(true);
 		}
+		
+		driver.quit();
 	}
 
 	@BeforeTest
