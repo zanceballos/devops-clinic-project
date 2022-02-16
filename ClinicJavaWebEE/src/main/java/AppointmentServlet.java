@@ -160,7 +160,7 @@ public class AppointmentServlet extends HttpServlet {
 			return;
 		}
 
-		response.setContentType("text/html");
+		// response.setContentType("text/html");
 		String appointment_type = request.getParameter("appointment_type");
 		String date = request.getParameter("date");
 		String time = request.getParameter("time");
@@ -397,7 +397,7 @@ public class AppointmentServlet extends HttpServlet {
 			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
 			return;
 		}
-		
+
 		// Step 1: Retrieve value from the request
 		String apptid = request.getParameter("id");
 		String userid = request.getParameter("user_id");
@@ -408,10 +408,10 @@ public class AppointmentServlet extends HttpServlet {
 		String status = request.getParameter("status");
 		String appointment_type = request.getParameter("appointment_type");
 		String update_time = "";
-		System.out.print(update_time);
+		System.out.println("PASSED DATE AND TIME:  " + date + time);
 
 		// use the update time
-		if (date.isEmpty() && time.isEmpty()) {
+		if (date.equals("") && time.equals("")) {
 			System.out.print("NO DATE TIME UPDATE");
 			update_time = date_time;
 			System.out.print(update_time);
@@ -420,7 +420,7 @@ public class AppointmentServlet extends HttpServlet {
 			// means the user wants to update the date and time
 			System.out.print("DATE TIME UPDATE");
 			// check both boxes empty or not
-			if (date.isEmpty() || time.isEmpty()) {
+			if (date.equals("") || time.equals("")) {
 				System.out.print("DATE TIME EMPTY ERROR");
 				session.setAttribute("update_datetime_error", true);
 
@@ -429,20 +429,15 @@ public class AppointmentServlet extends HttpServlet {
 					response.sendRedirect(
 							"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="
 									+ apptid);
-
 				}
-
 				// if Doctor Update
 				if (session.getAttribute("role").equals("doctor")) {
 					response.sendRedirect(
-							"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails-Doctors?id="
+							"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="
 									+ apptid);
-
 				}
-
 				return;
 			}
-
 			// Concat the date and time into one
 			update_time = date + " " + time + ":00";
 			System.out.print(update_time);
@@ -461,20 +456,20 @@ public class AppointmentServlet extends HttpServlet {
 			int i = statement.executeUpdate();
 			// Step 3: redirect back to UserServlet (note: remember to change the url to
 			// your project name)
-			if (session.getAttribute("role").equals("doctor")) {
-				response.sendRedirect(
-						"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="
-								+ clinic_id);
-			}
-			if (session.getAttribute("role").equals("patient")) {
-				response.sendRedirect(
-						"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="
-								+ session.getAttribute("id"));
-			}
 
 		} catch (Exception exception) {
 			System.out.println(exception);
 			// out.close();
+		}
+
+		if (session.getAttribute("role").equals("doctor")) {
+			response.sendRedirect(
+					"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="
+							+ clinic_id);
+		}
+		if (session.getAttribute("role").equals("patient")) {
+			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="
+					+ session.getAttribute("id"));
 		}
 
 	}
@@ -483,13 +478,13 @@ public class AppointmentServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		HttpSession session = request.getSession();
-		
+
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
 			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
 			return;
 		}
-		
+
 		// Step 1: Retrieve value from the request
 		String apptid = request.getParameter("id");
 		String clinicid = request.getParameter("clinicid");
