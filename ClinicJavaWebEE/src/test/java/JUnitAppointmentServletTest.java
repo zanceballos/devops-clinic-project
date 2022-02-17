@@ -65,8 +65,10 @@ class JUnitAppointmentServletTest {
 	 */
 	@Test
 	void testGetConnection() {
+		Connection connection = null;
 		Connection testConnection = appointmentServlet.getConnection();
-		assertNotNull(testConnection);
+		connection = testConnection;
+		assertNotNull(connection);
 	}
 
 	@Test

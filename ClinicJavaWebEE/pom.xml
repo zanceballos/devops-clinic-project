@@ -79,11 +79,27 @@
 		</dependency>
 
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>${junit-jupiter.groupId}</groupId>
 			<artifactId>${junit-jupiter.artifactId}</artifactId>
 			<version>${junit-jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.junit.support</groupId>
+			<artifactId>testng-engine</artifactId>
+			<version>1.0.1</version>
+			<scope>test</scope>
+		</dependency>
+
+
 
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
 		<dependency>
@@ -109,6 +125,14 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.1</version>
+				<dependencies>
+					<dependency> <!-- (2) -->
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit-platform</artifactId>
+						<version>2.22.1</version>
+					</dependency>
+				</dependencies>
+
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
