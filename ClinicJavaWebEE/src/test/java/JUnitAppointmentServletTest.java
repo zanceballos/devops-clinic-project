@@ -2,7 +2,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,6 +41,27 @@ class JUnitAppointmentServletTest {
 
 	// Arrange
 	private AppointmentServlet appointmentServlet;
+	private ArrayList<Appointment> appointments = new ArrayList<>();
+	private String testing_id;
+	private String testing_clinic_id;
+	// SQL statement to get all the appointments
+	private static final String SELECT_ALL_APPOINTMENT = "SELECT * FROM appointment";
+	private String jdbcURL = "jdbc:mysql://localhost:3306/clinic_db";
+	private String jdbcUsername = "root";
+	private String jdbcPassword = "password";
+
+	protected Connection getConnection() {
+		Connection connection = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return connection;
+	}
 
 	/**
 	 * @throws java.lang.Exception
@@ -45,6 +72,38 @@ class JUnitAppointmentServletTest {
 		appointmentServlet = new AppointmentServlet();
 		// This will be used to call the servlet function in order to ensure converage
 		// across each functions
+
+		// Step 1: Establishing a Connection
+		try (Connection connection = getConnection();
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_APPOINTMENT);) {
+
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			System.out.println("EXECUTED QUERY");
+			// Step 4: Process the ResultSet object
+			while (rs.next()) {
+				int appt_id = rs.getInt("id");
+				int user_id = rs.getInt("user_id");
+				int clinic_id = rs.getInt("clinic_id");
+				String date_time = rs.getString("date_time");
+				String status = rs.getString("status");
+				String appointment_type = rs.getString("appointment_type");
+				appointments.add(new Appointment(appt_id, user_id, clinic_id, date_time, status, appointment_type));
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		// Get the values and assign to testing IDs!
+		System.out.println(appointments);
+		if (appointments.isEmpty() == false) {
+			testing_id = Integer.toString(appointments.get(0).id);
+			testing_clinic_id = Integer.toString(appointments.get(0).id);
+		} else {
+			// set default testing id
+			testing_id = "50";
+			testing_clinic_id = "2";
+		}
 	}
 
 	// Step 3: Write your Test Cases!
@@ -220,7 +279,7 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("doctor");
 
 		// expecting parameter of the clinic id
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 
 		// setting the servlet path
 		when(request.getServletPath()).thenReturn("/AppointmentServlet/ClinicAppointments");
@@ -250,7 +309,7 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("patient");
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// setting the servlet path
 		when(request.getServletPath()).thenReturn("/AppointmentServlet/ShowAppointmentDetails");
@@ -281,7 +340,7 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("doctor");
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// setting the servlet path
 		when(request.getServletPath()).thenReturn("/AppointmentServlet/ShowAppointmentDetails");
@@ -312,11 +371,11 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("patient");
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// form for update
 		when(request.getParameter("user_id")).thenReturn("3");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 		when(request.getParameter("date_time")).thenReturn("2022-06-15 18:00:00");
 		when(request.getParameter("date")).thenReturn(empty);
 		when(request.getParameter("time")).thenReturn(empty);
@@ -353,11 +412,11 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("doctor");
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// form for update
 		when(request.getParameter("user_id")).thenReturn("3");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 		when(request.getParameter("date_time")).thenReturn("2022-06-15 18:00:00");
 		when(request.getParameter("date")).thenReturn("2022-06-17");
 		when(request.getParameter("time")).thenReturn("19:00");
@@ -392,11 +451,11 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("update_datetime_error")).thenReturn(true);
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// form for update
 		when(request.getParameter("user_id")).thenReturn("3");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 		when(request.getParameter("date_time")).thenReturn("2022-06-15 18:00:00");
 		// when Date & Time case is null
 		when(request.getParameter("date")).thenReturn("2022-07-15");
@@ -431,11 +490,11 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("update_datetime_error")).thenReturn(true);
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// form for update
 		when(request.getParameter("user_id")).thenReturn("3");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 		when(request.getParameter("date_time")).thenReturn("2022-06-15 18:00:00");
 		// when Date & Time case is null
 		when(request.getParameter("date")).thenReturn("2022-07-15");
@@ -454,8 +513,8 @@ class JUnitAppointmentServletTest {
 		System.out.println(captor.getValue());
 
 		// assert results
-		assertTrue(captor.getValue().toString().contains(
-				"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="));
+		assertTrue(captor.getValue().toString()
+				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="));
 	}
 
 	@Test
@@ -469,8 +528,8 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("patient");
 
 		// set request parameter
-		when(request.getParameter("id")).thenReturn("37");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("id")).thenReturn(testing_id);
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 
 		// set servlet path
 		// setting the servlet path
@@ -500,8 +559,8 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("doctor");
 
 		// set request parameter
-		when(request.getParameter("id")).thenReturn("37");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("id")).thenReturn(testing_id);
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 
 		// set servlet path
 		// setting the servlet path
@@ -530,8 +589,8 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("logged_in")).thenReturn(null);
 
 		// set request parameter
-		when(request.getParameter("id")).thenReturn("37");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("id")).thenReturn(testing_id);
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 
 		// set servlet path
 		// setting the servlet path
