@@ -206,7 +206,7 @@ public class AppointmentDoctorsCRUDTest {
 
 		driver.findElement(By.linkText("Manage")).click();
 
-		if (driver.getPageSource().contains("No Appointments Yet!") == false) {
+		if (!driver.getPageSource().contains("No Appointments Yet!")) {
 			driver.findElement(By.cssSelector("td .dropdown .dropdown-toggle")).click();
 
 			driver.findElement(By.linkText("Update")).click();

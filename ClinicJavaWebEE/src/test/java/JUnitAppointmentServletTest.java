@@ -157,7 +157,7 @@ class JUnitAppointmentServletTest {
 		System.out.println(captor.getValue());
 
 		// assert results
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/BookSuccess.jsp", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/BookSuccess.jsp", captor.getValue());
 	}
 
 	@Test
@@ -180,7 +180,7 @@ class JUnitAppointmentServletTest {
 		System.out.println("Guest attempt Book:" + captor.getValue());
 
 		// should not fall into the success page
-		assertFalse(captor.getValue().equals("http://localhost:8090/ClinicJavaWebEE/BookSuccess.jsp"));
+		assertFalse(captor.getValue().equals("/ClinicJavaWebEE/BookSuccess.jsp"));
 
 	}
 
@@ -234,7 +234,7 @@ class JUnitAppointmentServletTest {
 		System.out.println("Guest attempt Book:" + captor.getValue());
 
 		// should not fall into the booking page
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/login.jsp", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
 	}
 
 	@Test
@@ -296,7 +296,7 @@ class JUnitAppointmentServletTest {
 		Mockito.verify(response).sendRedirect(captor.capture());
 
 		// assert that servlet should send a redirect
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/login.jsp", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
 	}
 
 	@Test
@@ -326,7 +326,7 @@ class JUnitAppointmentServletTest {
 		Mockito.verify(response).sendRedirect(captor.capture());
 
 		// assert that servlet should send a redirect to logout
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/UserServlet/logout", captor.getValue());
 	}
 
 	@Test
@@ -357,7 +357,7 @@ class JUnitAppointmentServletTest {
 		Mockito.verify(response).sendRedirect(captor.capture());
 
 		// assert that servlet should send a redirect
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/PatientHome.jsp", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/PatientHome.jsp", captor.getValue());
 	}
 
 	@Test
@@ -415,7 +415,7 @@ class JUnitAppointmentServletTest {
 		Mockito.verify(response).sendRedirect(captor.capture());
 
 		// assert that servlet should send a redirect
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/UserServlet/logout", captor.getValue());
 
 	}
 
@@ -444,7 +444,7 @@ class JUnitAppointmentServletTest {
 		Mockito.verify(response).sendRedirect(captor.capture());
 
 		// assert that servlet should send a redirect
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/login.jsp", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
 
 	}
 
@@ -474,7 +474,7 @@ class JUnitAppointmentServletTest {
 		Mockito.verify(response).sendRedirect(captor.capture());
 
 		// assert that servlet should send a redirect
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/login.jsp", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
 
 	}
 
@@ -577,7 +577,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
 	}
 
 	@Test
@@ -615,7 +615,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="));
 
 	}
 
@@ -655,7 +655,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
 	}
 
 	@Test
@@ -694,7 +694,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="));
 	}
 
 	@Test
@@ -724,7 +724,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
 
 	}
 
@@ -755,7 +755,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="));
 
 	}
 
@@ -784,7 +784,7 @@ class JUnitAppointmentServletTest {
 		System.out.println(captor.getValue());
 
 		// assert results
-		assertTrue(captor.getValue().toString().contains("http://localhost:8090/ClinicJavaWebEE/login.jsp"));
+		assertTrue(captor.getValue().toString().contains("/ClinicJavaWebEE/login.jsp"));
 	}
 
 }
