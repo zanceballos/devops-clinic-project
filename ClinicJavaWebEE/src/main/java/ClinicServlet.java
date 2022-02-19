@@ -48,7 +48,7 @@ public class ClinicServlet extends HttpServlet {
 		}
 		return connection;
 	}
-
+ 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -102,12 +102,12 @@ public class ClinicServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		// check user role
 		if (session.getAttribute("role").equals("patient")) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			response.sendRedirect("/ClinicJavaWebEE/UserServlet/logout");
 			return;
 		}
 
@@ -226,12 +226,12 @@ public class ClinicServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		// check user role
 		if (session.getAttribute("role").equals("patient")) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			response.sendRedirect("/ClinicJavaWebEE/UserServlet/logout");
 			return;
 		}
 
@@ -275,12 +275,12 @@ public class ClinicServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		// check user role
 		if (session.getAttribute("role").equals("patient")) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			response.sendRedirect("/ClinicJavaWebEE/UserServlet/logout");
 			return;
 		}
 
@@ -299,7 +299,7 @@ public class ClinicServlet extends HttpServlet {
 			int i = statement.executeUpdate();
 		}
 
-		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard");
+		response.sendRedirect("/ClinicJavaWebEE/ClinicServlet/dashboard");
 	}
 
 	private void deleteClinic(HttpServletRequest request, HttpServletResponse response)
@@ -310,12 +310,12 @@ public class ClinicServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		// check user role
 		if (session.getAttribute("role").equals("patient")) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			response.sendRedirect("/ClinicJavaWebEE/UserServlet/logout");
 			return;
 		}
 
@@ -324,7 +324,7 @@ public class ClinicServlet extends HttpServlet {
 			statement.setInt(1, id);
 			int i = statement.executeUpdate();
 		}
-		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard");
+		response.sendRedirect("/ClinicJavaWebEE/ClinicServlet/dashboard");
 	}
 
 	/**

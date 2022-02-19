@@ -60,7 +60,7 @@ public class CreateClinicServlet extends HttpServlet {
 				|| description.isEmpty() || opening_hours.isEmpty() || opening_days.isEmpty()
 				|| contact_number.isEmpty()) {
 			session.setAttribute("empty_clinic_add", true);
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/CreateClinic.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/CreateClinic.jsp");
 			return;
 			
 
@@ -83,7 +83,7 @@ public class CreateClinicServlet extends HttpServlet {
 			System.out.println("SQL query executed");
 			if (i > 0) {
 				System.out.println("Successfully inserted");
-				response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard");
+				response.sendRedirect("/ClinicJavaWebEE/ClinicServlet/dashboard");
 			}
 		} catch (Exception exception) {
 			System.out.println(exception);

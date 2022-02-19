@@ -105,6 +105,8 @@ public class AppointmentServlet extends HttpServlet {
 
 	private void GetAppointmentClinic(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		
+		
 		// get parameter passed in the URL
 		String id = request.getParameter("id");
 		System.out.print(id);
@@ -113,7 +115,7 @@ public class AppointmentServlet extends HttpServlet {
 		// check if user is logged in
 		HttpSession session = request.getSession();
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 		}
 
 		// Step 1: Establishing a Connection
@@ -156,7 +158,7 @@ public class AppointmentServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 
@@ -184,7 +186,7 @@ public class AppointmentServlet extends HttpServlet {
 
 				// display success page with the data
 
-				response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/BookSuccess.jsp");
+				response.sendRedirect("/ClinicJavaWebEE/BookSuccess.jsp");
 			}
 		} catch (Exception exception) {
 			System.out.println(exception);
@@ -205,17 +207,17 @@ public class AppointmentServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		if (session.getAttribute("role").equals("doctor")) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			response.sendRedirect("/ClinicJavaWebEE/UserServlet/logout");
 			return;
 		}
 
 		if (!session.getAttribute("id").toString().equals(userid.toString())) {
 
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/PatientHome.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/PatientHome.jsp");
 			return;
 		}
 
@@ -263,12 +265,12 @@ public class AppointmentServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		// check user role
 		if (session.getAttribute("role").equals("patient")) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+			response.sendRedirect("/ClinicJavaWebEE/UserServlet/logout");
 			return;
 		}
 
@@ -346,7 +348,7 @@ public class AppointmentServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 
@@ -394,7 +396,7 @@ public class AppointmentServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 
@@ -427,13 +429,13 @@ public class AppointmentServlet extends HttpServlet {
 				// if patient update
 				if (session.getAttribute("role").equals("patient")) {
 					response.sendRedirect(
-							"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="
+							"/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="
 									+ apptid);
 				}
 				// if Doctor Update
 				if (session.getAttribute("role").equals("doctor")) {
 					response.sendRedirect(
-							"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="
+							"/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="
 									+ apptid);
 				}
 				return;
@@ -464,11 +466,11 @@ public class AppointmentServlet extends HttpServlet {
 
 		if (session.getAttribute("role").equals("doctor")) {
 			response.sendRedirect(
-					"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="
+					"/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="
 							+ clinic_id);
 		}
 		if (session.getAttribute("role").equals("patient")) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="
+			response.sendRedirect("/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="
 					+ session.getAttribute("id"));
 		}
 
@@ -481,7 +483,7 @@ public class AppointmentServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 
@@ -499,13 +501,13 @@ public class AppointmentServlet extends HttpServlet {
 			// if Patient Request
 			if (session.getAttribute("role").equals("patient")) {
 				response.sendRedirect(
-						"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="
+						"/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="
 								+ session.getAttribute("id"));
 			}
 			// if Doctor Request
 			if (session.getAttribute("role").equals("doctor")) {
 				response.sendRedirect(
-						"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="
+						"/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="
 								+ clinicid);
 			}
 

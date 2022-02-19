@@ -43,13 +43,14 @@
 										<div class="form-group mb-3">
 											<input id="inputUsername" type="text" name="username"
 												placeholder="Username"
-												class="form-control border-0 shadow-sm px-4 py-4" required/>
+												class="form-control border-0 shadow-sm px-4 py-4" required />
 										</div>
 
 										<div class="form-group mb-3">
 											<input id="inputPassword" type="password" name="password"
 												placeholder="Password"
-												class="form-control border-0 shadow-sm px-4 py-4 text-primary" required/>
+												class="form-control border-0 shadow-sm px-4 py-4 text-primary"
+												required />
 										</div>
 
 										<c:if test="${username_err == true || password_err == true}">
@@ -61,9 +62,8 @@
 											<c:set var="password_err" value="" scope="session" />
 										</c:if>
 
-										<button type="submit"
-											class="btn btn-primary py-3 btn-block text-uppercase mb-2 shadow-sm w-100">
-											Sign in</button>
+										<button type="submit" id='sign-in-button'
+											class="btn btn-primary py-3 btn-block text-uppercase mb-2 shadow-sm w-100">Sign in</button>
 
 
 										<div class="row justify-content-center">
