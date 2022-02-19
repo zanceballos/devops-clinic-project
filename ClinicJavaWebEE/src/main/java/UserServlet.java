@@ -146,10 +146,10 @@ public class UserServlet extends HttpServlet {
 
 						// If else statement to redirect user based on their user role
 						if (role.equals("patient")) {
-							response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
+							response.sendRedirect("/ClinicJavaWebEE/UserServlet/home");
 						}
 						if (role.equals("doctor")) {
-							response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
+							response.sendRedirect("/ClinicJavaWebEE/UserServlet/home");
 						}
 
 						// stop the while loop as we have reached our condition
@@ -157,7 +157,7 @@ public class UserServlet extends HttpServlet {
 						break;
 					} else {
 						// password incorrect , return error
-						response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+						response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 						session.setAttribute("password_err", true);
 						// stop the while loop as we have reached our condition
 						noBreak = false;
@@ -168,7 +168,7 @@ public class UserServlet extends HttpServlet {
 			}
 			if (noBreak) {
 				// username not found return error
-				response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+				response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 				session.setAttribute("username_err", true);
 			}
 		} catch (SQLException e) {
@@ -186,7 +186,7 @@ public class UserServlet extends HttpServlet {
 		session.removeAttribute("username");
 		session.removeAttribute("logged_in");
 		session.removeAttribute("role");
-		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE");
+		response.sendRedirect("/ClinicJavaWebEE");
 
 	}
 
@@ -198,7 +198,7 @@ public class UserServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		if (session.getAttribute("role").equals("patient")) {
@@ -218,7 +218,7 @@ public class UserServlet extends HttpServlet {
 		
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		
@@ -228,7 +228,7 @@ public class UserServlet extends HttpServlet {
 		User userDetails = new User(0, "", "", "", "", "", "");
 
 		if (!session.getAttribute("id").toString().equals(id)) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
+			response.sendRedirect("/ClinicJavaWebEE/UserServlet/home");
 			return;
 		}
 
@@ -279,7 +279,7 @@ public class UserServlet extends HttpServlet {
 			statement.setInt(1, id);
 			int i = statement.executeUpdate();
 		}
-		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/logout");
+		response.sendRedirect("/ClinicJavaWebEE/UserServlet/logout");
 	}
 
 	private void updateDetails(HttpServletRequest request, HttpServletResponse response)
@@ -289,7 +289,7 @@ public class UserServlet extends HttpServlet {
 		System.out.print("Update function called");
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		
@@ -311,7 +311,7 @@ public class UserServlet extends HttpServlet {
 			}else {
 				session.setAttribute("password_error", true);
 				response.sendRedirect(
-						"http://localhost:8090/ClinicJavaWebEE/UserServlet/showPasswordForm?id="
+						"/ClinicJavaWebEE/UserServlet/showPasswordForm?id="
 								+ session.getAttribute("id"));
 				return;
 			}
@@ -342,7 +342,7 @@ public class UserServlet extends HttpServlet {
 			}
 
 			response.sendRedirect(
-					"http://localhost:8090/ClinicJavaWebEE/UserServlet/account-details?id="
+					"/ClinicJavaWebEE/UserServlet/account-details?id="
 							+ session.getAttribute("id"));
 		}
 		

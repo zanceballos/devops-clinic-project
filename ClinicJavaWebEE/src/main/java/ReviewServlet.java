@@ -151,7 +151,7 @@ public class ReviewServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 
@@ -178,7 +178,7 @@ public class ReviewServlet extends HttpServlet {
 		if (Integer.parseInt(rating_score) > 5) {
 			session.setAttribute("score_error", true);
 			response.sendRedirect(
-					"http://localhost:8090/ClinicJavaWebEE/ReviewServlet/ClinicReviewForm?id=" + clinic_id);
+					"/ClinicJavaWebEE/ReviewServlet/ClinicReviewForm?id=" + clinic_id);
 			return;
 		}
 
@@ -201,7 +201,7 @@ public class ReviewServlet extends HttpServlet {
 				// display success page with the data
 
 				response.sendRedirect(
-						"http://localhost:8090/ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id=" + clinic_id);
+						"/ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id=" + clinic_id);
 			}
 		} catch (Exception exception) {
 			System.out.println(exception);
@@ -222,7 +222,7 @@ public class ReviewServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 
@@ -264,13 +264,13 @@ public class ReviewServlet extends HttpServlet {
 
 		// check if user is logged in
 		if (session.getAttribute("logged_in") == null) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 			return;
 		}
 		
 		// check if user is trying to update a review for another user based on id
 		if (!session.getAttribute("id").equals(user_id)) {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
+			response.sendRedirect("/ClinicJavaWebEE/UserServlet/home");
 			return;
 		}
 
@@ -286,7 +286,7 @@ public class ReviewServlet extends HttpServlet {
 			int i = statement.executeUpdate();
 		}
 
-		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id=" + clinic_id);
+		response.sendRedirect("/ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id=" + clinic_id);
 
 	}
 
@@ -303,7 +303,7 @@ public class ReviewServlet extends HttpServlet {
 			System.out.println(e.getMessage());
 		}
 
-		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id=" + clinicid);
+		response.sendRedirect("/ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id=" + clinicid);
 
 	}
 

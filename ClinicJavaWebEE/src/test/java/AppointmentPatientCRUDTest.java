@@ -276,7 +276,7 @@ public class AppointmentPatientCRUDTest {
 
 		Assert.assertTrue(driver.getPageSource().contains("AppointmentServlet/PatientAppointments?userid="));
 
-		if (driver.getPageSource().contains("Nothing To See Here!") == false) {
+		if (!driver.getPageSource().contains("Nothing To See Here!")) {
 			Assert.assertTrue(true);
 
 			driver.findElement(By.cssSelector(".card-body .dropdown .dropdown-toggle")).click();

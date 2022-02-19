@@ -2,7 +2,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,6 +41,27 @@ class JUnitAppointmentServletTest {
 
 	// Arrange
 	private AppointmentServlet appointmentServlet;
+	private ArrayList<Appointment> appointments = new ArrayList<>();
+	private String testing_id;
+	private String testing_clinic_id;
+	// SQL statement to get all the appointments
+	private static final String SELECT_ALL_APPOINTMENT = "SELECT * FROM appointment";
+	private String jdbcURL = "jdbc:mysql://localhost:3306/clinic_db";
+	private String jdbcUsername = "root";
+	private String jdbcPassword = "password";
+
+	protected Connection getConnection() {
+		Connection connection = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return connection;
+	}
 
 	/**
 	 * @throws java.lang.Exception
@@ -45,6 +72,38 @@ class JUnitAppointmentServletTest {
 		appointmentServlet = new AppointmentServlet();
 		// This will be used to call the servlet function in order to ensure converage
 		// across each functions
+
+		// Step 1: Establishing a Connection
+		try (Connection connection = getConnection();
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_APPOINTMENT);) {
+
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			System.out.println("EXECUTED QUERY");
+			// Step 4: Process the ResultSet object
+			while (rs.next()) {
+				int appt_id = rs.getInt("id");
+				int user_id = rs.getInt("user_id");
+				int clinic_id = rs.getInt("clinic_id");
+				String date_time = rs.getString("date_time");
+				String status = rs.getString("status");
+				String appointment_type = rs.getString("appointment_type");
+				appointments.add(new Appointment(appt_id, user_id, clinic_id, date_time, status, appointment_type));
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		// Get the values and assign to testing IDs!
+		System.out.println(appointments);
+		if (appointments.isEmpty() == false) {
+			testing_id = Integer.toString(appointments.get(0).id);
+			testing_clinic_id = Integer.toString(appointments.get(0).id);
+		} else {
+			// set default testing id
+			testing_id = "50";
+			testing_clinic_id = "2";
+		}
 	}
 
 	// Step 3: Write your Test Cases!
@@ -98,7 +157,7 @@ class JUnitAppointmentServletTest {
 		System.out.println(captor.getValue());
 
 		// assert results
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/BookSuccess.jsp", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/BookSuccess.jsp", captor.getValue());
 	}
 
 	@Test
@@ -121,7 +180,7 @@ class JUnitAppointmentServletTest {
 		System.out.println("Guest attempt Book:" + captor.getValue());
 
 		// should not fall into the success page
-		assertFalse(captor.getValue().equals("http://localhost:8090/ClinicJavaWebEE/BookSuccess.jsp"));
+		assertFalse(captor.getValue().equals("/ClinicJavaWebEE/BookSuccess.jsp"));
 
 	}
 
@@ -130,6 +189,7 @@ class JUnitAppointmentServletTest {
 
 		// Test for get selected appointment clinic
 		ArgumentCaptor<String> requestDispatcherString = ArgumentCaptor.forClass(String.class);
+
 		// setting the session of the user
 		when(request.getSession()).thenReturn(session);
 		when(request.getSession().getAttribute("logged_in")).thenReturn(true);
@@ -174,11 +234,11 @@ class JUnitAppointmentServletTest {
 		System.out.println("Guest attempt Book:" + captor.getValue());
 
 		// should not fall into the booking page
-		assertEquals("http://localhost:8090/ClinicJavaWebEE/login.jsp", captor.getValue());
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
 	}
 
 	@Test
-	void testdoPostGetPatientAppointments() throws ServletException, IOException {
+	void testGetPatientAppointments() throws ServletException, IOException {
 
 		// Test for get selected appointment clinic
 		ArgumentCaptor<String> requestDispatcherString = ArgumentCaptor.forClass(String.class);
@@ -210,6 +270,97 @@ class JUnitAppointmentServletTest {
 	}
 
 	@Test
+	void testGetPatientAppointmentsAsGuest() throws ServletException, IOException {
+
+		// Test for get selected appointment clinic
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+		// setting the session of the user
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("logged_in")).thenReturn(null);
+		when(request.getSession().getAttribute("role")).thenReturn(null);
+		when(request.getSession().getAttribute("id")).thenReturn(null);
+
+		// expecting parameters
+		when(request.getParameter("userid")).thenReturn("");
+
+		// setting the servlet path
+		when(request.getServletPath()).thenReturn("/AppointmentServlet/PatientAppointments");
+
+		// set the request dispatcher
+		when(request.getRequestDispatcher("/PatientAppointments.jsp")).thenReturn(requestDispatcher);
+		// run the function from servlet
+		appointmentServlet.doPost(request, response);
+
+		// Get the response and verify
+		Mockito.verify(response).sendRedirect(captor.capture());
+
+		// assert that servlet should send a redirect
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
+	}
+
+	@Test
+	void testGetPatientAppointmentsAsDoctor() throws ServletException, IOException {
+
+		// Test for get selected appointment clinic
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+		// setting the session of the user
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("logged_in")).thenReturn(true);
+		when(request.getSession().getAttribute("role")).thenReturn("doctor");
+		when(request.getSession().getAttribute("id")).thenReturn("2");
+
+		// expecting parameters
+		when(request.getParameter("userid")).thenReturn("2");
+
+		// setting the servlet path
+		when(request.getServletPath()).thenReturn("/AppointmentServlet/PatientAppointments");
+
+		// set the request dispatcher
+		when(request.getRequestDispatcher("/PatientAppointments.jsp")).thenReturn(requestDispatcher);
+		// run the function from servlet
+		appointmentServlet.doPost(request, response);
+
+		// Get the response and verify
+		Mockito.verify(response).sendRedirect(captor.capture());
+
+		// assert that servlet should send a redirect to logout
+		assertEquals("/ClinicJavaWebEE/UserServlet/logout", captor.getValue());
+	}
+
+	@Test
+	void testGetOtherPatientAppointments() throws ServletException, IOException {
+
+		// Test for patient trying to get another user's appointments listing
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+		// setting the session of the user
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("logged_in")).thenReturn(true);
+		when(request.getSession().getAttribute("role")).thenReturn("patient");
+		when(request.getSession().getAttribute("id")).thenReturn("3");
+
+		// expecting parameters - so user is trying to get another user's appointments
+		// lists
+		when(request.getParameter("userid")).thenReturn("1");
+
+		// setting the servlet path
+		when(request.getServletPath()).thenReturn("/AppointmentServlet/PatientAppointments");
+
+		// set the request dispatcher
+		when(request.getRequestDispatcher("/PatientAppointments.jsp")).thenReturn(requestDispatcher);
+		// run the function from servlet
+		appointmentServlet.doPost(request, response);
+
+		// Get the response and verify
+		Mockito.verify(response).sendRedirect(captor.capture());
+
+		// assert that servlet should send a redirect
+		assertEquals("/ClinicJavaWebEE/PatientHome.jsp", captor.getValue());
+	}
+
+	@Test
 	void testGetClinicAppointmentsAsDoctor() throws ServletException, IOException {
 		// Test for get selected appointment clinic
 		ArgumentCaptor<String> requestDispatcherString = ArgumentCaptor.forClass(String.class);
@@ -220,7 +371,7 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("doctor");
 
 		// expecting parameter of the clinic id
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn("3");
 
 		// setting the servlet path
 		when(request.getServletPath()).thenReturn("/AppointmentServlet/ClinicAppointments");
@@ -240,6 +391,94 @@ class JUnitAppointmentServletTest {
 	}
 
 	@Test
+	void testGetClinicAppointmentsAsPatient() throws ServletException, IOException {
+		// Test for get selected appointment clinic
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+		// setting the session of the user
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("logged_in")).thenReturn(true);
+		when(request.getSession().getAttribute("role")).thenReturn("patient");
+
+		// expecting parameter of the clinic id
+		when(request.getParameter("clinicid")).thenReturn("3");
+
+		// setting the servlet path
+		when(request.getServletPath()).thenReturn("/AppointmentServlet/ClinicAppointments");
+
+		// set the request dispatcher
+		when(request.getRequestDispatcher("/DoctorClinicAppt.jsp")).thenReturn(requestDispatcher);
+		// run the function from servlet
+		appointmentServlet.doPost(request, response);
+
+		// Get the response and verify
+		Mockito.verify(response).sendRedirect(captor.capture());
+
+		// assert that servlet should send a redirect
+		assertEquals("/ClinicJavaWebEE/UserServlet/logout", captor.getValue());
+
+	}
+
+	@Test
+	void testGetClinicAppointmentsAsGuest() throws ServletException, IOException {
+		// Test for get selected appointment clinic
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+		// setting the session of the user
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("logged_in")).thenReturn(null);
+		when(request.getSession().getAttribute("role")).thenReturn("");
+
+		// expecting parameter of the clinic id
+		when(request.getParameter("clinicid")).thenReturn("3");
+
+		// setting the servlet path
+		when(request.getServletPath()).thenReturn("/AppointmentServlet/ClinicAppointments");
+
+		// set the request dispatcher
+		when(request.getRequestDispatcher("/DoctorClinicAppt.jsp")).thenReturn(requestDispatcher);
+		// run the function from servlet
+		appointmentServlet.doPost(request, response);
+
+		// Get the response and verify
+		Mockito.verify(response).sendRedirect(captor.capture());
+
+		// assert that servlet should send a redirect
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
+
+	}
+
+	@Test
+	void testShowAppointmentsDetailsAsGuest() throws ServletException, IOException {
+		// Test for get selected appointment clinic
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+		// setting the session of the user
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("logged_in")).thenReturn(null);
+		when(request.getSession().getAttribute("role")).thenReturn("");
+
+		// expecting parameter of the appointment id
+		when(request.getParameter("id")).thenReturn(testing_id);
+
+		// setting the servlet path
+		when(request.getServletPath()).thenReturn("/AppointmentServlet/ShowAppointmentDetails");
+
+		// set the request dispatcher
+		when(request.getRequestDispatcher("/PatientUpdateAppt.jsp")).thenReturn(requestDispatcher);
+
+		// run the function from servlet
+		appointmentServlet.doPost(request, response);
+
+		// Get the response and verify
+		Mockito.verify(response).sendRedirect(captor.capture());
+
+		// assert that servlet should send a redirect
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
+
+	}
+
+	@Test
 	void testShowAppointmentsDetailsAsPatient() throws ServletException, IOException {
 		// Test for get selected appointment clinic
 		ArgumentCaptor<String> requestDispatcherString = ArgumentCaptor.forClass(String.class);
@@ -250,7 +489,7 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("patient");
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// setting the servlet path
 		when(request.getServletPath()).thenReturn("/AppointmentServlet/ShowAppointmentDetails");
@@ -281,7 +520,7 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("doctor");
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// setting the servlet path
 		when(request.getServletPath()).thenReturn("/AppointmentServlet/ShowAppointmentDetails");
@@ -312,11 +551,11 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("patient");
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// form for update
 		when(request.getParameter("user_id")).thenReturn("3");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 		when(request.getParameter("date_time")).thenReturn("2022-06-15 18:00:00");
 		when(request.getParameter("date")).thenReturn(empty);
 		when(request.getParameter("time")).thenReturn(empty);
@@ -338,7 +577,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
 	}
 
 	@Test
@@ -353,11 +592,11 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("doctor");
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// form for update
 		when(request.getParameter("user_id")).thenReturn("3");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 		when(request.getParameter("date_time")).thenReturn("2022-06-15 18:00:00");
 		when(request.getParameter("date")).thenReturn("2022-06-17");
 		when(request.getParameter("time")).thenReturn("19:00");
@@ -376,7 +615,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="));
 
 	}
 
@@ -392,11 +631,11 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("update_datetime_error")).thenReturn(true);
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// form for update
 		when(request.getParameter("user_id")).thenReturn("3");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 		when(request.getParameter("date_time")).thenReturn("2022-06-15 18:00:00");
 		// when Date & Time case is null
 		when(request.getParameter("date")).thenReturn("2022-07-15");
@@ -416,7 +655,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
 	}
 
 	@Test
@@ -431,11 +670,11 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("update_datetime_error")).thenReturn(true);
 
 		// expecting parameter of the appointment id
-		when(request.getParameter("id")).thenReturn("50");
+		when(request.getParameter("id")).thenReturn(testing_id);
 
 		// form for update
 		when(request.getParameter("user_id")).thenReturn("3");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 		when(request.getParameter("date_time")).thenReturn("2022-06-15 18:00:00");
 		// when Date & Time case is null
 		when(request.getParameter("date")).thenReturn("2022-07-15");
@@ -454,8 +693,8 @@ class JUnitAppointmentServletTest {
 		System.out.println(captor.getValue());
 
 		// assert results
-		assertTrue(captor.getValue().toString().contains(
-				"http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="));
+		assertTrue(captor.getValue().toString()
+				.contains("/ClinicJavaWebEE/AppointmentServlet/ShowAppointmentDetails?id="));
 	}
 
 	@Test
@@ -469,8 +708,8 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("patient");
 
 		// set request parameter
-		when(request.getParameter("id")).thenReturn("37");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("id")).thenReturn(testing_id);
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 
 		// set servlet path
 		// setting the servlet path
@@ -485,7 +724,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/PatientAppointments?userid="));
 
 	}
 
@@ -500,8 +739,8 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("role")).thenReturn("doctor");
 
 		// set request parameter
-		when(request.getParameter("id")).thenReturn("37");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("id")).thenReturn(testing_id);
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 
 		// set servlet path
 		// setting the servlet path
@@ -516,7 +755,7 @@ class JUnitAppointmentServletTest {
 
 		// assert results
 		assertTrue(captor.getValue().toString()
-				.contains("http://localhost:8090/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="));
+				.contains("/ClinicJavaWebEE/AppointmentServlet/ClinicAppointments?clinicid="));
 
 	}
 
@@ -530,8 +769,8 @@ class JUnitAppointmentServletTest {
 		when(request.getSession().getAttribute("logged_in")).thenReturn(null);
 
 		// set request parameter
-		when(request.getParameter("id")).thenReturn("37");
-		when(request.getParameter("clinicid")).thenReturn("2");
+		when(request.getParameter("id")).thenReturn(testing_id);
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
 
 		// set servlet path
 		// setting the servlet path
@@ -545,7 +784,7 @@ class JUnitAppointmentServletTest {
 		System.out.println(captor.getValue());
 
 		// assert results
-		assertTrue(captor.getValue().toString().contains("http://localhost:8090/ClinicJavaWebEE/login.jsp"));
+		assertTrue(captor.getValue().toString().contains("/ClinicJavaWebEE/login.jsp"));
 	}
 
 }

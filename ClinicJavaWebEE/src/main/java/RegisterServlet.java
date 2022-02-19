@@ -59,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		if(username.isEmpty() || full_name.isEmpty() || email.isEmpty() || contact_number.isEmpty() || role.isEmpty() || password.isEmpty()) {
 			session.setAttribute("empty_register", true);
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/register.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/register.jsp");
 			return;
 		}
 		
@@ -106,7 +106,7 @@ public class RegisterServlet extends HttpServlet {
 				System.out.println("SQL query executed");
 				if (i > 0) {
 					System.out.println("Successfully inserted");
-					response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+					response.sendRedirect("/ClinicJavaWebEE/login.jsp");
 				}
 			} catch (Exception exception) {
 				System.out.println(exception);
@@ -114,7 +114,7 @@ public class RegisterServlet extends HttpServlet {
 			}
 			doGet(request, response);
 		}else {
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/register.jsp");
+			response.sendRedirect("/ClinicJavaWebEE/register.jsp");
 		}
 		
 	}
