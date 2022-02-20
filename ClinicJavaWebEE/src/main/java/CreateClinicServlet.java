@@ -34,7 +34,7 @@ public class CreateClinicServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -55,16 +55,7 @@ public class CreateClinicServlet extends HttpServlet {
 		String contact_number = request.getParameter("contact_number");
 		System.out.println("Clinic post called");
 
-		// Check if form is empty
-		if (clinic_name.isEmpty() || address.isEmpty() || location_name.isEmpty() || image.isEmpty()
-				|| description.isEmpty() || opening_hours.isEmpty() || opening_days.isEmpty()
-				|| contact_number.isEmpty()) {
-			session.setAttribute("empty_clinic_add", true);
-			response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/CreateClinic.jsp");
-			return;
-			
 
-		}
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -83,13 +74,13 @@ public class CreateClinicServlet extends HttpServlet {
 			System.out.println("SQL query executed");
 			if (i > 0) {
 				System.out.println("Successfully inserted");
-				response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard");
+				
 			}
 		} catch (Exception exception) {
 			System.out.println(exception);
 
 		}
-		doGet(request, response);
+		response.sendRedirect("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard");
 	}
 
 }
