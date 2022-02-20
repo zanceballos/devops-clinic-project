@@ -36,29 +36,6 @@ public class AppointmentPatientCRUDTest {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	@Test
-	public void show_selected_clinic_details() {
-		// define the drive instance
-		driver = new ChromeDriver();
-		// perform login
-		login_patient_user();
-
-		// Find Clinics listings page
-		driver.findElement(By.linkText("Clinics")).click();
-
-		// Click on a view more button
-		driver.findElement(By.linkText("View More")).click();
-		// Click on a view more button
-		driver.findElement(By.linkText("Book an Appointment")).click();
-
-		if (driver.getCurrentUrl().contains("AppointmentServlet/AppointmentClinic?id=")) {
-			Assert.assertTrue(true);
-		} else {
-			Assert.assertTrue(false);
-		}
-		// close driver
-		driver.quit();
-	}
 
 	@Test
 	public void patient_book_appointment() {
@@ -130,41 +107,6 @@ public class AppointmentPatientCRUDTest {
 		driver.quit();
 	}
 
-	@Test
-	public void show_patient_appointment_details() {
-
-		// define the drive instance
-		driver = new ChromeDriver();
-		// perform login
-		login_patient_user();
-
-		// Find Clinics listings page
-		driver.findElement(By.linkText("Appointments")).click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		// Assert.assertTrue(driver.getPageSource().contains("AppointmentServlet/PatientAppointments?userid="));
-		// conditional statement here to check whether the list is empty or not before
-		// going to update button
-		if (driver.getPageSource().contains("Nothing To See Here!") == false) {
-			// select the update button from the dropdown
-			// driver.findElement(By.xpath(".//button[@data-toggle='dropdown']")).click();
-			driver.findElement(By.cssSelector(".card-body .dropdown .dropdown-toggle")).click();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			driver.findElement(By.linkText("Update")).click();
-
-			// check whether in correct page
-			if (driver.getCurrentUrl().contains("AppointmentServlet/ShowAppointmentDetails?id=")) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.assertTrue(false);
-			}
-
-		} else {
-			// assert true since there are no appointments to be updated
-			Assert.assertTrue(true);
-		}
-
-		driver.quit();
-	}
 
 	@Test
 	public void update_patient_appointment_details() {
@@ -263,65 +205,6 @@ public class AppointmentPatientCRUDTest {
 		driver.quit();
 	}
 
-	@Test
-	public void error_update_patient_appointment() {
-		// define the drive instance
-		driver = new ChromeDriver();
-		// perform login
-		login_patient_user();
-
-		// Find Clinics listings page
-		driver.findElement(By.linkText("Appointments")).click();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		Assert.assertTrue(driver.getPageSource().contains("AppointmentServlet/PatientAppointments?userid="));
-
-		if (!driver.getPageSource().contains("Nothing To See Here!")) {
-			Assert.assertTrue(true);
-
-			driver.findElement(By.cssSelector(".card-body .dropdown .dropdown-toggle")).click();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			driver.findElement(By.linkText("Update")).click();
-
-			// perform update of appointment
-			Select appointment_type = new Select(driver.findElement(By.name("appointment_type")));
-			Select status = new Select(driver.findElement(By.name("status")));
-			WebElement date = driver.findElement(By.name("date"));
-
-			appointment_type.selectByValue("Consultation");
-			status.selectByValue("cancelled");
-			date.sendKeys("06152022");
-
-			WebElement webElementTab = driver.findElement(By.name("time"));
-			webElementTab.sendKeys(Keys.TAB);
-			webElementTab.sendKeys(Keys.ENTER);
-			// driver.findElement(By.cssSelector("button[type=submit]")).click();
-
-			// wait for submit
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-			try {
-				// Verify Page with assert true
-				Assert.assertTrue(driver.getCurrentUrl().contains("AppointmentServlet/ShowAppointmentDetails?id="));
-				System.out.println(driver.getCurrentUrl());
-				if (driver.findElement(By.className("alert")) != null) {
-					Assert.assertTrue(true);
-				} else {
-					Assert.assertTrue(false);
-				}
-
-			} catch (Exception e) {
-
-				Assert.assertTrue(false);
-			}
-
-		} else {
-			Assert.assertTrue(false);
-		}
-
-		// quit driver
-		driver.quit();
-	}
 
 	@BeforeTest
 	public void beforeTest() {
