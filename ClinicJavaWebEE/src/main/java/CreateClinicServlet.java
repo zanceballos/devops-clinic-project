@@ -34,7 +34,7 @@ public class CreateClinicServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -43,7 +43,6 @@ public class CreateClinicServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
 
 		String clinic_name = request.getParameter("clinic_name");
 		String address = request.getParameter("address");
@@ -55,16 +54,6 @@ public class CreateClinicServlet extends HttpServlet {
 		String contact_number = request.getParameter("contact_number");
 		System.out.println("Clinic post called");
 
-		// Check if form is empty
-		if (clinic_name.isEmpty() || address.isEmpty() || location_name.isEmpty() || image.isEmpty()
-				|| description.isEmpty() || opening_hours.isEmpty() || opening_days.isEmpty()
-				|| contact_number.isEmpty()) {
-			session.setAttribute("empty_clinic_add", true);
-			response.sendRedirect("/ClinicJavaWebEE/CreateClinic.jsp");
-			return;
-			
-
-		}
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -89,7 +78,7 @@ public class CreateClinicServlet extends HttpServlet {
 			System.out.println(exception);
 
 		}
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }
