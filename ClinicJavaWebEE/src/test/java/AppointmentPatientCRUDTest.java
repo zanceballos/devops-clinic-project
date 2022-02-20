@@ -5,6 +5,7 @@ import java.awt.Button;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,9 @@ public class AppointmentPatientCRUDTest {
 	public void login_patient_user() {
 		// perform login
 		driver.get("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+		
+		driver.manage().window().setSize(new Dimension(1920, 1080));
+		
 		// enter a valid username
 		WebElement username = driver.findElement(By.name("username"));
 		WebElement password = driver.findElement(By.name("password"));
@@ -41,6 +45,9 @@ public class AppointmentPatientCRUDTest {
 	public void patient_book_appointment() {
 		// define the drive instance
 		driver = new ChromeDriver();
+		
+		
+		driver.manage().window().setSize(new Dimension(1920, 1080));
 		// perform login
 		login_patient_user();
 
@@ -88,6 +95,8 @@ public class AppointmentPatientCRUDTest {
 
 		// define the drive instance
 		driver = new ChromeDriver();
+		
+		driver.manage().window().setSize(new Dimension(1920, 1080));
 		// perform login
 		login_patient_user();
 
@@ -112,6 +121,8 @@ public class AppointmentPatientCRUDTest {
 	public void update_patient_appointment_details() {
 		// define the drive instance
 		driver = new ChromeDriver();
+		
+		driver.manage().window().setSize(new Dimension(1920, 1080));
 		// perform login
 		login_patient_user();
 
@@ -175,6 +186,9 @@ public class AppointmentPatientCRUDTest {
 	public void delete_patient_appointment() {
 		// define the drive instance
 		driver = new ChromeDriver();
+		
+		driver.manage().window().setSize(new Dimension(1920, 1080));
+		
 		// perform login
 		login_patient_user();
 
