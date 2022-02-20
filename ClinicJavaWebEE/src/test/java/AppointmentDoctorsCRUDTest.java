@@ -5,6 +5,7 @@ import java.awt.Button;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,9 @@ public class AppointmentDoctorsCRUDTest {
 	public void login_doctor_user() {
 		// perform login
 		driver.get("http://localhost:8090/ClinicJavaWebEE/login.jsp");
+
+	
+
 		// enter a valid username
 		WebElement username = driver.findElement(By.name("username"));
 		WebElement password = driver.findElement(By.name("password"));
@@ -37,9 +41,11 @@ public class AppointmentDoctorsCRUDTest {
 	}
 
 	@Test
-	public void get_clinic_appointments() { 
+	public void get_clinic_appointments() {
 		// define the drive instance
 		driver = new ChromeDriver();
+		
+		driver.manage().window().setSize(new Dimension(1920, 1080));
 		// perform login
 		login_doctor_user();
 
@@ -63,6 +69,9 @@ public class AppointmentDoctorsCRUDTest {
 	public void show_doctor_update_appointment_form() {
 		// define the drive instance
 		driver = new ChromeDriver();
+		
+		driver.manage().window().setSize(new Dimension(1920, 1080));
+		
 		// perform login
 		login_doctor_user();
 
@@ -100,6 +109,8 @@ public class AppointmentDoctorsCRUDTest {
 	public void doctor_update_appointment_details() {
 		// define the drive instance
 		driver = new ChromeDriver();
+		
+		driver.manage().window().setSize(new Dimension(1920, 1080));
 		// perform login
 		login_doctor_user();
 		// Find Clinics listings page
@@ -163,6 +174,8 @@ public class AppointmentDoctorsCRUDTest {
 	public void doctor_delete_appointment_details() {
 		// define the drive instance
 		driver = new ChromeDriver();
+		
+		driver.manage().window().setSize(new Dimension(1920, 1080));
 		// perform login
 		login_doctor_user();
 
@@ -193,7 +206,6 @@ public class AppointmentDoctorsCRUDTest {
 
 		driver.quit();
 	}
-
 
 	@BeforeTest
 	public void beforeTest() {
