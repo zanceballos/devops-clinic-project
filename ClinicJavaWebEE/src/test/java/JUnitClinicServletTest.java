@@ -72,7 +72,7 @@ class JUnitClinicServletTest {
 		when(request.getParameter("location_name")).thenReturn("Marine Parade");
 		when(request.getParameter("image"))
 				.thenReturn("https://www.onecaremedical.com.sg/wp-content/uploads/2019/07/OCTM.png");
-		when(request.getParameter("descrption")).thenReturn("It works");
+		when(request.getParameter("description")).thenReturn("It works");
 		when(request.getParameter("opening_hours")).thenReturn("9am to 7pm");
 		when(request.getParameter("opening_days")).thenReturn("Monday to Saturday");
 		when(request.getParameter("contact_number")).thenReturn("85249137");
@@ -171,10 +171,10 @@ class JUnitClinicServletTest {
 		clinicServlet.doPost(request, response);
 
 		Mockito.verify(response).sendRedirect(captor.capture());
-		System.out.println(captor.getValue());
+		System.out.println("Update clinic: " + captor.getValue());
 
 		assertTrue(
-				captor.getValue().toString().contains("http://localhost:8090/ClinicJavaWebEE/ClinicServlet/dashboard"));
+				captor.getValue().contains("/ClinicJavaWebEE/ClinicServlet/dashboard"));
 	}
 
 }

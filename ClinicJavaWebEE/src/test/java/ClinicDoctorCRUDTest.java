@@ -133,7 +133,6 @@ public class ClinicDoctorCRUDTest {
 				webElementTab.sendKeys(Keys.TAB);
 				webElementTab.sendKeys(Keys.ENTER);
 
-				driver.findElement(By.linkText("Update Clinic")).click();
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 				try {
