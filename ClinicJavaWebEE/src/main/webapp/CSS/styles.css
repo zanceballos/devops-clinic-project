@@ -41,7 +41,7 @@ body {
 .fixed-top-body {
 	padding-top: 100px !important;
 }
-
+/* Navbar link for border bottom padding */
 .navbar-light .navbar-nav .nav-link {
 	color: rgba(0, 0, 0, 0.55);
 	font-size: 1.1rem;
