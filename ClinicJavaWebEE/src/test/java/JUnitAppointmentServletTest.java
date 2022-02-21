@@ -240,7 +240,7 @@ class JUnitAppointmentServletTest {
 	@Test
 	void testGetPatientAppointments() throws ServletException, IOException {
 
-		// Test for get selected appointment clinic
+		// Test for get patient appointments
 		ArgumentCaptor<String> requestDispatcherString = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -272,7 +272,7 @@ class JUnitAppointmentServletTest {
 	@Test
 	void testGetPatientAppointmentsAsGuest() throws ServletException, IOException {
 
-		// Test for get selected appointment clinic
+		// Test for get patient appointments as a guest user
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -302,7 +302,7 @@ class JUnitAppointmentServletTest {
 	@Test
 	void testGetPatientAppointmentsAsDoctor() throws ServletException, IOException {
 
-		// Test for get selected appointment clinic
+		// Test for get patient appointments by user id as a doctor
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -362,7 +362,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testGetClinicAppointmentsAsDoctor() throws ServletException, IOException {
-		// Test for get selected appointment clinic
+		// Test for get Clinic Appointments as doctor
 		ArgumentCaptor<String> requestDispatcherString = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -392,7 +392,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testGetClinicAppointmentsAsPatient() throws ServletException, IOException {
-		// Test for get selected appointment clinic
+		// Test for get clinic appointments as the patient
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -450,7 +450,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testShowAppointmentsDetailsAsGuest() throws ServletException, IOException {
-		// Test for get selected appointment clinic
+		// Test for show appointment details as a guest user
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -480,7 +480,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testShowAppointmentsDetailsAsPatient() throws ServletException, IOException {
-		// Test for get selected appointment clinic
+		// Test for show appointment details as a patient user
 		ArgumentCaptor<String> requestDispatcherString = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -511,7 +511,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testShowAppointmentsDetailsAsDoctor() throws ServletException, IOException {
-		// Test for get selected appointment clinic
+		// Test for show appointment details as a doctor user
 		ArgumentCaptor<String> requestDispatcherString = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -541,7 +541,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testUpdateAppointmentsDetailsAsPatient() throws ServletException, IOException {
-		// Test for Booking Appointment
+		// Test for update appointment as patient user
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 		String empty = "";
 
@@ -583,7 +583,7 @@ class JUnitAppointmentServletTest {
 	@Test
 	void testUpdateAppointmentsDetailsAsDoctor() throws ServletException, IOException {
 
-		// Test for Booking Appointment
+		// Test for update appointment as doctor user
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -621,7 +621,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testUpdateDateTimeAppointmentsAsPatient() throws ServletException, IOException {
-		// Test for Booking Appointment with date and time null
+		// Test for update Appointment with date and time null
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -660,7 +660,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testUpdateDateTimeAppointmentAsDoctor() throws ServletException, IOException {
-		// Test for Booking Appointment with date and time null
+		// Test for update Appointment with date and time null as doctor user
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -699,7 +699,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testDeleteAppointmentsDetailsAsPatient() throws ServletException, IOException {
-		// Test for Booking Appointment with date and time null
+		// Test for update Appointment with date and time null as patient user
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -730,7 +730,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testDeleteAppointmentsDetailsAsDoctor() throws ServletException, IOException {
-		// Test for Booking Appointment with date and time null
+		// Test for Delete Appointment as a doctor user
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
@@ -761,7 +761,7 @@ class JUnitAppointmentServletTest {
 
 	@Test
 	void testDeleteAppointmentAsGuest() throws ServletException, IOException {
-		// Test for Booking Appointment with date and time null
+		// Test for delete appointment as a guest user
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 
 		// setting the session of the user
