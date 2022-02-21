@@ -23,7 +23,7 @@ body {
 .empty-icon-appt {
 	padding-top: 5%;
 }
-
+/* Rouned CSS for cards, tables etc */
 .rounded-lg {
 	border-radius: 1rem !important;
 }
