@@ -14,49 +14,6 @@ import org.testng.annotations.Test;
 public class PatientDetailsCRUDTest {
 	private WebDriver driver;
 	
-	@Test
-	public void create_patient_account() {
-
-		driver = new ChromeDriver();
-
-		driver.manage().window().setSize(new Dimension(1920,1080));
-
-		driver.findElement(By.linkText("Register")).click();
-
-
-		if (driver.getCurrentUrl().contains("http://localhost:8090/ClinicJavaWebEE/register.jsp")) {
-			Assert.assertTrue(true);
-
-			WebElement username = driver.findElement(By.name("username"));
-			WebElement full_name = driver.findElement(By.name("full_name"));
-			WebElement email = driver.findElement(By.name("email"));
-			WebElement contact_number = driver.findElement(By.name("contact_number"));
-			driver.findElement(By.cssSelector(".card-body .dropdown .dropdown-toggle")).click();
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			driver.findElement(By.linkText("Patient")).click();
-			WebElement password = driver.findElement(By.name("password"));
-
-			username.sendKeys("test");
-			full_name.sendKeys("test full name");
-			email.sendKeys("test@gmail.com");
-			contact_number.sendKeys("12345678");
-			password.sendKeys("test123");
-
-			// select element
-			WebElement webElementTab = driver.findElement(By.name("contact_number"));
-			webElementTab.sendKeys(Keys.TAB);
-			webElementTab.sendKeys(Keys.ENTER);
-
-			// driver.findElement(By.cssSelector("button[type=submit]")).click();
-
-			Assert.assertEquals("http://localhost:8090/ClinicJavaWebEE/login.jsp",
-					driver.getCurrentUrl());
-
-			driver.quit();
-		}
-
-	}
-	
 	public void login_patient_user() {
 		// perform login
 		driver.get("http://localhost:8090/ClinicJavaWebEE/login.jsp");
