@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.io.PrintWriter;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -48,20 +48,15 @@ public class RegisterServlet extends HttpServlet {
 		// Set User session storage here!
 		HttpSession session = request.getSession();
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+		//response.setContentType("text/html");
+		//PrintWriter out = response.getWriter();
 		String username = request.getParameter("username");
 		String full_name = request.getParameter("full_name");
 		String email = request.getParameter("email");
 		String contact_number = request.getParameter("contact_number");
 		String role = request.getParameter("role");
 		String password = request.getParameter("password");
-		
-		if(username.isEmpty() || full_name.isEmpty() || email.isEmpty() || contact_number.isEmpty() || role.isEmpty() || password.isEmpty()) {
-			session.setAttribute("empty_register", true);
-			response.sendRedirect("/ClinicJavaWebEE/register.jsp");
-			return;
-		}
+	
 		
 		System.out.println("Selected Role: " + role);
 		
@@ -86,7 +81,7 @@ public class RegisterServlet extends HttpServlet {
 			}
 		} catch (Exception exception) {
 			System.out.println(exception);
-			out.close();
+		
 		}
 		System.out.println("Going through the next if statement to attempt and create user");
 		System.out.println("Username Taken? : " + username_error);
@@ -110,9 +105,9 @@ public class RegisterServlet extends HttpServlet {
 				}
 			} catch (Exception exception) {
 				System.out.println(exception);
-				out.close();
+		
 			}
-			doGet(request, response);
+			
 		}else {
 			response.sendRedirect("/ClinicJavaWebEE/register.jsp");
 		}

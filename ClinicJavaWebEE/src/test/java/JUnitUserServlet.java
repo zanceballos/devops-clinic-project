@@ -31,8 +31,9 @@ class JUnitUserServlet {
 
 	private ArrayList<User> users = new ArrayList<>();
 	private String testing_user_id;
-
+	private String testing_last_id;
 	private UserServlet userServlet;
+	private RegisterServlet registerServlet;
 	
 	private static final String SELECT_ALL_USERS = "select * from users ";
 
@@ -56,7 +57,7 @@ class JUnitUserServlet {
 	@BeforeEach
 	void setUp() throws Exception {
 		userServlet = new UserServlet();
-
+		registerServlet = new RegisterServlet();
 
 
 		// Step 1: Establishing a Connection
@@ -86,6 +87,8 @@ class JUnitUserServlet {
 
 		if (users.isEmpty() == false) {
 			testing_user_id = Integer.toString(users.get(0).id);
+			testing_last_id = Integer.toString(users.get(users.size()-1 ).id);
+			System.out.println("Last id:" + testing_last_id);
 
 		} else {
 			// set default testing id
@@ -103,6 +106,40 @@ class JUnitUserServlet {
 	void testGetConnection() {
 		Connection testConnection = userServlet.getConnection();
 		assertNotNull(testConnection);
+	}
+	
+	@Test
+	void register_user() throws ServletException, IOException {
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+		when(request.getSession()).thenReturn(session);
+		
+		when(request.getParameter("username")).thenReturn("someTest");
+		when(request.getParameter("role")).thenReturn("patient");
+		when(request.getParameter("full_name")).thenReturn("someTest");
+		when(request.getParameter("email")).thenReturn("someTest@mail.com");
+		when(request.getParameter("contact_number")).thenReturn("999");
+		when(request.getParameter("password")).thenReturn("test123");
+	
+		registerServlet.doPost(request, response);
+		Mockito.verify(response).sendRedirect(captor.capture());
+
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
+	}
+	
+	@Test
+	void delete_user() throws ServletException, IOException {
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+		when(request.getSession()).thenReturn(session);
+		
+		when(request.getParameter("id")).thenReturn(testing_last_id);
+		when(request.getServletPath()).thenReturn("/UserServlet/delete");
+		
+		userServlet.doPost(request, response);
+		Mockito.verify(response).sendRedirect(captor.capture());
+
+		assertEquals("/ClinicJavaWebEE/UserServlet/logout", captor.getValue());
 	}
 	
 	@Test
