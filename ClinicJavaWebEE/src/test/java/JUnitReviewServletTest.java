@@ -33,16 +33,17 @@ import org.junit.jupiter.api.Test;
  */
 class JUnitReviewServletTest {
 
+	//mock server side classes using Mockito
 	HttpSession session = mock(HttpSession.class);
 	HttpServletRequest request = mock(HttpServletRequest.class);
 	HttpServletResponse response = mock(HttpServletResponse.class);
 	RequestDispatcher requestDispatcher = mock(RequestDispatcher.class);
+	
 	private ReviewServlet reviewServlet;
 	private String testing_id;
 	private String testing_clinic_id;
 	private ArrayList<Review> reviews = new ArrayList<>();
 	
-
 	// SQL statement to get reviews
 	private static final String SELECT_ALL_REVIEWS = "SELECT * FROM review";
 	private String jdbcURL = "jdbc:mysql://localhost:3306/clinic_db";
@@ -96,6 +97,7 @@ class JUnitReviewServletTest {
 			System.out.print("Error: " + e.getMessage());
 		}
 		
+//		Get values and set testing IDs
 		if(!reviews.isEmpty()) {
 			testing_id = Integer.toString(reviews.get(0).id);
 			testing_clinic_id = Integer.toString(reviews.get(0).clinic_id);
@@ -104,7 +106,6 @@ class JUnitReviewServletTest {
 			testing_clinic_id = "2";
 		}
 		
-//		Get values and set testing IDs
 		
 	}
 
