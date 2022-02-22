@@ -21,14 +21,14 @@ public class ReviewCRUDTest {
 	public void login_user() {
 		// perform login
 		driver.get("http://localhost:8090/ClinicJavaWebEE/login.jsp");
-		// enter a valid username
+		// enter valid credentials
 		WebElement username = driver.findElement(By.name("username"));
 		WebElement password = driver.findElement(By.name("password"));
 
 		username.sendKeys("test");
 		password.sendKeys("test123");
 
-		// driver.findElement(By.id("sign-in-button"));
+		// click sign in button
 		driver.findElement(By.cssSelector("button[type=submit]")).click();
 
 		// wait for login
