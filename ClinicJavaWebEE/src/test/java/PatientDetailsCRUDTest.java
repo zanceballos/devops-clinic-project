@@ -153,6 +153,7 @@ public class PatientDetailsCRUDTest {
 		
 		Assert.assertEquals("http://localhost:8090/ClinicJavaWebEE/",driver.getCurrentUrl().toString());
 
+		driver.quit();
 		
 	}
 
