@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "maven 3.8.2"
+    }
+
+    stages {
+        stage('Git') {
+            steps {
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '15c2d564-ea0b-4f59-a5c9-4f694583ecb9', url: 'https://github.com/zanceballos/devops-clinic-project']]])
+            }
+        }
+         stage('Build and Test') {
+            steps {
+               bat 'mvn clean install --file ClinicJavaWebEE/pom.xml'
+            }
+             post{
+                always{
+                    junit "ClinicJavaWebEE/target/surefire-reports/TEST-*.xml" 
+                }
+            }
+        }
+        stage('Deploy to Tomcat') {
+            steps {
+              //delete the existing war file
+              bat "del C:\\xampp\\tomcat\\webapps\\ClinicJavaWebEE.war"
+              deploy adapters: [tomcat7(credentialsId: '2d5b45b3-7fec-4717-8200-829b133976eb', path: '', url: 'http://localhost:8095/')], contextPath: 'ClinicJavaWebEE', war: '**/*.war'
+            }
+        }
+}
+
+}
+
