@@ -27,7 +27,7 @@ body {
 .rounded-lg {
 	border-radius: 1rem !important;
 }
-
+/* CSS to set a min height of the page */
 .background {
 	min-height: 800px;
 }
