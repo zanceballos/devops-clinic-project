@@ -43,7 +43,7 @@ public class PatientDetailsCRUDTest {
 		// perform register
 		driver.get("http://localhost:8090/ClinicJavaWebEE/register.jsp");
 
-		// enter a valid username
+		// enter a valid username to register
 		WebElement username = driver.findElement(By.name("username"));
 
 		WebElement full_name = driver.findElement(By.name("full_name"));
