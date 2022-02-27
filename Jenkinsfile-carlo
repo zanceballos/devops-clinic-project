@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "maven 3.8.2"
+    }
+
+    stages {
+        stage('Source Code Management (GIT)') {
+            steps {
+                // Get source code from GitHub repository
+                git credentialsId: '8e1a60cd-0d20-4ea3-ba21-27abdb10baf1', url: 'https://github.com/zanceballos/devops-clinic-project.git'
+
+            }
+        }
+        
+        stage('Build and Test Project') {
+            steps {
+                // To run Maven on a Windows agent, use
+                bat 'mvn clean install --file ClinicJavaWebEE/pom.xml'
+                
+                // Archive JUnit formatted test results
+                junit '**/surefire-reports/*.xml'
+            }
+        }
+        stage("Deploy"){
+            steps{
+                deploy adapters: [tomcat8(credentialsId: '09395b42-63bf-414c-9998-2cc5dc3a2621', path: '', url: 'http://localhost:8093/')], contextPath: 'ClinicJavaWebEE', war: '**/*.war'
+            }
+        }
+    }
+}
