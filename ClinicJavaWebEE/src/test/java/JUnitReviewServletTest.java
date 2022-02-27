@@ -147,11 +147,121 @@ class JUnitReviewServletTest {
 		Mockito.verify(response).sendRedirect(captor.capture());
 		
 		//assert results
-		if(captor.getValue().contains("ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id=")) {
+		if(captor.getValue().contains("ReviewServlet/ListClinicReviews?id=")) {
 			assertTrue(true);
 		} else {
 			assertTrue(false);
 		}
+	}
+
+	@Test
+	void testShowReviewForm() throws ServletException, IOException {
+		//test to show review form
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		
+		//set user session
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("logged_in")).thenReturn(true);
+		when(request.getSession().getAttribute("id")).thenReturn("2");
+		when(request.getSession().getAttribute("clinicid")).thenReturn("1");;
+		when(request.getParameter("id")).thenReturn("1");
+
+		//set session for servlet path
+		when(request.getServletPath()).thenReturn("/ReviewServlet/ClinicReviewForm");
+		
+		//set dispatcher
+		when(request.getRequestDispatcher("/ReviewClinic.jsp")).thenReturn(requestDispatcher);
+		
+		reviewServlet.doPost(request, response);
+		
+		//get request dispatcher
+		Mockito.verify(request).getRequestDispatcher(captor.capture());
+		
+		//assert results
+		assertEquals("/ReviewClinic.jsp", captor.getValue());
+		
+	}
+	
+	@Test
+	void testShowReviewLoggedOut() throws ServletException, IOException {
+
+		//test if user is redirected to login after attempting to review
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		
+		//set user session
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("clinicid")).thenReturn("1");
+		when(request.getParameter("id")).thenReturn("1");
+
+		//set session for servlet path
+		when(request.getServletPath()).thenReturn("/ReviewServlet/ClinicReviewForm");
+		
+		
+		reviewServlet.doPost(request, response);
+		
+		//get request dispatcher
+		Mockito.verify(response).sendRedirect(captor.capture());
+		
+		//assert results
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
+		
+	}
+	
+
+	@Test
+	void testShowUpdateForm() throws ServletException, IOException {
+		//test to show update form
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		
+		//set user session
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("logged_in")).thenReturn(true);
+		when(request.getSession().getAttribute("id")).thenReturn("2");
+
+		//set request params
+		when(request.getParameter("id")).thenReturn(testing_id);
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
+
+		//set session for servlet path
+		when(request.getServletPath()).thenReturn("/ReviewServlet/ShowUpdateForm");
+		
+		//set dispatcher
+		when(request.getRequestDispatcher("/EditReview.jsp")).thenReturn(requestDispatcher);
+		
+		reviewServlet.doPost(request, response);
+		
+		//get request dispatcher
+		Mockito.verify(request).getRequestDispatcher(captor.capture());
+		
+		//assert results
+		assertEquals("/EditReview.jsp", captor.getValue());
+		
+	}
+	
+	@Test
+	void testUpdateReviewLoggedOut() throws ServletException, IOException {
+
+		//test if user is redirected to login after attempting to update review
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		
+		//set user session
+		when(request.getSession()).thenReturn(session);
+		
+		//set request params
+		when(request.getParameter("id")).thenReturn(testing_id);
+		when(request.getParameter("clinicid")).thenReturn(testing_clinic_id);
+
+		//set session for servlet path
+		when(request.getServletPath()).thenReturn("/ReviewServlet/ShowUpdateForm");
+		
+		reviewServlet.doPost(request, response);
+		
+		//get request dispatcher
+		Mockito.verify(response).sendRedirect(captor.capture());
+		
+		//assert results
+		assertEquals("/ClinicJavaWebEE/login.jsp", captor.getValue());
+		
 	}
 	
 	@Test
@@ -179,6 +289,34 @@ class JUnitReviewServletTest {
 		
 		//assert results
 		assertEquals("/ClinicReviews.jsp", captor.getValue());
+		
+	}
+	
+	@Test
+	void testListClinicReviewsDoctors() throws ServletException, IOException {
+		//test to get reviews by clinic id
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		
+		//set user session
+		when(request.getSession()).thenReturn(session);
+		when(request.getSession().getAttribute("logged_in")).thenReturn(true);
+		when(request.getSession().getAttribute("role")).thenReturn("doctor");
+		
+		//clinic id used
+		when(request.getParameter("id")).thenReturn("2");
+		
+		//set servlet path
+		when(request.getServletPath()).thenReturn("/ReviewServlet/ListClinicReviewsDoctors");
+		
+		//set dispatcher
+		when(request.getRequestDispatcher("/DoctorViewReviews.jsp")).thenReturn(requestDispatcher);
+		
+		//run servlet function and get dispatcher
+		reviewServlet.doPost(request, response);
+		Mockito.verify(request).getRequestDispatcher(captor.capture());
+		
+		//assert results
+		assertEquals("/DoctorViewReviews.jsp", captor.getValue());
 		
 	}
 	
@@ -212,7 +350,7 @@ class JUnitReviewServletTest {
 		System.out.println(captor.getValue());
 		
 		//assert results
-		if(captor.getValue().contains("ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id=")) {
+		if(captor.getValue().contains("ReviewServlet/ListClinicReviews?id=")) {
 			assertTrue(true);
 		} else {
 			assertTrue(false);
@@ -244,7 +382,7 @@ class JUnitReviewServletTest {
 		System.out.println(captor.getValue());
 		
 		//assert results
-		if(captor.getValue().contains("ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id=")) {
+		if(captor.getValue().contains("ReviewServlet/ListClinicReviews?id=")) {
 			assertTrue(true);
 		} else {
 			assertTrue(false);

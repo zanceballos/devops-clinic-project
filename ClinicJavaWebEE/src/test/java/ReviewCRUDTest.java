@@ -17,16 +17,23 @@ public class ReviewCRUDTest {
 	// declare Selenium WebDriver
 	private WebDriver driver;
 
-	// Reusable function to login the user to perform CRUD Operation
-	public void login_user() {
-		// perform login
+	//  function to login the user to perform CRUD Operation
+	public void login_user(String role) {
+		
+		// navigate to login page
 		driver.get("http://localhost:8090/ClinicJavaWebEE/login.jsp");
-		// enter valid credentials
+		
 		WebElement username = driver.findElement(By.name("username"));
 		WebElement password = driver.findElement(By.name("password"));
 
-		username.sendKeys("test");
-		password.sendKeys("test123");
+		//input credentials based on role
+		if(role == "patient") {
+			username.sendKeys("test");
+			password.sendKeys("test123");
+		} else if(role == "doctor") {
+			username.sendKeys("marcos");
+			password.sendKeys("test");
+		}
 
 		// click sign in button
 		driver.findElement(By.cssSelector("button[type=submit]")).click();
@@ -45,7 +52,6 @@ public class ReviewCRUDTest {
 
 	@AfterTest
 	public void afterTest() {
-		// driver quit
 	}
 
 	@Test
@@ -55,10 +61,7 @@ public class ReviewCRUDTest {
 		driver.manage().window().setSize(new Dimension(1920, 1080));
 
 		// login user
-		login_user();
-
-		// navigate to home page
-		driver.get("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
+		login_user("patient");
 
 		// navigate to clinic listing page
 		driver.findElement(By.linkText("Clinics")).click();
@@ -90,8 +93,9 @@ public class ReviewCRUDTest {
 
 		// assert if user is brought back to clinic review page
 		Assert.assertTrue(driver.getCurrentUrl()
-				.contains("http://localhost:8090/ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id="));
-
+				.contains("ReviewServlet/ListClinicReviews?id="));
+		
+		// driver quit
 		driver.quit();
 
 	}
@@ -105,10 +109,7 @@ public class ReviewCRUDTest {
 		driver.manage().window().setSize(new Dimension(1920, 1080));
 
 		// login user
-		login_user();
-
-		// navigate to home page
-		driver.get("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
+		login_user("patient");
 
 		// navigate to clinic listing page
 		driver.findElement(By.linkText("Clinics")).click();
@@ -126,12 +127,34 @@ public class ReviewCRUDTest {
 			Assert.assertTrue(false);
 		}
 		
+		// driver quit
 		driver.quit();
 
 	}
 
 	@Test
-	public void display_review_details() {
+	public void show_reviews_as_doctor() {
+		// define drive instance
+		driver = new ChromeDriver();
+		driver.manage().window().setSize(new Dimension(1920, 1080));
+
+		// login user
+		login_user("doctor");
+
+		// navigate to clinic listing page
+		driver.findElement(By.linkText("Appointments")).click();
+
+		// click manage on a clinic
+		driver.findElement(By.linkText("Manage")).click();
+
+		// click on reviews
+		driver.findElement(By.linkText("Reviews")).click();
+		
+		//check if page is correct
+		Assert.assertTrue(driver.getCurrentUrl().contains("ReviewServlet/ListClinicReviewsDoctors?id="));	
+		
+		// driver quit
+		driver.quit();
 
 	}
 
@@ -142,10 +165,7 @@ public class ReviewCRUDTest {
 		driver.manage().window().setSize(new Dimension(1920, 1080));
 
 		// login user
-		login_user();
-
-		// navigate to home page
-		driver.get("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
+		login_user("patient");
 
 		// navigate to clinic listing page
 		driver.findElement(By.linkText("Clinics")).click();
@@ -164,7 +184,7 @@ public class ReviewCRUDTest {
 		//check if page is correct
 		if(driver.getCurrentUrl().contains("ReviewServlet/ShowUpdateForm?id=")) {
 
-			//perform update appointment
+			//perform update
 			
 			WebElement title = driver.findElement(By.name("review_title"));
 			WebElement review = driver.findElement(By.name("review"));
@@ -185,7 +205,7 @@ public class ReviewCRUDTest {
 			try {
 				
 				Assert.assertTrue(driver.getCurrentUrl()
-						.contains("http://localhost:8090/ClinicJavaWebEE/ReviewServlet/ListClinicReviews?id="));
+						.contains("ReviewServlet/ListClinicReviews?id="));
 				
 			} catch(Exception e) {
 				Assert.assertTrue(false);
@@ -195,8 +215,7 @@ public class ReviewCRUDTest {
 			Assert.assertTrue(false);
 		}
 		
-		
-		
+		// driver quit
 		driver.quit();
 
 	}
@@ -209,10 +228,7 @@ public class ReviewCRUDTest {
 		driver.manage().window().setSize(new Dimension(1920, 1080));
 
 		// login user
-		login_user();
-
-		// navigate to home page
-		driver.get("http://localhost:8090/ClinicJavaWebEE/UserServlet/home");
+		login_user("patient");
 
 		// navigate to clinic listing page
 		driver.findElement(By.linkText("Clinics")).click();
@@ -236,6 +252,8 @@ public class ReviewCRUDTest {
 			Assert.assertTrue(false);
 		}
 		
+		// driver quit
 		driver.quit();
+		
 	}
 }
