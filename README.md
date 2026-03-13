@@ -1,31 +1,41 @@
-# ClinicHub devops-clinic-project
-Group assignment project for devops
+# 🏥 ClinicHub
 
-# Description 
-For this project topic, we aim to build & develop a Clinic Appointment Web application system using the approach of DevOps. The requirements of our project are clear and concise as the main goal is to enable users to use features such as managing appointments with a clinic that they choose.
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white)
+![Apache Tomcat](https://img.shields.io/badge/Apache%20Tomcat-F8DC75?style=for-the-badge&logo=apache-tomcat&logoColor=black)
 
-# Usage
-1. Clone the repository to your local repository in Eclipse
-2. Right click project explorer and Import projects from git
-3. Select the cloned repository that you have added earlier
-4. Select the masters repository
-5. Select Import as general project
-6. Open up Eclipse Servers tab and run your project by right clicking TomCat and Server and click on Start
+**Group assignment project for DevOps.**
 
-# Support
-1. Contact the administrator for support or enquiries about the project
-- izzan2234@outlook.com
+> **Status: 🟡 In Progress (Testing Phase)** > *Core features of the web application have been successfully developed. The project has now transitioned into the testing phase.*
 
-# Contribuing 
-- This is a closed project but if you are interested in expanding the project you may contact the administrator's email to enquire for collaboration
+## 📖 Description
 
-# Authors and Acknoledgement
-- This project is made possible with this group of developers!
-  - zanceballos (izzan2234@outlook.com)
-  - zal07 
-  - carlodl
-  - dhevakash
-  
-  # Project Status
-  - This project is still in progress and in the project development timeframe.
-  - The required features of the web application has been developed and we are going to proceed with the testing phase 
+**ClinicHub** is a Clinic Appointment Web Application built to demonstrate core DevOps practices. The platform is designed with clear, concise requirements to solve a specific problem: enabling users to seamlessly browse, book, and manage appointments with their preferred clinics. 
+
+## 🚀 Getting Started (Usage)
+
+To run this project locally using Eclipse and an Apache Tomcat server, follow these steps:
+
+1. **Clone the repository** to your local machine.
+2. In Eclipse, right-click inside the **Project Explorer** and select **Import projects from Git**.
+3. Select the local repository directory you just cloned.
+4. Select the `master` branch.
+5. Choose the **Import as general project** option and finish the setup.
+6. Open the **Servers** tab in Eclipse, right-click your **Tomcat Server**, and click **Start** to run the application.
+
+## 👥 Authors & Acknowledgements
+
+This project was made possible by our dedicated development team:
+
+* **Izzan** ([@zanceballos](https://github.com/zanceballos)) - *izzan2234@outlook.com*
+* **zal07**
+* **carlodl**
+* **dhevakash**
+
+## 🤝 Contributing & Support
+
+**Support:**
+If you have any inquiries regarding the project or need technical support, please contact the project administrator at [izzan2234@outlook.com](mailto:izzan2234@outlook.com).
+
+**Contributing:**
+Currently, this is a closed academic project. However, if you are interested in expanding the project or exploring potential collaborations, please reach out to the administrator via email.
